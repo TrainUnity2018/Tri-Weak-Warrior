@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Scene
+    uniqueID: 761959733
+    locked: 0
+  - name: Game
+    uniqueID: 971136291
+    locked: 0
+  - name: UI
+    uniqueID: 3466975563
+    locked: 0
+  - name: Loading
+    uniqueID: 2603064277
+    locked: 0
