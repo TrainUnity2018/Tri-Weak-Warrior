@@ -66,12 +66,15 @@ public class PlayerStateControl : MonoBehaviour {
         }
     }
 
+    public virtual void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+            health = 0;
+    }
+
     public virtual void OnCollide(Collider2D col)
     {
-        if (col.gameObject.tag == "Enemy")
-        {
-            currentState = (int)MovementState.Idle;
-            player.GetComponent<PlayerAnimationControl>().SetState(currentState);
-        }
+        
     }
 }
