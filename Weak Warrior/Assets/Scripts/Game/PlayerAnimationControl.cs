@@ -18,7 +18,7 @@ public class PlayerAnimationControl : MonoBehaviour {
     public virtual void Slash(bool direction)
     {
         Flip(direction);
-        animator.Play("Player_Slash");
+        SetMovementState((int)PlayerStateControl.MovementState.Slash);
     }
 
     public virtual void Flip(bool direction)
@@ -31,8 +31,13 @@ public class PlayerAnimationControl : MonoBehaviour {
         transform.localScale = theScale;
     }
 
-    public virtual void SetState(int state)
+    public virtual void SetMovementState(int state)
     {
-        animator.SetInteger("State", state);
+        animator.SetInteger("MovementState", state);
+    }
+
+    public virtual void SetArmorState(int state)
+    {
+        animator.SetInteger("ArmorState", state);
     }
 }

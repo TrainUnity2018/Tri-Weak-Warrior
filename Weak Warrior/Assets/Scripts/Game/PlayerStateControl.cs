@@ -15,8 +15,16 @@ public class PlayerStateControl : MonoBehaviour {
         Die
     }
 
+    public enum ArmorState
+    {
+        Full,
+        Half,
+        Naked
+    }
+
     public int health;
-    public int currentState;
+    public int currentMovementState;
+    public int currentArmorState;
 
     public float slashDuration;
     protected float slashDurationTimer;
@@ -29,8 +37,11 @@ public class PlayerStateControl : MonoBehaviour {
 	
     // Use this for initialization
 	void Start () {
-        currentState = (int)MovementState.Idle;
-	}
+        currentMovementState = (int)MovementState.Idle;
+        currentArmorState = (int)ArmorState.Full;
+        player.GetComponent<PlayerAnimationControl>().SetMovementState(currentMovementState);
+        player.GetComponent<PlayerAnimationControl>().SetArmorState(currentArmorState);
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -44,10 +55,10 @@ public class PlayerStateControl : MonoBehaviour {
 
     public virtual void Slash(bool direction)
     {
-        if (currentState == (int)MovementState.Idle)
+        if (currentMovementState == (int)MovementState.Idle)
         {
-            currentState = (int)MovementState.Slash;
-            player.GetComponent<PlayerAnimationControl>().SetState(currentState);
+            currentMovementState = (int)MovementState.Slash;
+            player.GetComponent<PlayerAnimationControl>().SetMovementState(currentMovementState);
             player.GetComponent<PlayerAnimationControl>().Slash(direction);
             slashDurationTimer = 0;
         }
@@ -55,13 +66,13 @@ public class PlayerStateControl : MonoBehaviour {
 
     public virtual void SlashDurationTiming()
     {
-        if (currentState == (int)MovementState.Slash)
+        if (currentMovementState == (int)MovementState.Slash)
         {
             slashDurationTimer += Time.deltaTime;
             if (slashDurationTimer >= slashDuration)
             {
-                currentState = (int)MovementState.Idle;
-                player.GetComponent<PlayerAnimationControl>().SetState(currentState);
+                currentMovementState = (int)MovementState.Idle;
+                player.GetComponent<PlayerAnimationControl>().SetMovementState(currentMovementState);
             }
         }
     }
@@ -71,6 +82,21 @@ public class PlayerStateControl : MonoBehaviour {
         health -= damage;
         if (health <= 0)
             health = 0;
+        if (health == 3)
+        {
+            currentArmorState = 0;
+            player.GetComponent<PlayerAnimationControl>().SetArmorState(currentArmorState);
+        }
+        else if (health == 2)
+        {
+            currentArmorState = 1;
+            player.GetComponent<PlayerAnimationControl>().SetArmorState(currentArmorState);
+        }
+        else if (currentArmorState == 1)
+        {
+            currentArmorState = 2;
+            player.GetComponent<PlayerAnimationControl>().SetArmorState(currentArmorState);
+        }
     }
 
     public virtual void OnCollide(Collider2D col)
