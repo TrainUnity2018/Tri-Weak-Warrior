@@ -19,7 +19,7 @@ public class GoblinSwordman_DamageBox : DamageBox {
     {
         if (col.gameObject.tag == "Player")
         {
-            col.gameObject.GetComponent<PlayerStateControl>().TakeDamage(damage);
+            PlayerStateControl.Instance.TakeDamage(damage);
         }
     }
 }

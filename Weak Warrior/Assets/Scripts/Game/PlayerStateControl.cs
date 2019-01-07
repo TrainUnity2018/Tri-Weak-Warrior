@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerStateControl : MonoBehaviour {
-
-    public GameObject player;
+public class PlayerStateControl : MonoSingleton<PlayerStateControl> {
 
     public enum MovementState
     {
@@ -29,6 +27,9 @@ public class PlayerStateControl : MonoBehaviour {
     public float slashDuration;
     protected float slashDurationTimer;
 
+    public BoxCollider2D hitBox;
+    public Player_DamageBox damageBox;
+
     public enum State
     {
         Active,
@@ -39,8 +40,8 @@ public class PlayerStateControl : MonoBehaviour {
 	void Start () {
         currentMovementState = (int)MovementState.Idle;
         currentArmorState = (int)ArmorState.Full;
-        player.GetComponent<PlayerAnimationControl>().SetMovementState(currentMovementState);
-        player.GetComponent<PlayerAnimationControl>().SetArmorState(currentArmorState);
+        PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+        PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
     }
 	
 	// Update is called once per frame
@@ -53,18 +54,18 @@ public class PlayerStateControl : MonoBehaviour {
         OnCollide(col);
     }
 
-    public virtual void Slash(bool direction)
+    public void Slash(bool direction)
     {
         if (currentMovementState == (int)MovementState.Idle)
         {
             currentMovementState = (int)MovementState.Slash;
-            player.GetComponent<PlayerAnimationControl>().SetMovementState(currentMovementState);
-            player.GetComponent<PlayerAnimationControl>().Slash(direction);
+            PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+            PlayerAnimationControl.Instance.Slash(direction);
             slashDurationTimer = 0;
         }
     }
 
-    public virtual void SlashDurationTiming()
+    public void SlashDurationTiming()
     {
         if (currentMovementState == (int)MovementState.Slash)
         {
@@ -72,34 +73,56 @@ public class PlayerStateControl : MonoBehaviour {
             if (slashDurationTimer >= slashDuration)
             {
                 currentMovementState = (int)MovementState.Idle;
-                player.GetComponent<PlayerAnimationControl>().SetMovementState(currentMovementState);
+                PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
             }
         }
     }
 
-    public virtual void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         health -= damage;
+        currentMovementState = (int)MovementState.Idle;
+        PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
         if (health <= 0)
             health = 0;
         if (health == 3)
         {
             currentArmorState = 0;
-            player.GetComponent<PlayerAnimationControl>().SetArmorState(currentArmorState);
+            PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
         }
         else if (health == 2)
         {
             currentArmorState = 1;
-            player.GetComponent<PlayerAnimationControl>().SetArmorState(currentArmorState);
+            PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
         }
         else if (currentArmorState == 1)
         {
             currentArmorState = 2;
-            player.GetComponent<PlayerAnimationControl>().SetArmorState(currentArmorState);
+            PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
         }
     }
 
-    public virtual void OnCollide(Collider2D col)
+    public void EnableHitBox()
+    {
+        hitBox.enabled = true;
+    }
+
+    public void DisableHitBox()
+    {
+        hitBox.enabled = false;
+    }
+
+    public  void EnableDamageBox()
+    {
+        damageBox.EnableDamageBox();
+    }
+
+    public void DisableDamageBox()
+    {
+        damageBox.DisableDamageBox();
+    }
+
+    public void OnCollide(Collider2D col)
     {
         
     }

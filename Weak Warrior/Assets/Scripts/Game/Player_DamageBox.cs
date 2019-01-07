@@ -18,8 +18,8 @@ public class Player_DamageBox : DamageBox {
     {
         if (col.gameObject.tag == "Enemy")
         {
-            actor.GetComponent<PlayerStateControl>().currentMovementState = (int)PlayerStateControl.MovementState.Idle;
-            actor.GetComponent<PlayerAnimationControl>().SetMovementState(actor.GetComponent<PlayerStateControl>().currentMovementState);
+            PlayerStateControl.Instance.currentMovementState = (int)PlayerStateControl.MovementState.Idle;
+            PlayerAnimationControl.Instance.SetMovementState(actor.GetComponent<PlayerStateControl>().currentMovementState);
 
             Destroy(col.gameObject);
         }

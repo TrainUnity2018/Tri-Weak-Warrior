@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimationControl : MonoBehaviour {
+public class PlayerAnimationControl : MonoSingleton<PlayerAnimationControl> {
 
     public Animator animator;
 
@@ -15,13 +15,13 @@ public class PlayerAnimationControl : MonoBehaviour {
 
     }
 
-    public virtual void Slash(bool direction)
+    public void Slash(bool direction)
     {
         Flip(direction);
         SetMovementState((int)PlayerStateControl.MovementState.Slash);
     }
 
-    public virtual void Flip(bool direction)
+    public void Flip(bool direction)
     {
         Vector3 theScale = transform.localScale;
         if (direction)
@@ -31,12 +31,12 @@ public class PlayerAnimationControl : MonoBehaviour {
         transform.localScale = theScale;
     }
 
-    public virtual void SetMovementState(int state)
+    public void SetMovementState(int state)
     {
         animator.SetInteger("MovementState", state);
     }
 
-    public virtual void SetArmorState(int state)
+    public void SetArmorState(int state)
     {
         animator.SetInteger("ArmorState", state);
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class DamageBox : MonoBehaviour {
 
     public GameObject actor;
+    public BoxCollider2D damageBox;
     public int damage;
 
     // Use this for initialization
@@ -16,6 +17,18 @@ public class DamageBox : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public virtual void EnableDamageBox()
+    {
+        Debug.Log("enable" + damageBox.enabled);
+        damageBox.enabled = true;
+        Debug.Log("enable" + damageBox.enabled);
+    }
+
+    public virtual void DisableDamageBox()
+    {
+        damageBox.enabled = false;
+    }
 
     void OnTriggerEnter2D(Collider2D col)
     {

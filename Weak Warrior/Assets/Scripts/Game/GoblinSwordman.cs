@@ -10,6 +10,9 @@ public class GoblinSwordman : MonoBehaviour {
 
     public Animator animator;
 
+    public GoblinSwordman_DamageBox damageBox;
+    public BoxCollider2D hitBox;
+
     public enum MovementState
     {
         Walk,
@@ -56,6 +59,26 @@ public class GoblinSwordman : MonoBehaviour {
             currentState = (int)MovementState.Slash;
             animator.SetInteger("State", currentState);
         }
+    }
+
+    public virtual void EnableHitBox()
+    {
+        hitBox.enabled = true;
+    }
+
+    public virtual void DisableHitBox()
+    {
+        hitBox.enabled = false;
+    }
+
+    public virtual void EnableDamageBox()
+    {
+        damageBox.EnableDamageBox();
+    }
+
+    public virtual void DisableDamageBox()
+    {
+        damageBox.DisableDamageBox();
     }
 
     public virtual void OnCollide(Collider2D col)
