@@ -20,9 +20,7 @@ public class DamageBox : MonoBehaviour {
 
     public virtual void EnableDamageBox()
     {
-        Debug.Log("enable" + damageBox.enabled);
         damageBox.enabled = true;
-        Debug.Log("enable" + damageBox.enabled);
     }
 
     public virtual void DisableDamageBox()

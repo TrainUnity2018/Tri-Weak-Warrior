@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player_DamageBox : DamageBox {
 
-	// Use this for initialization
+    // Use this for initialization
 	void Start () {
 		
 	}
@@ -19,9 +19,9 @@ public class Player_DamageBox : DamageBox {
         if (col.gameObject.tag == "Enemy")
         {
             PlayerStateControl.Instance.currentMovementState = (int)PlayerStateControl.MovementState.Idle;
-            PlayerAnimationControl.Instance.SetMovementState(actor.GetComponent<PlayerStateControl>().currentMovementState);
+            PlayerAnimationControl.Instance.SetMovementState(PlayerStateControl.Instance.currentMovementState);
 
-            Destroy(col.gameObject);
+            col.gameObject.GetComponent<GoblinSwordman>().TakeDamage();
         }
     }
 }

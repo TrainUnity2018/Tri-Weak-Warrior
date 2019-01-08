@@ -8,6 +8,9 @@ public class GoblinSwordman : MonoBehaviour {
     public int damage;
     public bool spawnDirection;
 
+    public float slashDelay;
+    protected float slashDelayTimer;
+
     public Animator animator;
 
     public GoblinSwordman_DamageBox damageBox;
@@ -16,20 +19,22 @@ public class GoblinSwordman : MonoBehaviour {
     public enum MovementState
     {
         Walk,
-        Slash
+        Slash,
+        SlashDelay,
     }
 
-    public int currentState;
+    public int currentMovementState;
 
     // Use this for initialization
     void Start () {
-        currentState = (int)MovementState.Walk;
-        animator.SetInteger("State", currentState);
+        currentMovementState = (int)MovementState.Walk;
+        animator.SetInteger("State", currentMovementState);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Walk(spawnDirection);
+        Walk();
+        SlashDelayTiming();
 	}
 
     void OnTriggerEnter2D(Collider2D col)
@@ -37,9 +42,9 @@ public class GoblinSwordman : MonoBehaviour {
 
     }
 
-    public virtual void Walk(bool spawnDirection)
+    public virtual void Walk()
     {
-        if (currentState == (int)MovementState.Walk)
+        if (currentMovementState == (int)MovementState.Walk)
         {
             if (spawnDirection == true)
             {
@@ -54,11 +59,36 @@ public class GoblinSwordman : MonoBehaviour {
 
     public virtual void Slash()
     {
-        if (currentState == (int)MovementState.Walk)
+        if (currentMovementState == (int)MovementState.Walk)
         {
-            currentState = (int)MovementState.Slash;
-            animator.SetInteger("State", currentState);
+            currentMovementState = (int)MovementState.Slash;
+            animator.SetInteger("State", currentMovementState);
         }
+    }
+
+    public virtual void SlashDelayTiming()
+    {
+        if (currentMovementState == (int)MovementState.SlashDelay)
+        {
+            slashDelayTimer += Time.deltaTime;
+            if (slashDelayTimer >= slashDelay)
+            {
+                currentMovementState = (int)MovementState.Slash;
+                animator.SetInteger("State", currentMovementState);
+            }
+        }
+    }
+
+    public virtual void SlashEnd()
+    {
+        currentMovementState = (int)MovementState.SlashDelay;
+        animator.SetInteger("State", currentMovementState);
+        slashDelayTimer = 0;
+    }
+
+    public virtual void TakeDamage()
+    {
+        Destroy(gameObject);
     }
 
     public virtual void EnableHitBox()
