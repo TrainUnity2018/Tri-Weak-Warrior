@@ -39,7 +39,7 @@ public class GoblinSwordman : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D col)
     {
-
+        OnCollide(col);
     }
 
     public virtual void Walk()
