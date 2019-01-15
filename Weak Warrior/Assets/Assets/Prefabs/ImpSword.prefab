@@ -197,9 +197,9 @@ MonoBehaviour:
   damageBox: {fileID: 114468186971961688}
   hitBox: {fileID: 61381770749623766}
   currentMovementState: 0
-  jumpDecelerate: 0.02
+  jumpDecelerate: 0.05
   startJumpSpeed: 2.5
-  fallAccelerate: 0.02
+  fallAccelerate: 0.08
   isJump: 0
 --- !u!114 &114468186971961688
 MonoBehaviour:

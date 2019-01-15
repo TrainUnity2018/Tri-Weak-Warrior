@@ -20,9 +20,7 @@ public class GnollSword : GoblinSwordman {
 
     void Start()
     {
-        currentMovementState = (int)MovementState.Walk;
-        animator.SetInteger("State", currentMovementState);
-        standDelayTimer = 0;
+
     }
 
     void Update()
@@ -30,6 +28,15 @@ public class GnollSword : GoblinSwordman {
         Walk();
         SlashDelayTiming();
         StandTiming();
+    }
+
+    public override void Setup(bool direction, ModelLevel model = null)
+    {
+        currentMovementState = (int)MovementState.Walk;
+        animator.SetInteger("State", currentMovementState);
+        Flip(direction);
+        standDelayTimer = 0;
+        spawnDirection = direction;
     }
 
     public virtual void StandTiming()

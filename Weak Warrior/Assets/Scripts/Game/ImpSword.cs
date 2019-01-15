@@ -13,11 +13,18 @@ public class ImpSword : GoblinSwordman {
 
     void Start()
     {
+
+    }
+
+    public override void Setup(bool direction, ModelLevel model = null)
+    {
         isJump = true;
         jumpSpeed = new Vector3(0, startJumpSpeed);
         fallSpeed = new Vector3(0, 0);
         currentMovementState = (int)MovementState.Walk;
         animator.SetInteger("State", currentMovementState);
+        Flip(direction);
+        spawnDirection = direction;
     }
 
     public override void Walk()

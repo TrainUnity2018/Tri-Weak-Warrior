@@ -27,8 +27,7 @@ public class GoblinSwordman : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        currentMovementState = (int)MovementState.Walk;
-        animator.SetInteger("State", currentMovementState);
+        
 	}
 	
 	// Update is called once per frame
@@ -40,6 +39,18 @@ public class GoblinSwordman : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D col)
     {
         OnCollide(col);
+    }
+
+    public virtual void Setup(bool direction, ModelLevel model = null)
+    {
+        currentMovementState = (int)MovementState.Walk;
+        animator.SetInteger("State", currentMovementState);
+        Flip(direction);
+        spawnDirection = direction;
+        if(model != null)
+        {
+            this.moveSpeed = model.speed;
+        }
     }
 
     public virtual void Walk()
@@ -84,6 +95,16 @@ public class GoblinSwordman : MonoBehaviour {
         currentMovementState = (int)MovementState.SlashDelay;
         animator.SetInteger("State", currentMovementState);
         slashDelayTimer = 0;
+    }
+
+    public virtual void Flip(bool direction)
+    {
+            Vector3 theScale = transform.localScale;
+            if (direction)
+                theScale.x = 1;
+            else
+                theScale.x = -1;
+            transform.localScale = theScale;
     }
 
     public virtual void TakeDamage()
