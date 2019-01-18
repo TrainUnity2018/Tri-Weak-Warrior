@@ -192,12 +192,13 @@ MonoBehaviour:
   moveSpeed: 1
   damage: 1
   spawnDirection: 1
-  slashDelay: 0
+  slashDelay: 0.5
   animator: {fileID: 95830877034803530}
   damageBox: {fileID: 114401947839127622}
   hitBox: {fileID: 61085298275546844}
   currentMovementState: 0
   health: 2
+  recoverMoveSpeed: 1
   knockBackDistance: 1
   knockBackDuration: 0.5
   knockBackDelay: 1

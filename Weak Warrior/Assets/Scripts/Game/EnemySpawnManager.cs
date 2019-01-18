@@ -1,140 +1,165 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 [System.Serializable]
 public class ModelLevel
 {
     public int level = -1;
-    public float time = 0.0f;
+    public float spawningDelay = 0.0f;
     public bool isSupper = false;
-    public float speed = 0.0f;
-    public int getLevel()
-    {
-        return this.level;
-    }
-    public float getTime()
-    {
-        return this.time;
-    }
+    public float moveSpeed = 1;
     public ModelLevel()
-    { }
-    public ModelLevel(int level, float time)
+    {
+        this.level = 0;
+        this.spawningDelay = 0.3f;
+    }
+
+    public ModelLevel(int level, float spawningDelay)
     {
         this.level = level;
-        this.time = time;
+        this.spawningDelay = spawningDelay;
     }
+
     public ModelLevel(int level)
     {
         this.level = level;
-        this.time = 0.3f;// Random.Range(0.2f, 0.5f);
-        this.speed = 100f;// Random.Range(100.0f, 200.0f);
+        this.spawningDelay = 0.3f;
     }
 
 }
+
 [System.Serializable]
 public class ModelEnemyNormal : ModelLevel
 {
     public ModelEnemyNormal()
     { }
-    public ModelEnemyNormal(int lv)
+
+    public ModelEnemyNormal(int level)
     {
-        this.level = lv;
-        this.speed = 1;// Random.Range(0.5f, 2.0f);
-        this.time = Random.Range(1.0f, 3.0f);
-        int rand = Random.Range(0, 100);
+        this.level = level;
+        this.moveSpeed = 1;
+        this.spawningDelay = 0.3f;
+    }
+
+    public ModelEnemyNormal(int level, float spawningDelay)
+    {
+        this.level = level;
+        this.moveSpeed = 1;
+        this.spawningDelay = spawningDelay;
+    }
+
+    public ModelEnemyNormal(int level, float spawningDelay, int isSupperPercentage)
+    {
+        this.level = level;
+        this.moveSpeed = 1;
+        this.spawningDelay = spawningDelay;
         
-        if(rand < 10)
+        int rand = Random.Range(0, 100);
+
+        if (rand <= isSupperPercentage)
         {
             this.isSupper = true;
-            this.speed = 2;
-
+            this.moveSpeed = 3;
         }
-
     }
 }
 
+public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
+{
 
-
-public class EnemySpawnManager : MonoSingleton<EnemySpawnManager> {
-
-    public Transform spawnerLeft;
-    public Transform spawnerRight;
+    public Transform spawnerLocationLeft;
+    public Transform spawnerLocationRight;
     protected bool spawningLocation;
     public List<GoblinSwordman> enemyPrefabs;
-    public List<ModelLevel> levels;// = new List<ModelLevel>() { new ModelLevel(0), new ModelLevel(0), new ModelLevel(1) };
+    public List<ModelLevel> levels;
     private ModelLevel currentLevel = null;
-    private int indexCurrent = 0;
-    private float timeDelay = 0;
-    // Use this for initialization
-	void Start () {
-        
-        this.Setup();
-    }
-	private void Setup()
-    {
-        this.levels = new List<ModelLevel>();
-        for (int i = 0; i < 10; i++)
-        {
-            ModelEnemyNormal normal = new ModelEnemyNormal(0);
-            this.levels.Add(normal);
-        }
+    private int currentIndex = 0;
+    private float spawningDelayTimer = 0;
 
-        this.indexCurrent = 0;
-        this.timeDelay = 0;
+    // Use this for initialization
+    void Start()
+    {
+        this.Setup();
         this.SpawnEnemy();
     }
-	// Update is called once per frame
-	void Update () {
+
+    private void Setup()
+    {
+        // this.levels = new List<ModelLevel>();
+        // for (int i = 0; i < 50; i++)
+        // {
+        //     ModelEnemyNormal normal = new ModelEnemyNormal(Random.Range(0, 4));
+        //     this.levels.Add(normal);
+        // }
+        this.currentIndex = 0;
+        this.spawningDelayTimer = 0;
+
+        this.levels = new List<ModelLevel>() {
+            new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 4),
+            new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 4, 70),
+            new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1, 70), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3),
+            new ModelEnemyNormal(1, 1), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 3), new ModelEnemyNormal(1, 1), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 4),
+            new ModelEnemyNormal(1, 1), new ModelEnemyNormal(1, 0.2f), new ModelEnemyNormal(1, 3), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 3),
+            new ModelEnemyNormal(2, 1), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 3), new ModelEnemyNormal(2, 1), new ModelEnemyNormal(2, 0.8f),
+            new ModelEnemyNormal(2, 3f), new ModelEnemyNormal(2, 1), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 1.2f), new ModelEnemyNormal(2, 3),
+            new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 3), new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 0.5f), new ModelEnemyNormal(3, 0.5f),
+            new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 5),
+         };
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (this.currentLevel != null)
         {
-            this.timeDelay += Time.deltaTime;
-            if(this.timeDelay >= this.currentLevel.getTime())
+            this.spawningDelayTimer += Time.deltaTime;
+            if (this.spawningDelayTimer >= this.currentLevel.spawningDelay)
             {
                 this.SpawnEnemy();
             }
         }
-
     }
 
     private void SpawnEnemy()
     {
-        if(this.indexCurrent < this.levels.Count)
+        if (this.currentIndex < this.levels.Count)
         {
-            this.currentLevel = this.levels[this.indexCurrent];
+            this.currentLevel = this.levels[this.currentIndex];
             if (this.currentLevel != null)
             {
-                int location = Random.Range(-1, 2);
-                if (location == 0)
+                int location = Random.Range(0, 2);
+                if (location == 1)
                 {
-                    GoblinSwordman enemy = Instantiate(this.enemyPrefabs[this.currentLevel.getLevel()], this.transform) as GoblinSwordman;
+                    GoblinSwordman enemy = Instantiate(this.enemyPrefabs[this.currentLevel.level], this.transform) as GoblinSwordman;
 
                     if (enemy != null)
                     {
-                        enemy.transform.position = new Vector3(this.spawnerLeft.position.x, this.spawnerLeft.position.y, 0);
+                        enemy.transform.position = new Vector3(this.spawnerLocationLeft.position.x, this.spawnerLocationLeft.position.y, 0);
                         enemy.Setup(true, this.currentLevel);
-                        this.timeDelay = 0;
-                        this.indexCurrent++;
+                        this.spawningDelayTimer = 0;
+                        this.currentIndex++;
                     }
                 }
                 else
                 {
-                    GoblinSwordman enemy = Instantiate(this.enemyPrefabs[this.currentLevel.getLevel()], this.transform) as GoblinSwordman;
+                    GoblinSwordman enemy = Instantiate(this.enemyPrefabs[this.currentLevel.level], this.transform) as GoblinSwordman;
 
                     if (enemy != null)
                     {
-                        enemy.transform.position = new Vector3(this.spawnerRight.position.x, this.spawnerRight.position.y, 0);
+                        enemy.transform.position = new Vector3(this.spawnerLocationRight.position.x, this.spawnerLocationRight.position.y, 0);
                         enemy.Setup(false, this.currentLevel);
-                        this.timeDelay = 0;
-                        this.indexCurrent++;
+                        this.spawningDelayTimer = 0;
+                        this.currentIndex++;
                     }
                 }
-                
+
             }
         }
         else
         {
             this.Setup();
         }
-        
+
     }
 }

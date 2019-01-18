@@ -6,23 +6,24 @@ public class ImpSword : GoblinSwordman {
 
     public float jumpDecelerate;
     public float startJumpSpeed;
-    protected Vector3 jumpSpeed;
+    protected float jumpSpeed;
     public float fallAccelerate;
-    protected Vector3 fallSpeed;
+    public float startFallSpeed;
+    protected float fallSpeed;
     public bool isJump;
 
     void Start()
     {
+        currentMovementState = (int)MovementState.Walk;
+        animator.SetInteger("State", currentMovementState);
 
+        isJump = true;
+        jumpSpeed = startJumpSpeed;
+        fallSpeed = startFallSpeed;
     }
 
     public override void Setup(bool direction, ModelLevel model = null)
     {
-        isJump = true;
-        jumpSpeed = new Vector3(0, startJumpSpeed);
-        fallSpeed = new Vector3(0, 0);
-        currentMovementState = (int)MovementState.Walk;
-        animator.SetInteger("State", currentMovementState);
         Flip(direction);
         spawnDirection = direction;
     }
@@ -42,21 +43,21 @@ public class ImpSword : GoblinSwordman {
 
             if (isJump)
             {
-                if (jumpSpeed.y <= 0)
+                if (jumpSpeed <= 0)
                 {
                     isJump = false;
-                    fallSpeed = new Vector3(0, 0);
+                    fallSpeed = startFallSpeed;
                 }
                 else
                 {
-                    jumpSpeed -= new Vector3(0, jumpDecelerate);
-                    gameObject.transform.position += jumpSpeed * Time.deltaTime;
+                    jumpSpeed -= jumpDecelerate * Time.deltaTime;
+                    gameObject.transform.position += new Vector3(0, jumpSpeed)  * Time.deltaTime;
                 }
             }
             else
             {
-                fallSpeed += new Vector3(0, fallAccelerate);
-                gameObject.transform.position -= fallSpeed * Time.deltaTime;
+                fallSpeed += fallAccelerate * Time.deltaTime;
+                gameObject.transform.position -= new Vector3(0, fallSpeed) * Time.deltaTime;
             }
         }
     }
@@ -66,7 +67,7 @@ public class ImpSword : GoblinSwordman {
         if (col.gameObject.tag == "Ground")
         {
             isJump = true;
-            jumpSpeed = new Vector3(0, startJumpSpeed);
+            jumpSpeed = startJumpSpeed;
         }
     }
 }

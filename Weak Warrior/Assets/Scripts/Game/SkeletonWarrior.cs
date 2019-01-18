@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkeletonWarrior : GoblinSwordman {
+public class SkeletonWarrior : GoblinSwordman
+{
 
     public int health;
+    public float recoverMoveSpeed;
     public float knockBackDistance;
     public float knockBackDuration;
     protected float knockBackDurationTimer;
@@ -30,6 +32,37 @@ public class SkeletonWarrior : GoblinSwordman {
         RecoverTiming();
     }
 
+    public override void Setup(bool direction, ModelLevel model = null)
+    {
+        Flip(direction);
+        spawnDirection = direction;
+    }
+
+    public override void Walk()
+    {
+        if (currentMovementState == (int)MovementState.Walk && health > 1)
+        {
+            if (spawnDirection == true)
+            {
+                gameObject.transform.position += new Vector3(moveSpeed, 0) * Time.deltaTime;
+            }
+            else
+            {
+                gameObject.transform.position -= new Vector3(moveSpeed, 0) * Time.deltaTime;
+            }
+        }
+        else if (currentMovementState == (int)MovementState.Walk && health <= 1)
+        {
+            if (spawnDirection == true)
+            {
+                gameObject.transform.position += new Vector3(recoverMoveSpeed, 0) * Time.deltaTime;
+            }
+            else
+            {
+                gameObject.transform.position -= new Vector3(recoverMoveSpeed, 0) * Time.deltaTime;
+            }
+        }
+    }
     public virtual void KnockBackTiming()
     {
         if (currentMovementState == (int)MovementState.KnockedBack)

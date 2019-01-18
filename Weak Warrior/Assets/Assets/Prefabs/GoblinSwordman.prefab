@@ -218,7 +218,7 @@ MonoBehaviour:
   moveSpeed: 1
   damage: 1
   spawnDirection: 1
-  slashDelay: 0
+  slashDelay: 0.5
   animator: {fileID: 95097480650755048}
   damageBox: {fileID: 114189482473864242}
   hitBox: {fileID: 61765776361589584}
@@ -276,7 +276,7 @@ RectTransform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1272351896818940}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.18945312}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224335217074857796}
