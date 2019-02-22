@@ -6,8 +6,10 @@ public class GoblinSwordman_DamageBox : DamageBox {
 
 	// Use this for initialization
 	void Start () {
-        damage = actor.GetComponent<GoblinSwordman>().damage;
-
+        if (actor.GetComponent<GoblinSwordman>() != null)
+            damage = actor.GetComponent<GoblinSwordman>().damage;
+        if (actor.GetComponent<DarkTree_Arm>() != null)
+            damage = actor.GetComponent<DarkTree_Arm>().damage;
     }
 	
 	// Update is called once per frame

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerStateControl : MonoSingleton<PlayerStateControl> {
+public class PlayerStateControl : MonoSingleton<PlayerStateControl>
+{
 
     public enum MovementState
     {
         Idle,
         Slash,
         Dash,
+        Damaged,
         Die
     }
 
@@ -35,19 +37,23 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl> {
         Active,
         Inactive
     }
-	
+
     // Use this for initialization
-	void Start () {
+    void Start()
+    {
         currentMovementState = (int)MovementState.Idle;
         currentArmorState = (int)ArmorState.Full;
+        // currentArmorState = (int)ArmorState.Half;
+        // currentArmorState = (int)ArmorState.Naked;
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
         PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update()
+    {
         SlashDurationTiming();
-	}
+    }
 
     void OnTriggerEnter2D(Collider2D col)
     {
@@ -81,7 +87,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl> {
     public void TakeDamage(int damage)
     {
         health -= damage;
-        currentMovementState = (int)MovementState.Idle;
+        currentMovementState = (int)MovementState.Damaged;
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
         if (health <= 0)
             health = 0;
@@ -112,7 +118,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl> {
         hitBox.enabled = false;
     }
 
-    public  void EnableDamageBox()
+    public void EnableDamageBox()
     {
         damageBox.EnableDamageBox();
     }
@@ -122,8 +128,16 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl> {
         damageBox.DisableDamageBox();
     }
 
+    public void SetIdleState()
+    {
+        currentMovementState = (int)MovementState.Idle;
+        PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+    }
+
     public void OnCollide(Collider2D col)
     {
-        
+
     }
+
+    
 }

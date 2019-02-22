@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerInput : MonoBehaviour {
-    
+public class PlayerInput : MonoBehaviour
+{
+
     // Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         InputHandle();
-	}
+    }
 
     public void InputHandle()
     {
@@ -30,5 +33,15 @@ public class PlayerInput : MonoBehaviour {
         {
 
         }
+    }
+
+    public void SlashRight()
+    {
+        PlayerStateControl.Instance.Slash(false);
+    }
+
+    public void SlashLeft()
+    {
+        PlayerStateControl.Instance.Slash(true);
     }
 }

@@ -24,7 +24,7 @@ public class GnollSword : GoblinSwordman {
         animator.SetInteger("State", currentMovementState);
         standDelayTimer = 0;
 
-        standDelay = Random.Range(standDelay, standDelay + 0.6f);
+        //standDelay = Random.Range(standDelay, standDelay + 0.6f);
     }
 
     void Update()
@@ -48,8 +48,7 @@ public class GnollSword : GoblinSwordman {
             if (standDelayTimer >= standDelay)
             {
                 standDurationTimer = 0;
-                currentMovementState = (int)MovementState.Stand;
-                animator.SetInteger("State", currentMovementState);
+                currentMovementState = (int)MovementState.Stand;                
             }
         }
         else
