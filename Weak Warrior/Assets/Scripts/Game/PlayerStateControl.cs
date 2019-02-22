@@ -5,7 +5,6 @@ using UnityEngine.Events;
 
 public class PlayerStateControl : MonoSingleton<PlayerStateControl>
 {
-
     public enum MovementState
     {
         Idle,
@@ -32,6 +31,8 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     public BoxCollider2D hitBox;
     public Player_DamageBox damageBox;
 
+    public GameObject popup;
+
     public enum State
     {
         Active,
@@ -41,12 +42,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     // Use this for initialization
     void Start()
     {
-        currentMovementState = (int)MovementState.Idle;
-        currentArmorState = (int)ArmorState.Full;
-        // currentArmorState = (int)ArmorState.Half;
-        // currentArmorState = (int)ArmorState.Naked;
-        PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
-        PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
+        this.Setup();
     }
 
     // Update is called once per frame
@@ -58,6 +54,17 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     void OnTriggerEnter2D(Collider2D col)
     {
         OnCollide(col);
+    }
+
+    public void Setup()
+    {
+        currentMovementState = (int)MovementState.Idle;
+        currentArmorState = (int)ArmorState.Full;
+        health = 3;
+        // currentArmorState = (int)ArmorState.Half;
+        // currentArmorState = (int)ArmorState.Naked;
+        PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+        PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
     }
 
     public void Slash(bool direction)
@@ -90,7 +97,11 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         currentMovementState = (int)MovementState.Damaged;
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
         if (health <= 0)
-            health = 0;
+        {
+            health = 0; 
+            popup.SetActive(true);
+            EnemySpawnManager.Instance.Pause();
+        } 
         if (health == 3)
         {
             currentArmorState = 0;
@@ -139,5 +150,5 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
 
     }
 
-    
+
 }

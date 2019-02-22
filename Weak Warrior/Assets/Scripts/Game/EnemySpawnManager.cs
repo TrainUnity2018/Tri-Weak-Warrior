@@ -102,7 +102,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         this.SpawnEnemy();
     }
 
-    private void Setup()
+    public void Setup()
     {
         // this.levels = new List<ModelLevel>();
         // for (int i = 0; i < 50; i++)
@@ -194,5 +194,9 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
             //this.Setup();
         }
 
+    }
+
+    public void Pause() {
+        this.currentLevel = null;
     }
 }
