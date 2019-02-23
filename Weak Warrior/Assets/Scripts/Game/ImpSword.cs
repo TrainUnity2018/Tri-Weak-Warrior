@@ -15,11 +15,19 @@ public class ImpSword : GoblinSwordman {
     void Start()
     {
         currentMovementState = (int)MovementState.Walk;
-        animator.SetInteger("State", currentMovementState);
+        //animator.SetInteger("State", currentMovementState);
 
         isJump = true;
         jumpSpeed = startJumpSpeed;
         fallSpeed = startFallSpeed;
+    }
+
+    void Update()
+    {
+        if (!pause)
+        {
+            Walk();
+        }
     }
 
     public override void Setup(bool direction, ModelLevel model = null)

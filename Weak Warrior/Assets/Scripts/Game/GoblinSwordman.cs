@@ -16,6 +16,8 @@ public class GoblinSwordman : MonoBehaviour {
     public GoblinSwordman_DamageBox damageBox;
     public BoxCollider2D hitBox;
 
+    public bool pause;
+
     public enum MovementState
     {
         Walk,
@@ -29,12 +31,16 @@ public class GoblinSwordman : MonoBehaviour {
     void Start () {
         currentMovementState = (int)MovementState.Walk;
         animator.SetInteger("State", currentMovementState);
+        pause = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Walk();
-        SlashDelayTiming();
+        if (!pause)
+        {
+            Walk();
+            SlashDelayTiming();
+        }
 	}
 
     void OnTriggerEnter2D(Collider2D col)
@@ -114,6 +120,16 @@ public class GoblinSwordman : MonoBehaviour {
 
     public virtual void SetMoveSpeed(float moveSpeed) {
         this.moveSpeed = moveSpeed;
+    }
+
+    public virtual void Pause()
+    {
+        pause = true;
+    }
+
+    public virtual void UnPause()
+    {
+        pause = false;
     }
 
     public virtual void EnableHitBox()

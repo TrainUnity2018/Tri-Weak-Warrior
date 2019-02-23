@@ -51,6 +51,8 @@ public class DarkTree : MonoBehaviour
     }
     public int currentMovementState;
 
+    public bool pause;
+
     // Use this for initialization
     void Start()
     {
@@ -64,19 +66,21 @@ public class DarkTree : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Spawning();
-        if (currentMovementState == (int)MovementState.Attack)
-        {            
-            if (this.currentLevel != null)
+        if (!pause)
+        {
+            Spawning();
+            if (currentMovementState == (int)MovementState.Attack)
             {
-                this.attackDelayTimer += Time.deltaTime;
-                if (this.attackDelayTimer >= this.currentLevel.attackDelay)
+                if (this.currentLevel != null)
                 {
-                    this.Attack();
+                    this.attackDelayTimer += Time.deltaTime;
+                    if (this.attackDelayTimer >= this.currentLevel.attackDelay)
+                    {
+                        this.Attack();
+                    }
                 }
             }
         }
-
     }
 
     public virtual void Setup(Transform spawnLocation, Transform attackLocation) {
@@ -87,6 +91,7 @@ public class DarkTree : MonoBehaviour
         currentLevel = new ModelLevel_Boss();
         currentMovementState = (int)MovementState.Spawning;
         this.transform.position = new Vector3(spawnLocation.position.x, spawnLocation.position.y, 0);
+        pause = false;
     }
 
     public void Spawning()
@@ -147,5 +152,15 @@ public class DarkTree : MonoBehaviour
         else {
             health -= damage;
         }
+    }
+
+    public virtual void Pause()
+    {
+        pause = true;
+    }
+
+    public void UnPause()
+    {
+        pause = false;
     }
 }

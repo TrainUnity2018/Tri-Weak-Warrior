@@ -6,7 +6,7 @@ public class Popup : MonoSingleton<Popup> {
 
 	// Use this for initialization
 	void Start () {
-		
+        Disable();
 	}
 	
 	// Update is called once per frame

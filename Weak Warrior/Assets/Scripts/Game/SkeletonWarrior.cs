@@ -26,10 +26,13 @@ public class SkeletonWarrior : GoblinSwordman
 
     void Update()
     {
-        Walk();
-        SlashDelayTiming();
-        KnockBackTiming();
-        RecoverTiming();
+        if (!pause)
+        {
+            Walk();
+            SlashDelayTiming();
+            KnockBackTiming();
+            RecoverTiming();
+        }
     }
 
     public override void Setup(bool direction, ModelLevel model = null)

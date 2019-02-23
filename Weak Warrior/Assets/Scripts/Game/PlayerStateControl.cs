@@ -31,8 +31,6 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     public BoxCollider2D hitBox;
     public Player_DamageBox damageBox;
 
-    public GameObject popup;
-
     public enum State
     {
         Active,
@@ -98,8 +96,8 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
         if (health <= 0)
         {
-            health = 0; 
-            popup.SetActive(true);
+            health = 0;
+            Popup.Instance.Enable();
             EnemySpawnManager.Instance.Pause();
         } 
         if (health == 3)

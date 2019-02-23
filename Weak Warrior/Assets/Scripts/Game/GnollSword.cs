@@ -29,9 +29,12 @@ public class GnollSword : GoblinSwordman {
 
     void Update()
     {
-        Walk();
-        SlashDelayTiming();
-        StandTiming();
+        if (!pause)
+        {
+            Walk();
+            SlashDelayTiming();
+            StandTiming();
+        }
     }
 
     public override void Setup(bool direction, ModelLevel model = null)
