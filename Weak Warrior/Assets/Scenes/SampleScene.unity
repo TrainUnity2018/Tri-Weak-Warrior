@@ -3409,6 +3409,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 3
+  beingDamaged: 0
+  beingDamagedDuration: 0.5
   currentMovementState: 0
   currentArmorState: 1
   slashDuration: 1

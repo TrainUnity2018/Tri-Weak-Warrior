@@ -40,4 +40,8 @@ public class PlayerAnimationControl : MonoSingleton<PlayerAnimationControl> {
     {
         animator.SetInteger("ArmorState", state);
     }
+
+    public void SetBeingDamagedState(bool state) {
+        animator.SetBool("BeingDamaged", state);
+    }
 }

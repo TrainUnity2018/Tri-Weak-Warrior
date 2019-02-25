@@ -10,7 +10,6 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         Idle,
         Slash,
         Dash,
-        Damaged,
         Die
     }
 
@@ -22,6 +21,9 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     }
 
     public int health;
+    public bool beingDamaged;
+    public float beingDamagedDuration;
+    protected float beingDamagedDurationTimer;
     public int currentMovementState;
     public int currentArmorState;
 
@@ -47,6 +49,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     void Update()
     {
         SlashDurationTiming();
+        BeingDamagedDurationTiming();
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -59,6 +62,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         currentMovementState = (int)MovementState.Idle;
         currentArmorState = (int)ArmorState.Full;
         health = 3;
+        beingDamaged = false;
         // currentArmorState = (int)ArmorState.Half;
         // currentArmorState = (int)ArmorState.Naked;
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
@@ -89,17 +93,38 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         }
     }
 
+    public void BeingDamagedDurationTiming()
+    {
+        if (beingDamaged)
+        {
+            beingDamagedDurationTimer += Time.deltaTime;
+            if (beingDamagedDurationTimer >= beingDamagedDuration)
+            {
+                beingDamaged = false;
+                PlayerAnimationControl.Instance.SetBeingDamagedState(beingDamaged);
+            }
+        }
+        else
+        {
+            beingDamagedDurationTimer = 0;
+        }
+    }
+
     public void TakeDamage(int damage)
     {
         health -= damage;
-        currentMovementState = (int)MovementState.Damaged;
+        beingDamaged = true;
+        PlayerAnimationControl.Instance.SetBeingDamagedState(beingDamaged);
+        currentMovementState = (int)MovementState.Idle;
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
         if (health <= 0)
         {
             health = 0;
             Popup.Instance.Enable();
             EnemySpawnManager.Instance.Pause();
-        } 
+            currentMovementState = (int)MovementState.Die;
+            PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+        }
         if (health == 3)
         {
             currentArmorState = 0;
@@ -110,7 +135,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
             currentArmorState = 1;
             PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
         }
-        else if (currentArmorState == 1)
+        else if (health == 1)
         {
             currentArmorState = 2;
             PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
