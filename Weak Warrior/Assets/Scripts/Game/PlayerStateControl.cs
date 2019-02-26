@@ -121,6 +121,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         {
             health = 0;
             Popup.Instance.Enable();
+            Popup.Instance.LastestEnemyShow(EnemySpawnManager.Instance.lastestEnemySpawed);
             EnemySpawnManager.Instance.Pause();
             currentMovementState = (int)MovementState.Die;
             PlayerAnimationControl.Instance.SetMovementState(currentMovementState);

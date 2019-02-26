@@ -93,6 +93,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
     public List<ModelLevel> levels;
     public List<GoblinSwordman> spawnedEnemies;
     public List<DarkTree> spawnedBosses;
+    public GoblinSwordman lastestEnemySpawed;
     private ModelLevel currentLevel = null;
     private int currentIndex = 0;
     private float spawningDelayTimer = 0;
@@ -176,6 +177,8 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
                             this.spawningDelayTimer = 0;
                             this.currentIndex++;
                             spawnedEnemies.Add(enemy);
+                            lastestEnemySpawed = enemy;
+                            
                         }
                     }
                     else
@@ -189,6 +192,8 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
                             this.spawningDelayTimer = 0;
                             this.currentIndex++;
                             spawnedEnemies.Add(enemy);
+                            lastestEnemySpawed = enemy;
+                            
                         }
                     }
                 }

@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Popup : MonoSingleton<Popup> {
 
-	// Use this for initialization
+    public Transform lastestEnemyLocation;
+    
+    // Use this for initialization
 	void Start () {
         Disable();
 	}
@@ -21,4 +23,11 @@ public class Popup : MonoSingleton<Popup> {
 	public void Enable() {
 		this.gameObject.SetActive(true);
 	}
+
+    public void LastestEnemyShow(GoblinSwordman enemy)
+    {
+        GoblinSwordman lastestEnemy = Instantiate(enemy) as GoblinSwordman;
+        lastestEnemy.transform.position = new Vector3(this.lastestEnemyLocation.position.x, this.lastestEnemyLocation.position.y);
+        lastestEnemy.Setup(true, null);
+    }
 }

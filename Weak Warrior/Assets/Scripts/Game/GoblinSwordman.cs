@@ -52,10 +52,14 @@ public class GoblinSwordman : MonoBehaviour {
     {
         Flip(direction);
         spawnDirection = direction;
-        
-        if(model != null)
+
+        if (model != null)
         {
             SetMoveSpeed(model.moveSpeed);
+        }
+        else
+        {
+            SetMoveSpeed(0);
         }
     }
 
