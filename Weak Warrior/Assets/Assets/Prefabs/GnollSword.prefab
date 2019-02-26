@@ -237,6 +237,7 @@ MonoBehaviour:
   animator: {fileID: 95593461834038518}
   damageBox: {fileID: 114191148677565512}
   hitBox: {fileID: 61471118381261612}
+  pause: 0
   currentMovementState: 0
   standDelay: 1
   standDuration: 0.1

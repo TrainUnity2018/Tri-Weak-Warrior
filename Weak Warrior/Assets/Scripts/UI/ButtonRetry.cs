@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class ButtonRetry : Button {
 
-    public GameObject deadDialog;
-
     // Use this for initialization
     void Start () {
 		
@@ -18,9 +16,6 @@ public class ButtonRetry : Button {
 	}
 
 	public override void onClick() {
-        // PlayerStateControl.Instance.Setup();
-        // EnemySpawnManager.Instance.Setup();
-        // deadDialog.SetActive(false);
         SceneManager.LoadScene("SampleScene");
 	}
 }

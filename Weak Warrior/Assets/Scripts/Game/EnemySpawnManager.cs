@@ -93,7 +93,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
     public List<ModelLevel> levels;
     public List<GoblinSwordman> spawnedEnemies;
     public List<DarkTree> spawnedBosses;
-    public GoblinSwordman lastestEnemySpawed;
+    public int enemyLevelID;
     private ModelLevel currentLevel = null;
     private int currentIndex = 0;
     private float spawningDelayTimer = 0;
@@ -117,7 +117,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         this.currentIndex = 0;
         this.spawningDelayTimer = 0;
         pause = false;
-
+        enemyLevelID = 0;
         this.levels = new List<ModelLevel>() {
             new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 4),
             new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 4, 70, 3),
@@ -158,7 +158,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
                 {
                     DarkTree boss = Instantiate(this.bossPrefabs[0], this.transform) as DarkTree;
                     boss.transform.position = new Vector3(this.bossSpawnerLocation.position.x, this.bossSpawnerLocation.position.y, 0);
-                    boss.Setup(bossSpawnerLocation, bossAttackLocation);                    
+                    boss.Setup(bossSpawnerLocation, bossAttackLocation);
                     this.spawningDelayTimer = 0;
                     this.currentIndex++;
                     spawnedBosses.Add(boss);
@@ -177,8 +177,10 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
                             this.spawningDelayTimer = 0;
                             this.currentIndex++;
                             spawnedEnemies.Add(enemy);
-                            lastestEnemySpawed = enemy;
-                            
+                            if (enemyLevelID < this.currentLevel.enemyID)
+                            {
+                                enemyLevelID = this.currentLevel.enemyID;
+                            }
                         }
                     }
                     else
@@ -192,8 +194,10 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
                             this.spawningDelayTimer = 0;
                             this.currentIndex++;
                             spawnedEnemies.Add(enemy);
-                            lastestEnemySpawed = enemy;
-                            
+                            if (enemyLevelID < this.currentLevel.enemyID)
+                            {
+                                enemyLevelID = this.currentLevel.enemyID;
+                            }
                         }
                     }
                 }
@@ -208,7 +212,8 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
 
     }
 
-    public void Pause() {
+    public void Pause()
+    {
         pause = true;
         if (spawnedEnemies.Count > 0)
             for (int i = 0; i < spawnedEnemies.Count; i++)

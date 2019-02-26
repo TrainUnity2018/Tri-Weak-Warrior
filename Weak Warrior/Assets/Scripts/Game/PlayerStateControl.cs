@@ -33,6 +33,11 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     public BoxCollider2D hitBox;
     public Player_DamageBox damageBox;
 
+    public GameObject slashLeftButton;
+    public GameObject slashRightButton;
+
+
+
     public enum State
     {
         Active,
@@ -119,10 +124,14 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
         if (health <= 0)
         {
-            health = 0;
+           
             Popup.Instance.Enable();
-            Popup.Instance.LastestEnemyShow(EnemySpawnManager.Instance.lastestEnemySpawed);
+            Popup.Instance.LastEnemyShow(EnemySpawnManager.Instance.enemyLevelID);
             EnemySpawnManager.Instance.Pause();
+            slashLeftButton.SetActive(false);
+            slashRightButton.SetActive(false);
+
+            health = 0;
             currentMovementState = (int)MovementState.Die;
             PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
         }
