@@ -8,10 +8,16 @@ public class Popup : MonoSingleton<Popup>
     public Animator lastEnemyAnimator;
     public Text killCount;
 
+    public GameObject deadDiaglog;
+    public GameObject pauseDialog;
+    public GameObject slashLeftButton;
+    public GameObject slashRightButton;
+
+
     // Use this for initialization
     void Start()
     {
-        Disable();
+
     }
 
     // Update is called once per frame
@@ -30,12 +36,26 @@ public class Popup : MonoSingleton<Popup>
         this.gameObject.SetActive(true);
     }
 
-    public void LastEnemyShow(int id)
-    {
-        lastEnemyAnimator.SetInteger("ID", id);
+    public void EnablePauseDialog() {
+        this.pauseDialog.SetActive(true);
+        EnemySpawnManager.Instance.Pause();
+        slashLeftButton.SetActive(false);
+        slashRightButton.SetActive(false);
     }
 
-    public void KillCountShow(int killCount) {
+    public void DisablePauseDialog() {
+        
+    }
+
+    public void EnableDeadDialog(int id, int killCount)
+    {
+        this.deadDiaglog.SetActive(true);
+        lastEnemyAnimator.SetInteger("ID", id);
         this.killCount.text = killCount.ToString();
+    }
+
+    public void DisableDeadDialog()
+    {
+        this.deadDiaglog.SetActive(false);
     }
 }

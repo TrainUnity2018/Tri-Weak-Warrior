@@ -125,13 +125,10 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         if (health <= 0)
         {
            
-            Popup.Instance.Enable();
-            Popup.Instance.LastEnemyShow(EnemySpawnManager.Instance.enemyLevelID);
-            Popup.Instance.KillCountShow(EnemySpawnManager.Instance.enemyKilled);
+            Popup.Instance.EnableDeadDialog(EnemySpawnManager.Instance.enemyLevelID, EnemySpawnManager.Instance.enemyKilled);
             EnemySpawnManager.Instance.Pause();
             slashLeftButton.SetActive(false);
             slashRightButton.SetActive(false);
-
             health = 0;
             currentMovementState = (int)MovementState.Die;
             PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
