@@ -94,6 +94,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
     public List<GoblinSwordman> spawnedEnemies;
     public List<DarkTree> spawnedBosses;
     public int enemyLevelID;
+    public int enemyKilled;
     private ModelLevel currentLevel = null;
     private int currentIndex = 0;
     private float spawningDelayTimer = 0;
@@ -118,6 +119,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         this.spawningDelayTimer = 0;
         pause = false;
         enemyLevelID = 0;
+        enemyKilled = 0;
         this.levels = new List<ModelLevel>() {
             new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 4),
             new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 4, 70, 3),
@@ -232,5 +234,10 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         if (spawnedBosses.Count > 0)
             for (int i = 0; i < spawnedBosses.Count; i++)
                 spawnedBosses[i].Pause();
+    }
+
+    public void EnemyKilled()
+    {
+        enemyKilled++;
     }
 }

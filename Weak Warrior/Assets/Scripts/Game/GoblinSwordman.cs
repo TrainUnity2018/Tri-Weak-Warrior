@@ -119,6 +119,7 @@ public class GoblinSwordman : MonoBehaviour {
 
     public virtual void TakeDamage()
     {
+        EnemySpawnManager.Instance.EnemyKilled();
         Destroy(gameObject);
     }
 

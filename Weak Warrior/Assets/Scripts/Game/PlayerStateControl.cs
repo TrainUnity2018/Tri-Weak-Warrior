@@ -127,6 +127,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
            
             Popup.Instance.Enable();
             Popup.Instance.LastEnemyShow(EnemySpawnManager.Instance.enemyLevelID);
+            Popup.Instance.KillCountShow(EnemySpawnManager.Instance.enemyKilled);
             EnemySpawnManager.Instance.Pause();
             slashLeftButton.SetActive(false);
             slashRightButton.SetActive(false);
