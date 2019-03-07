@@ -33,10 +33,13 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     public BoxCollider2D hitBox;
     public Player_DamageBox damageBox;
 
+    public bool pause;
+
     public GameObject slashLeftButton;
     public GameObject slashRightButton;
 
-
+    public Transform ultimateLeftLocation;
+    public Transform ultimateRightLocation;
 
     public enum State
     {
@@ -55,6 +58,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     {
         SlashDurationTiming();
         BeingDamagedDurationTiming();
+        Ultimate();
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -68,6 +72,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         currentArmorState = (int)ArmorState.Full;
         health = 3;
         beingDamaged = false;
+        pause = false;
         // currentArmorState = (int)ArmorState.Half;
         // currentArmorState = (int)ArmorState.Naked;
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
@@ -124,7 +129,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
         if (health <= 0)
         {
-           
+
             Popup.Instance.EnableDeadDialog(EnemySpawnManager.Instance.enemyLevelID, EnemySpawnManager.Instance.enemyKilled);
             EnemySpawnManager.Instance.Pause();
             slashLeftButton.SetActive(false);
@@ -147,6 +152,22 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         {
             currentArmorState = 2;
             PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
+        }
+    }
+
+    public void UltimateActive()
+    {
+            currentMovementState = (int)MovementState.Dash;
+            PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+    }
+    public void Ultimate()
+    {
+        if (currentMovementState == (int)MovementState.Dash)
+        {
+            this.gameObject.transform.position += new Vector3(5f, 0) * Time.deltaTime;
+        }
+        if (this.gameObject.transform.position.x == ultimateRightLocation.transform.position.x) {
+            this.gameObject.transform.position = new Vector3(ultimateLeftLocation.transform.position.x, this.gameObject.transform.position.y, 0);
         }
     }
 
@@ -178,8 +199,19 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
 
     public void OnCollide(Collider2D col)
     {
-
+        
     }
 
+    public void Pause()
+    {
+        this.pause = true;
+        DisableDamageBox();
+        DisableHitBox();
+    }
 
+    public void UnPasue()
+    {
+        this.pause = false;
+        PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+    }
 }

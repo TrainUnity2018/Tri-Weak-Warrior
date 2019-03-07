@@ -21,8 +21,12 @@ public class Player_DamageBox : DamageBox
     {
         if (col.gameObject.tag == "Enemy")
         {
-            PlayerStateControl.Instance.currentMovementState = (int)PlayerStateControl.MovementState.Idle;
-            PlayerAnimationControl.Instance.SetMovementState(PlayerStateControl.Instance.currentMovementState);
+            if (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Slash)
+            {
+                PlayerStateControl.Instance.currentMovementState = (int)PlayerStateControl.MovementState.Idle;
+                PlayerAnimationControl.Instance.SetMovementState(PlayerStateControl.Instance.currentMovementState);
+            }
+
 
             if (col.gameObject.GetComponent<GoblinSwordman>() != null)
                 col.gameObject.GetComponent<GoblinSwordman>().TakeDamage();

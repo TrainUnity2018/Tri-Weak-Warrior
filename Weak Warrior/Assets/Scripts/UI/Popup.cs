@@ -44,7 +44,10 @@ public class Popup : MonoSingleton<Popup>
     }
 
     public void DisablePauseDialog() {
-        
+        this.pauseDialog.SetActive(false);
+        EnemySpawnManager.Instance.UnPause();
+        slashLeftButton.SetActive(true);
+        slashRightButton.SetActive(true);
     }
 
     public void EnableDeadDialog(int id, int killCount)
