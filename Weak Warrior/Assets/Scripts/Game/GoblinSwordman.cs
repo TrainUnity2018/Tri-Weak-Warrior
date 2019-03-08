@@ -130,11 +130,13 @@ public class GoblinSwordman : MonoBehaviour {
     public virtual void Pause()
     {
         pause = true;
+        DisableDamageBox();
     }
 
     public virtual void UnPause()
     {
         pause = false;
+        animator.SetInteger("State", currentMovementState);
     }
 
     public virtual void EnableHitBox()

@@ -26,20 +26,25 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     protected float beingDamagedDurationTimer;
     public int currentMovementState;
     public int currentArmorState;
+    public bool currentDirection;
 
     public float slashDuration;
     protected float slashDurationTimer;
 
     public BoxCollider2D hitBox;
     public Player_DamageBox damageBox;
+    public Player_DamageBox ultimateDamageBox;
+    public float ultimateSpeed;
+    public bool ultimateSide;
 
     public bool pause;
 
     public GameObject slashLeftButton;
     public GameObject slashRightButton;
 
-    public Transform ultimateLeftLocation;
-    public Transform ultimateRightLocation;
+    public Transform ultimateLocationLeft;
+    public Transform ultimateLocationRight;
+    public Transform ultimateEndLocation;
 
     public enum State
     {
@@ -57,8 +62,8 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     void Update()
     {
         SlashDurationTiming();
+        DashDurationTiming();
         BeingDamagedDurationTiming();
-        Ultimate();
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -73,10 +78,12 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         health = 3;
         beingDamaged = false;
         pause = false;
+        currentDirection = false;
         // currentArmorState = (int)ArmorState.Half;
         // currentArmorState = (int)ArmorState.Naked;
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
         PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
+        //transform.position = new Vector3(ultimateLocationLeft.position.x, ultimateLocationLeft.position.y, 0);
     }
 
     public void Slash(bool direction)
@@ -86,6 +93,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
             currentMovementState = (int)MovementState.Slash;
             PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
             PlayerAnimationControl.Instance.Slash(direction);
+            currentDirection = direction;
             slashDurationTimer = 0;
         }
     }
@@ -155,19 +163,76 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         }
     }
 
-    public void UltimateActive()
+    public void Dash()
     {
+        if (currentMovementState == (int)MovementState.Idle)
+        {
             currentMovementState = (int)MovementState.Dash;
             PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+            ultimateSide = false;
+        }
     }
-    public void Ultimate()
+    public void DashDurationTiming()
     {
         if (currentMovementState == (int)MovementState.Dash)
         {
-            this.gameObject.transform.position += new Vector3(5f, 0) * Time.deltaTime;
-        }
-        if (this.gameObject.transform.position.x == ultimateRightLocation.transform.position.x) {
-            this.gameObject.transform.position = new Vector3(ultimateLeftLocation.transform.position.x, this.gameObject.transform.position.y, 0);
+            if (!currentDirection)
+            {
+                if (!ultimateSide) {
+                    if (transform.position.x < ultimateLocationRight.position.x)
+                    {
+                        transform.position += new Vector3(ultimateSpeed, 0) * Time.deltaTime;
+                    }
+                    else
+                    {
+                        transform.position = new Vector3(ultimateLocationLeft.position.x, transform.position.y, 0);
+                        ultimateSide = true;
+                    }
+                }
+                else {
+                    if (transform.position.x < ultimateEndLocation.position.x)
+                    {
+                        transform.position += new Vector3(ultimateSpeed, 0) * Time.deltaTime;
+                    }
+                    else
+                    {
+                        currentMovementState = (int)MovementState.Idle;
+                        PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+                        EnemySpawnManager.Instance.UnPause();
+                    }
+                }               
+            }
+            else
+            {
+                if (!ultimateSide)
+                {
+                    if (transform.position.x > ultimateLocationLeft.position.x)
+                    {
+                        transform.position -= new Vector3(ultimateSpeed, 0) * Time.deltaTime;
+                    }
+                    else
+                    {
+                        transform.position = new Vector3(ultimateLocationRight.position.x, transform.position.y, 0);
+                        ultimateSide = true;
+                    }
+                }
+                else
+                {
+                    if (transform.position.x > ultimateEndLocation.position.x)
+                    {
+                        transform.position -= new Vector3(ultimateSpeed, 0) * Time.deltaTime;
+                    }
+                    else
+                    {
+                        currentMovementState = (int)MovementState.Idle;
+                        PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+                        EnemySpawnManager.Instance.UnPause();
+                    }
+                }
+            }
+
+            //this.gameObject.transform.position += new Vector3(5f, 0) * Time.deltaTime;
+
         }
     }
 
@@ -186,6 +251,11 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         damageBox.EnableDamageBox();
     }
 
+    public void EnableUltimateDamageBox()
+    {
+        ultimateDamageBox.EnableDamageBox();
+    }
+
     public void DisableDamageBox()
     {
         damageBox.DisableDamageBox();
@@ -199,7 +269,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
 
     public void OnCollide(Collider2D col)
     {
-        
+
     }
 
     public void Pause()
@@ -209,7 +279,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         DisableHitBox();
     }
 
-    public void UnPasue()
+    public void UnPause()
     {
         this.pause = false;
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);

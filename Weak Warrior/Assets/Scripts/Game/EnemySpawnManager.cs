@@ -147,6 +147,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
                 this.SpawnEnemy();
             }
         }
+        CleanKilledEnemies();
     }
 
     private void SpawnEnemy()
@@ -214,6 +215,12 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
 
     }
 
+    public void CleanKilledEnemies()
+    {
+        spawnedEnemies.RemoveAll(GoblinSwordman => GoblinSwordman == null);
+        spawnedBosses.RemoveAll(DarkTree => DarkTree == null);
+    }
+
     public void Pause()
     {
         pause = true;
@@ -233,7 +240,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
                 spawnedEnemies[i].UnPause();
         if (spawnedBosses.Count > 0)
             for (int i = 0; i < spawnedBosses.Count; i++)
-                spawnedBosses[i].Pause();
+                spawnedBosses[i].UnPause();
     }
 
     public void EnemyKilled()

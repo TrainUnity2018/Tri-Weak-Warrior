@@ -26,6 +26,7 @@ public class ButtonUltimate : Button
         else
         {
 			EnemySpawnManager.Instance.Pause();
+            PlayerStateControl.Instance.Dash();
         }
     }
 }
