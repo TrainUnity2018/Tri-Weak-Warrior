@@ -199,6 +199,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                         currentMovementState = (int)MovementState.Idle;
                         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
                         EnemySpawnManager.Instance.UnPause();
+                        UltimateCooldown.Instance.Setup();
                     }
                 }               
             }
@@ -227,6 +228,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                         currentMovementState = (int)MovementState.Idle;
                         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
                         EnemySpawnManager.Instance.UnPause();
+                        UltimateCooldown.Instance.Setup();
                     }
                 }
             }

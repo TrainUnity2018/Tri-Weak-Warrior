@@ -17,10 +17,13 @@ public class UltimateCooldown : MonoSingleton<UltimateCooldown>
         Setup();
     }
 
-    void Setup()
+    public void Setup()
     {
         inCooldown = true;
         cooldownDurationTimer = 0;
+        cooldownImage.fillAmount = 1;
+        cooldownImage.gameObject.SetActive(true);
+        ultimateCooldownReady.color = new Color(ultimateCooldownReady.color.r, ultimateCooldownReady.color.g, ultimateCooldownReady.color.b, 0f);
     }
 
     // Update is called once per frame
@@ -29,7 +32,7 @@ public class UltimateCooldown : MonoSingleton<UltimateCooldown>
         CooldownDurationTiming();
     }
 
-    void CooldownDurationTiming()
+    public void CooldownDurationTiming()
     {
         cooldownDurationTimer += Time.deltaTime;
         float fillAmount = 1 - (cooldownDurationTimer / cooldownDuration);
@@ -37,7 +40,7 @@ public class UltimateCooldown : MonoSingleton<UltimateCooldown>
         if (cooldownDurationTimer >= cooldownDuration)
         {
             inCooldown = false;
-            ultimateCooldownReady.color = new Color(ultimateCooldownReady.color.r, ultimateCooldownReady.color.r, ultimateCooldownReady.color.r, 1f);
+            ultimateCooldownReady.color = new Color(ultimateCooldownReady.color.r, ultimateCooldownReady.color.g, ultimateCooldownReady.color.b, 1f);
 			cooldownImage.gameObject.SetActive(false);
         }
     }
