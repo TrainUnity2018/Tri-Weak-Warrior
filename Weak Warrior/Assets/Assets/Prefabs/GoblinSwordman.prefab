@@ -21,6 +21,8 @@ GameObject:
   - component: {fileID: 4953844900065566}
   - component: {fileID: 212363166360171802}
   - component: {fileID: 50352236851384588}
+  - component: {fileID: 61731256721626534}
+  - component: {fileID: 114719670240568748}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -75,6 +77,8 @@ GameObject:
   - component: {fileID: 4368389467991304}
   - component: {fileID: 212184480915670054}
   - component: {fileID: 50421973218517336}
+  - component: {fileID: 61643512875768028}
+  - component: {fileID: 114638368916153498}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -227,6 +231,31 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.2877015, y: 0.6144655}
   m_EdgeRadius: 0
+--- !u!61 &61643512875768028
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1310857982168108}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.01361084, y: -0.018148065}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.1, y: 0.7314286}
+    newSize: {x: 1.1, y: 0.7314286}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.28636694, y: 0.3261242}
+  m_EdgeRadius: 0
 --- !u!61 &61707905086401182
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -251,6 +280,31 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.2031194, y: 0.8503419}
+  m_EdgeRadius: 0
+--- !u!61 &61731256721626534
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1020002447256454}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.07259166, y: -0.021172702}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.1, y: 0.7314286}
+    newSize: {x: 1.1, y: 0.7314286}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.33778596, y: 0.31402552}
   m_EdgeRadius: 0
 --- !u!61 &61765776361589584
 BoxCollider2D:
@@ -341,18 +395,42 @@ MonoBehaviour:
   hitBox: {fileID: 61765776361589584}
   head: {fileID: 1310857982168108}
   body: {fileID: 1020002447256454}
-  bodySplashStartSpeedVertical: 3
+  bodySplashStartSpeedVertical: 2
   bodySplashStartSpeedHorizontal: 3
-  bodySplashVerticalDecelerate: 0.2
-  bodySplashHorizontalDecelerate: 0.2
+  bodySplashVerticalDecelerate: 9
+  bodySplashHorizontalDecelerate: 10
   headSplashStartSpeedVertical: 5
-  headSplashStartSpeedHorizontal: 5
-  headSplashVeritcalDecelerate: 0.2
-  headSplashHorizontalDecelerate: 0.2
-  headSpashStartSpinningSpeed: 360
-  headSplashSpinningDecelerate: 5
+  headSplashStartSpeedHorizontal: 6
+  headSplashVerticalDecelerate: 12
+  headSplashHorizontalDecelerate: 13
+  headSplashStartSpinningSpeed: 360
+  headSplashSpinningDecelerate: 280
   pause: 0
   currentMovementState: 0
+--- !u!114 &114638368916153498
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1310857982168108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34fa9676622d76345bb9247231802aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boundTouched: 0
+--- !u!114 &114719670240568748
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1020002447256454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34fa9676622d76345bb9247231802aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boundTouched: 0
 --- !u!212 &212184480915670054
 SpriteRenderer:
   m_ObjectHideFlags: 1

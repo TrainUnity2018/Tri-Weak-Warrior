@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ImpSword : GoblinSwordman {
+public class ImpSword : GoblinSwordman
+{
 
     public float jumpDecelerate;
     public float startJumpSpeed;
@@ -28,6 +29,7 @@ public class ImpSword : GoblinSwordman {
         {
             Walk();
         }
+        OnDead();
     }
 
     public override void Setup(bool direction, ModelLevel model = null)
@@ -59,13 +61,95 @@ public class ImpSword : GoblinSwordman {
                 else
                 {
                     jumpSpeed -= jumpDecelerate * Time.deltaTime;
-                    gameObject.transform.position += new Vector3(0, jumpSpeed)  * Time.deltaTime;
+                    gameObject.transform.position += new Vector3(0, jumpSpeed) * Time.deltaTime;
                 }
             }
             else
             {
                 fallSpeed += fallAccelerate * Time.deltaTime;
                 gameObject.transform.position -= new Vector3(0, fallSpeed) * Time.deltaTime;
+            }
+        }
+    }
+
+    public override void TakeDamage()
+    {
+        currentMovementState = (int)MovementState.Die;
+        pause = true;
+        body.GetComponent<SpriteRenderer>().enabled = true;
+        head.GetComponent<SpriteRenderer>().enabled = true;
+        headSplashSpeedHorizontal = headSplashStartSpeedHorizontal;
+        headSplashSpeedVertical = headSplashStartSpeedVertical;
+        headSplashSpinningSpeed = headSplashStartSpinningSpeed;
+        bodySplashSpeedHorizontal = bodySplashStartSpeedHorizontal;
+        bodySplashSpeedVertical = bodySplashStartSpeedVertical;
+    }
+
+    public override void OnDead()
+    {
+        if (body.GetComponent<GoblinSwordman_BodyPart>().boundTouched && head.GetComponent<GoblinSwordman_BodyPart>().boundTouched)
+        {
+            Destroy(gameObject);
+            EnemySpawnManager.Instance.EnemyKilled();
+        }
+
+        if (currentMovementState == (int)MovementState.Die)
+        {
+            DisableDamageBox();
+            DisableHitBox();
+            if (spawnDirection)
+            {
+                if (headSplashSpeedHorizontal > 0)
+                {
+                    head.gameObject.transform.position += new Vector3(headSplashSpeedHorizontal, 0) * Time.deltaTime;
+                    headSplashSpeedHorizontal -= headSplashHorizontalDecelerate * Time.deltaTime;
+                }
+                head.gameObject.transform.position += new Vector3(0, headSplashSpeedVertical) * Time.deltaTime;
+                headSplashSpeedVertical -= headSplashVerticalDecelerate * Time.deltaTime;
+                if (headSplashSpinningSpeed > 0)
+                {
+                    float degreesPerSec = headSplashSpinningSpeed;
+                    float rotAmount = degreesPerSec * Time.deltaTime;
+                    float curRot = head.gameObject.transform.localRotation.eulerAngles.z;
+                    head.gameObject.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, curRot + rotAmount));
+                    headSplashSpinningSpeed -= headSplashSpinningDecelerate * Time.deltaTime;
+                }
+
+                if (bodySplashSpeedHorizontal > 0)
+                {
+                    body.gameObject.transform.position -= new Vector3(bodySplashSpeedHorizontal, 0) * Time.deltaTime;
+                    bodySplashSpeedHorizontal -= bodySplashHorizontalDecelerate * Time.deltaTime;
+                }
+                body.gameObject.transform.position += new Vector3(0, bodySplashSpeedVertical) * Time.deltaTime;
+                bodySplashSpeedVertical -= bodySplashVerticalDecelerate * Time.deltaTime;
+                gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            }
+            else
+            {
+                if (headSplashSpeedHorizontal > 0)
+                {
+                    head.gameObject.transform.position -= new Vector3(headSplashSpeedHorizontal, 0) * Time.deltaTime;
+                    headSplashSpeedHorizontal -= headSplashHorizontalDecelerate * Time.deltaTime;
+                }
+                head.gameObject.transform.position += new Vector3(0, headSplashSpeedVertical) * Time.deltaTime;
+                headSplashSpeedVertical -= headSplashVerticalDecelerate * Time.deltaTime;
+                if (headSplashSpinningSpeed > 0)
+                {
+                    float degreesPerSec = headSplashSpinningSpeed;
+                    float rotAmount = degreesPerSec * Time.deltaTime;
+                    float curRot = head.gameObject.transform.localRotation.eulerAngles.z;
+                    head.gameObject.transform.localRotation = Quaternion.Euler(new Vector3(0, 0, curRot + rotAmount));
+                    headSplashSpinningSpeed -= headSplashSpinningDecelerate * Time.deltaTime;
+                }
+
+                if (bodySplashSpeedHorizontal > 0)
+                {
+                    body.gameObject.transform.position += new Vector3(bodySplashSpeedHorizontal, 0) * Time.deltaTime;
+                    bodySplashSpeedHorizontal -= bodySplashHorizontalDecelerate * Time.deltaTime;
+                }
+                body.gameObject.transform.position += new Vector3(0, bodySplashSpeedVertical) * Time.deltaTime;
+                bodySplashSpeedVertical -= bodySplashVerticalDecelerate * Time.deltaTime;
+                gameObject.GetComponent<SpriteRenderer>().enabled = false;
             }
         }
     }

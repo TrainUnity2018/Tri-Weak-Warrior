@@ -167,6 +167,8 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     {
         if (currentMovementState == (int)MovementState.Idle)
         {
+            beingDamaged = false;
+            PlayerAnimationControl.Instance.SetBeingDamagedState(beingDamaged);
             currentMovementState = (int)MovementState.Dash;
             PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
             ultimateSide = false;
@@ -178,7 +180,8 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         {
             if (!currentDirection)
             {
-                if (!ultimateSide) {
+                if (!ultimateSide)
+                {
                     if (transform.position.x < ultimateLocationRight.position.x)
                     {
                         transform.position += new Vector3(ultimateSpeed, 0) * Time.deltaTime;
@@ -189,7 +192,8 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                         ultimateSide = true;
                     }
                 }
-                else {
+                else
+                {
                     if (transform.position.x < ultimateEndLocation.position.x)
                     {
                         transform.position += new Vector3(ultimateSpeed, 0) * Time.deltaTime;
@@ -198,10 +202,11 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                     {
                         currentMovementState = (int)MovementState.Idle;
                         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+                        DisableUltimateDamageBox();
                         EnemySpawnManager.Instance.UnPause();
                         UltimateCooldown.Instance.Setup();
                     }
-                }               
+                }
             }
             else
             {
@@ -227,14 +232,12 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                     {
                         currentMovementState = (int)MovementState.Idle;
                         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+                        DisableUltimateDamageBox();
                         EnemySpawnManager.Instance.UnPause();
                         UltimateCooldown.Instance.Setup();
                     }
                 }
             }
-
-            //this.gameObject.transform.position += new Vector3(5f, 0) * Time.deltaTime;
-
         }
     }
 
@@ -261,6 +264,11 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     public void DisableDamageBox()
     {
         damageBox.DisableDamageBox();
+    }
+
+    public void DisableUltimateDamageBox()
+    {
+        ultimateDamageBox.DisableDamageBox();
     }
 
     public void SetIdleState()

@@ -33,7 +33,7 @@ public class Player_DamageBox : DamageBox
             else if (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Dash)
             {
                 if (col.gameObject.GetComponent<GoblinSwordman>() != null)
-                    Destroy(col.gameObject);
+                    col.gameObject.GetComponent<GoblinSwordman>().TakeDamage();
                 if (col.gameObject.GetComponent<DarkTree_Arm>() != null)
                     col.gameObject.GetComponent<DarkTree_Arm>().TakeDamage();
             }
