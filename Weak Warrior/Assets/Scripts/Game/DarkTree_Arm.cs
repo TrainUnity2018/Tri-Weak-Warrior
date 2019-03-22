@@ -49,10 +49,21 @@ public class DarkTree_Arm : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Floating();
-        Attack();
-        Retreat();
-        KnockBack();
+        if (!body.pause && (PlayerStateControl.Instance.currentMovementState != (int)PlayerStateControl.MovementState.Dash))
+        {
+            Floating();
+            Attack();
+            Retreat();
+            KnockBack();
+        }
+        else if (body.pause && (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Dash))
+        {
+            KnockBack();
+        }
+        else if (!body.pause && (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Dash))
+        {
+            KnockBack();
+        }
     }
 
     public virtual void Setup()
@@ -67,6 +78,7 @@ public class DarkTree_Arm : MonoBehaviour
     {
         if (currentMovementState == (int)MovementState.Floating)
         {
+            EnableHitBox();
             floatingDelayTimer += Time.deltaTime;
             if (floatingDelayTimer >= floatingDelay)
             {
@@ -115,7 +127,6 @@ public class DarkTree_Arm : MonoBehaviour
             if (attackVibrateTimer > attackVibrateDuration)
             {
                 EnableDamageBox();
-                EnableHitBox();
                 if ((Mathf.Abs(transform.localPosition.x - attackEndPosition.x) > 0.01f) || (Mathf.Abs(transform.localPosition.y - attackEndPosition.y) > 0.01f))
                 {
                     Vector3 moveVector = (attackEndPosition - transform.localPosition).normalized;
@@ -149,7 +160,6 @@ public class DarkTree_Arm : MonoBehaviour
         if (currentMovementState == (int)MovementState.Retreat)
         {
             DisableDamageBox();
-            DisableHitBox();
             attackDelayTimer += Time.deltaTime;
             if (attackDelayTimer >= attackDelay)
             {

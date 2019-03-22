@@ -33,8 +33,11 @@ public class SkeletonWarrior : GoblinSwordman
             SlashDelayTiming();
             KnockBackTiming();
             RecoverTiming();
-        }
-        OnDead();
+        }    
+        if (!Popup.Instance.pauseDialog.activeSelf && !Popup.Instance.deadDiaglog.activeSelf)
+        {
+            OnDead();
+        }  
     }
 
     public override void Setup(bool direction, ModelLevel model = null)
@@ -134,11 +137,10 @@ public class SkeletonWarrior : GoblinSwordman
             pause = true;
             body.GetComponent<SpriteRenderer>().enabled = true;
             head.GetComponent<SpriteRenderer>().enabled = true;
-            headSplashSpeedHorizontal = headSplashStartSpeedHorizontal;
-            headSplashSpeedVertical = headSplashStartSpeedVertical;
+
             headSplashSpinningSpeed = headSplashStartSpinningSpeed;
-            bodySplashSpeedHorizontal = bodySplashStartSpeedHorizontal;
-            bodySplashSpeedVertical = bodySplashStartSpeedVertical;
+            headSplashVelocity = headSplashStartVelocity;
+            bodySplashVelocity = bodySplashStartVelocity;
         }
     }
 
@@ -156,13 +158,14 @@ public class SkeletonWarrior : GoblinSwordman
             DisableHitBox();
             if (spawnDirection)
             {
-                if (headSplashSpeedHorizontal > 0)
+                if (headSplashVelocity.x > 0)
                 {
-                    head.gameObject.transform.position += new Vector3(headSplashSpeedHorizontal, 0) * Time.deltaTime;
-                    headSplashSpeedHorizontal -= headSplashHorizontalDecelerate * Time.deltaTime;
+                    head.gameObject.transform.position += new Vector3(headSplashVelocity.x, 0) * Time.deltaTime;
                 }
-                head.gameObject.transform.position += new Vector3(0, headSplashSpeedVertical) * Time.deltaTime;
-                headSplashSpeedVertical -= headSplashVerticalDecelerate * Time.deltaTime;
+                head.gameObject.transform.position += new Vector3(0, headSplashVelocity.y) * Time.deltaTime;
+                headSplashVelocity = new Vector2(headSplashVelocity.x - headSplashDecelerate.x * Time.deltaTime, headSplashVelocity.y - headSplashDecelerate.y * Time.deltaTime);
+                headSplashDecelerate = new Vector2(headSplashDecelerate.x - Time.deltaTime * 10, headSplashDecelerate.y);
+
                 if (headSplashSpinningSpeed > 0)
                 {
                     float degreesPerSec = headSplashSpinningSpeed;
@@ -172,24 +175,26 @@ public class SkeletonWarrior : GoblinSwordman
                     headSplashSpinningSpeed -= headSplashSpinningDecelerate * Time.deltaTime;
                 }
 
-                if (bodySplashSpeedHorizontal > 0)
+                if (bodySplashVelocity.x > 0)
                 {
-                    body.gameObject.transform.position -= new Vector3(bodySplashSpeedHorizontal, 0) * Time.deltaTime;
-                    bodySplashSpeedHorizontal -= bodySplashHorizontalDecelerate * Time.deltaTime;
+                    body.gameObject.transform.position -= new Vector3(bodySplashVelocity.x, 0) * Time.deltaTime;
                 }
-                body.gameObject.transform.position += new Vector3(0, bodySplashSpeedVertical) * Time.deltaTime;
-                bodySplashSpeedVertical -= bodySplashVerticalDecelerate * Time.deltaTime;
+                body.gameObject.transform.position += new Vector3(0, bodySplashVelocity.y) * Time.deltaTime;
+                bodySplashVelocity = new Vector2(bodySplashVelocity.x - bodySplashDecelerate.x * Time.deltaTime, bodySplashVelocity.y - bodySplashDecelerate.y * Time.deltaTime);
+                bodySplashDecelerate = new Vector2(bodySplashDecelerate.x - Time.deltaTime * 10, bodySplashDecelerate.y);
+
                 gameObject.GetComponent<SpriteRenderer>().enabled = false;
             }
             else
             {
-                if (headSplashSpeedHorizontal > 0)
+                if (headSplashVelocity.x > 0)
                 {
-                    head.gameObject.transform.position -= new Vector3(headSplashSpeedHorizontal, 0) * Time.deltaTime;
-                    headSplashSpeedHorizontal -= headSplashHorizontalDecelerate * Time.deltaTime;
+                    head.gameObject.transform.position -= new Vector3(headSplashVelocity.x, 0) * Time.deltaTime;
                 }
-                head.gameObject.transform.position += new Vector3(0, headSplashSpeedVertical) * Time.deltaTime;
-                headSplashSpeedVertical -= headSplashVerticalDecelerate * Time.deltaTime;
+                head.gameObject.transform.position += new Vector3(0, headSplashVelocity.y) * Time.deltaTime;
+                headSplashVelocity = new Vector2(headSplashVelocity.x - headSplashDecelerate.x * Time.deltaTime, headSplashVelocity.y - headSplashDecelerate.y * Time.deltaTime);
+                headSplashDecelerate = new Vector2(headSplashDecelerate.x - Time.deltaTime * 10, headSplashDecelerate.y);
+
                 if (headSplashSpinningSpeed > 0)
                 {
                     float degreesPerSec = headSplashSpinningSpeed;
@@ -199,13 +204,14 @@ public class SkeletonWarrior : GoblinSwordman
                     headSplashSpinningSpeed -= headSplashSpinningDecelerate * Time.deltaTime;
                 }
 
-                if (bodySplashSpeedHorizontal > 0)
+                if (bodySplashVelocity.x > 0)
                 {
-                    body.gameObject.transform.position += new Vector3(bodySplashSpeedHorizontal, 0) * Time.deltaTime;
-                    bodySplashSpeedHorizontal -= bodySplashHorizontalDecelerate * Time.deltaTime;
+                    body.gameObject.transform.position += new Vector3(bodySplashVelocity.x, 0) * Time.deltaTime;
                 }
-                body.gameObject.transform.position += new Vector3(0, bodySplashSpeedVertical) * Time.deltaTime;
-                bodySplashSpeedVertical -= bodySplashVerticalDecelerate * Time.deltaTime;
+                body.gameObject.transform.position += new Vector3(0, bodySplashVelocity.y) * Time.deltaTime;
+                bodySplashVelocity = new Vector2(bodySplashVelocity.x - bodySplashDecelerate.x * Time.deltaTime, bodySplashVelocity.y - bodySplashDecelerate.y * Time.deltaTime);
+                bodySplashDecelerate = new Vector2(bodySplashDecelerate.x - Time.deltaTime * 10, bodySplashDecelerate.y);
+
                 gameObject.GetComponent<SpriteRenderer>().enabled = false;
             }
         }

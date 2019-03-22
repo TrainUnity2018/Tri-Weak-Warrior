@@ -61,9 +61,12 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     // Update is called once per frame
     void Update()
     {
-        SlashDurationTiming();
-        DashDurationTiming();
-        BeingDamagedDurationTiming();
+        if (!pause)
+        {
+            SlashDurationTiming();
+            DashDurationTiming();
+            BeingDamagedDurationTiming();
+        }
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -83,7 +86,6 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         // currentArmorState = (int)ArmorState.Naked;
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
         PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
-        //transform.position = new Vector3(ultimateLocationLeft.position.x, ultimateLocationLeft.position.y, 0);
     }
 
     public void Slash(bool direction)

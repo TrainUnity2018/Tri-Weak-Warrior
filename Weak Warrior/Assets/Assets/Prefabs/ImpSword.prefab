@@ -219,7 +219,7 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1036564553741930}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -326,16 +326,12 @@ MonoBehaviour:
   hitBox: {fileID: 61381770749623766}
   head: {fileID: 1621305752226636}
   body: {fileID: 1446651110810378}
-  bodySplashStartSpeedVertical: 2
-  bodySplashStartSpeedHorizontal: 3
-  bodySplashVerticalDecelerate: 9
-  bodySplashHorizontalDecelerate: 10
-  headSplashStartSpeedVertical: 5
-  headSplashStartSpeedHorizontal: 6
-  headSplashVerticalDecelerate: 12
-  headSplashHorizontalDecelerate: 13
+  bodySplashStartVelocity: {x: 3, y: 2}
+  bodySplashDecelerate: {x: 10, y: 9}
   headSplashStartSpinningSpeed: 360
   headSplashSpinningDecelerate: 280
+  headSplashStartVelocity: {x: 6, y: 5}
+  headSplashDecelerate: {x: 13, y: 12}
   pause: 0
   currentMovementState: 0
   jumpDecelerate: 4

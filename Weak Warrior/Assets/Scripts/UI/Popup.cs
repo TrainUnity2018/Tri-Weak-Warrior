@@ -36,16 +36,22 @@ public class Popup : MonoSingleton<Popup>
         this.gameObject.SetActive(true);
     }
 
-    public void EnablePauseDialog() {
+    public void EnablePauseDialog()
+    {
         this.pauseDialog.SetActive(true);
-        EnemySpawnManager.Instance.Pause();
+        if (PlayerStateControl.Instance.currentMovementState != (int)PlayerStateControl.MovementState.Dash)
+            EnemySpawnManager.Instance.Pause();
+        PlayerStateControl.Instance.Pause();
         slashLeftButton.SetActive(false);
         slashRightButton.SetActive(false);
     }
 
-    public void DisablePauseDialog() {
+    public void DisablePauseDialog()
+    {
         this.pauseDialog.SetActive(false);
-        EnemySpawnManager.Instance.UnPause();
+        if (PlayerStateControl.Instance.currentMovementState != (int)PlayerStateControl.MovementState.Dash)
+            EnemySpawnManager.Instance.UnPause();
+        PlayerStateControl.Instance.UnPause();
         slashLeftButton.SetActive(true);
         slashRightButton.SetActive(true);
     }
