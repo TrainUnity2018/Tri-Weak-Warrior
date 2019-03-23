@@ -19,6 +19,6 @@ public class ButtonExit : Button
 
     public override void onClick()
     {
-        Application.Quit();
+        Popup.Instance.EnableMainMenu();
     }
 }

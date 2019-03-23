@@ -104,7 +104,6 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
     void Start()
     {
         this.Setup();
-        this.SpawnEnemy();
     }
 
     public void Setup()
@@ -117,7 +116,6 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         // }
         this.currentIndex = 0;
         this.spawningDelayTimer = 0;
-        pause = false;
         enemyLevelID = 0;
         enemyKilled = 0;
         this.levels = new List<ModelLevel>() {
@@ -246,5 +244,23 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
     public void EnemyKilled()
     {
         enemyKilled++;
+    }
+
+    public void Disable()
+    {
+        for (int i = 0; i < spawnedEnemies.Count; i++)
+        {
+            Destroy(spawnedEnemies[i].gameObject);
+        }
+        for (int i = 0; i < spawnedBosses.Count; i++)
+        {
+            Destroy(spawnedBosses[i].gameObject);
+        }
+    }
+
+    public void Enable() {
+        this.Setup();
+        pause = false;
+        this.SpawnEnemy();
     }
 }

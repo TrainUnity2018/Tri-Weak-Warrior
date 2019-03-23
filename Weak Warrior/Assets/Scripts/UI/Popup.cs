@@ -10,14 +10,17 @@ public class Popup : MonoSingleton<Popup>
 
     public GameObject deadDiaglog;
     public GameObject pauseDialog;
-    public GameObject slashLeftButton;
-    public GameObject slashRightButton;
+    public GameObject gamePlayButtons;
+    public GameObject pauseButton;
+    public GameObject mainMenu;
+    public GameObject startMenu;
+    public GameObject player;
 
 
     // Use this for initialization
     void Start()
     {
-
+        EnableMainMenu();
     }
 
     // Update is called once per frame
@@ -42,8 +45,7 @@ public class Popup : MonoSingleton<Popup>
         if (PlayerStateControl.Instance.currentMovementState != (int)PlayerStateControl.MovementState.Dash)
             EnemySpawnManager.Instance.Pause();
         PlayerStateControl.Instance.Pause();
-        slashLeftButton.SetActive(false);
-        slashRightButton.SetActive(false);
+        gamePlayButtons.SetActive(false);
     }
 
     public void DisablePauseDialog()
@@ -52,8 +54,7 @@ public class Popup : MonoSingleton<Popup>
         if (PlayerStateControl.Instance.currentMovementState != (int)PlayerStateControl.MovementState.Dash)
             EnemySpawnManager.Instance.UnPause();
         PlayerStateControl.Instance.UnPause();
-        slashLeftButton.SetActive(true);
-        slashRightButton.SetActive(true);
+        gamePlayButtons.SetActive(true);
     }
 
     public void EnableDeadDialog(int id, int killCount)
@@ -66,5 +67,42 @@ public class Popup : MonoSingleton<Popup>
     public void DisableDeadDialog()
     {
         this.deadDiaglog.SetActive(false);
+    }
+
+    public void EnableMainMenu() {
+        this.mainMenu.SetActive(true);
+        this.deadDiaglog.SetActive(false);
+        this.pauseDialog.SetActive(false);
+        this.gamePlayButtons.SetActive(false);
+        this.pauseButton.SetActive(false);
+        this.startMenu.SetActive(false);
+        this.player.SetActive(false);
+        EnemySpawnManager.Instance.Disable();
+        EnemySpawnManager.Instance.Pause();
+        EnemySpawnManager.Instance.Setup();
+    }
+
+    public void DisableMainMenu() {
+        this.mainMenu.SetActive(false);
+        this.deadDiaglog.SetActive(false);
+        this.pauseDialog.SetActive(false);
+        this.gamePlayButtons.SetActive(false);
+        this.pauseButton.SetActive(false);
+        this.startMenu.SetActive(true);
+        this.player.SetActive(true);
+        EnemySpawnManager.Instance.Pause();
+        EnemySpawnManager.Instance.Disable();
+    }
+
+    public void DisableStartMenu() {
+        this.mainMenu.SetActive(false);
+        this.deadDiaglog.SetActive(false);
+        this.pauseDialog.SetActive(false);
+        this.gamePlayButtons.SetActive(true);
+        this.pauseButton.SetActive(true);
+        this.startMenu.SetActive(false);
+        this.player.SetActive(true);
+        PlayerStateControl.Instance.Setup();
+        EnemySpawnManager.Instance.Enable();
     }
 }
