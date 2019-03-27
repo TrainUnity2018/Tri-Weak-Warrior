@@ -38,6 +38,7 @@ public class DarkTree : MonoBehaviour
     public Transform spawnLocation;
     public Transform attackLocation;
     public float spawnSpeed;
+    public float dieSpeed;
 
     public List<ModelLevel_Boss> levels;
     private ModelLevel_Boss currentLevel = null;
@@ -48,6 +49,7 @@ public class DarkTree : MonoBehaviour
     {
         Spawning,
         Attack,
+        Die,
     }
     public int currentMovementState;
 
@@ -56,6 +58,8 @@ public class DarkTree : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        EnemySpawnManager.Instance.Pause();
+        pause = false;
         // this.currentIndex = 0;
         // this.attackDelayTimer = 0;
         // currentLevel = new ModelLevel_Boss();
@@ -81,9 +85,14 @@ public class DarkTree : MonoBehaviour
                 }
             }
         }
+        if (!Popup.Instance.pauseDialog.activeSelf && !Popup.Instance.deadDiaglog.activeSelf)
+        {
+            OnDead();
+        }
     }
 
-    public virtual void Setup(Transform spawnLocation, Transform attackLocation) {
+    public virtual void Setup(Transform spawnLocation, Transform attackLocation)
+    {
         this.spawnLocation = spawnLocation;
         this.attackLocation = attackLocation;
         this.currentIndex = 0;
@@ -145,12 +154,33 @@ public class DarkTree : MonoBehaviour
 
     public virtual void TakeDamage(int damage)
     {
-        if (health - damage <= 0) {
+        if (health - damage <= 0)
+        {
             health = 0;
-            Destroy(this.gameObject);
+            currentMovementState = (int)DarkTree.MovementState.Die;
+            Destroy(leftArm.gameObject);
+            Destroy(rightArm.gameObject);
         }
-        else {
+        else
+        {
             health -= damage;
+        }
+    }
+
+    public virtual void OnDead()
+    {
+        if (currentMovementState == (int)MovementState.Die)
+        {
+            if ((Mathf.Abs(transform.position.x - spawnLocation.position.x) > 0.01f) || (Mathf.Abs(transform.position.y - spawnLocation.position.y) > 0.01f))
+            {
+                Vector3 moveVector = (spawnLocation.position - transform.position).normalized;
+                transform.position += moveVector * dieSpeed * Time.deltaTime;
+            }
+            else
+            {
+                Destroy(gameObject);
+                EnemySpawnManager.Instance.UnPause();
+            }
         }
     }
 

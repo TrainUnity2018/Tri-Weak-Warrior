@@ -2421,7 +2421,7 @@ MonoBehaviour:
   cooldownImage: {fileID: 1719570009}
   ultimateCooldownReady: {fileID: 415043472}
   inCooldown: 0
-  cooldownDuration: 5
+  cooldownDuration: 0
 --- !u!1 &467070553
 GameObject:
   m_ObjectHideFlags: 0
@@ -3697,16 +3697,6 @@ Prefab:
     - target: {fileID: 1272351896818940, guid: 1c899d4b853dd224f8e72e27504ee526, type: 2}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114558737873590806, guid: 1c899d4b853dd224f8e72e27504ee526,
-        type: 2}
-      propertyPath: bodySplashStartDecelerate
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 114558737873590806, guid: 1c899d4b853dd224f8e72e27504ee526,
-        type: 2}
-      propertyPath: bodySplashAccelerate
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c899d4b853dd224f8e72e27504ee526, type: 2}
@@ -5579,15 +5569,12 @@ MonoBehaviour:
   - enemyID: 0
     spawningDelay: 0.3
     isSupper: 0
-    moveSpeed: 1
   - enemyID: 0
     spawningDelay: 0.5
     isSupper: 0
-    moveSpeed: 1
   - enemyID: 0
     spawningDelay: 5
     isSupper: 0
-    moveSpeed: 1
   spawnedEnemies: []
   spawnedBosses: []
   enemyLevelID: 0

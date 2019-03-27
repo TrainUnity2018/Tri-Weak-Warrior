@@ -317,7 +317,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fff5eed0169657247a817d92a1aac7fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 1.8
+  superMoveSpeed: 2.4
   damage: 1
   spawnDirection: 1
   slashDelay: 0
@@ -333,11 +334,16 @@ MonoBehaviour:
   headSplashStartVelocity: {x: 6, y: 5}
   headSplashDecelerate: {x: 13, y: 12}
   pause: 0
+  isSuper: 0
   currentMovementState: 0
   jumpDecelerate: 4
   startJumpSpeed: 3
   fallAccelerate: 4
   startFallSpeed: 0
+  superJumpDecelerate: 4.4
+  superStartJumpSpeed: 3
+  superFallAccelerate: 4.2
+  superStartFallSpeed: 1
   isJump: 0
 --- !u!114 &114316506895319924
 MonoBehaviour:

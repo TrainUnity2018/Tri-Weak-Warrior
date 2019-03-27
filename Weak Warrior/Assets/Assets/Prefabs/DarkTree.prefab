@@ -439,8 +439,10 @@ MonoBehaviour:
   spawnLocation: {fileID: 0}
   attackLocation: {fileID: 0}
   spawnSpeed: 50
+  dieSpeed: 5
   levels: []
   currentMovementState: 0
+  pause: 0
 --- !u!212 &212531111035814882
 SpriteRenderer:
   m_ObjectHideFlags: 1

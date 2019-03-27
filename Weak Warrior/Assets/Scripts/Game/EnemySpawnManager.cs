@@ -8,7 +8,6 @@ public class ModelLevel
     public int enemyID = -1;
     public float spawningDelay = 0.0f;
     public bool isSupper = false;
-    public float moveSpeed = 1;
     public ModelLevel()
     {
         this.enemyID = 0;
@@ -38,21 +37,18 @@ public class ModelEnemyNormal : ModelLevel
     public ModelEnemyNormal(int enemyID)
     {
         this.enemyID = enemyID;
-        this.moveSpeed = 1;
         this.spawningDelay = 0.3f;
     }
 
     public ModelEnemyNormal(int enemyID, float spawningDelay)
     {
         this.enemyID = enemyID;
-        this.moveSpeed = 1;
         this.spawningDelay = spawningDelay;
     }
 
     public ModelEnemyNormal(int enemyID, float spawningDelay, int isSuperPercentage)
     {
         this.enemyID = enemyID;
-        this.moveSpeed = 1;
         this.spawningDelay = spawningDelay;
 
         int rand = Random.Range(0, 100);
@@ -60,22 +56,6 @@ public class ModelEnemyNormal : ModelLevel
         if (rand <= isSuperPercentage)
         {
             this.isSupper = true;
-            this.moveSpeed = 3;
-        }
-    }
-
-    public ModelEnemyNormal(int enemyID, float spawningDelay, int isSuperPercentage, float superMoveSpeed)
-    {
-        this.enemyID = enemyID;
-        this.moveSpeed = 1;
-        this.spawningDelay = spawningDelay;
-
-        int rand = Random.Range(0, 100);
-
-        if (rand <= isSuperPercentage)
-        {
-            this.isSupper = true;
-            this.moveSpeed = superMoveSpeed;
         }
     }
 }
@@ -118,20 +98,23 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         this.spawningDelayTimer = 0;
         enemyLevelID = 0;
         enemyKilled = 0;
-        this.levels = new List<ModelLevel>() {
-            new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 4),
-            new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 4, 70, 3),
-            new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1, 70, 3), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3),
-            new ModelEnemyNormal(1, 1), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 3), new ModelEnemyNormal(1, 1), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 4),
-            new ModelEnemyNormal(1, 1), new ModelEnemyNormal(1, 0.2f), new ModelEnemyNormal(1, 3), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 3),
-            new ModelEnemyNormal(2, 1), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 3), new ModelEnemyNormal(2, 1), new ModelEnemyNormal(2, 0.8f),
-            new ModelEnemyNormal(2, 3f), new ModelEnemyNormal(2, 1), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 1.2f), new ModelEnemyNormal(2, 3),
-            new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 3), new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 0.5f), new ModelEnemyNormal(3, 0.5f),
-            new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 8), new ModelEnemyNormal(-1, 5),
-         };
+        // this.levels = new List<ModelLevel>() {
+        //     new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 4),
+        //     new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 4, 70),
+        //     new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1, 70), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3),
+        //     new ModelEnemyNormal(1, 1), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 3), new ModelEnemyNormal(1, 1), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 4),
+        //     new ModelEnemyNormal(1, 1), new ModelEnemyNormal(1, 0.2f), new ModelEnemyNormal(1, 3), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 3),
+        //     new ModelEnemyNormal(2, 1), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 3), new ModelEnemyNormal(2, 1), new ModelEnemyNormal(2, 0.8f),
+        //     new ModelEnemyNormal(2, 3f), new ModelEnemyNormal(2, 1), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 1.2f), new ModelEnemyNormal(2, 3),
+        //     new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 3), new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 0.5f), new ModelEnemyNormal(3, 0.5f),
+        //     new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 8), new ModelEnemyNormal(-1, 5),
+        //  };
         // this.levels = new List<ModelLevel>() {
         //      new ModelEnemyNormal(-1, 5),
         //  };
+
+        this.levels = new List<ModelLevel>() {new ModelEnemyNormal(0, 1), new ModelEnemyNormal(4,1)};
+        //this.levels = new List<ModelLevel>();
     }
 
     // Update is called once per frame
@@ -173,7 +156,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
 
                         if (enemy != null)
                         {
-                            enemy.transform.position = new Vector3(this.spawnerLocationLeft.position.x, this.spawnerLocationLeft.position.y, 0);
+                            enemy.transform.position = new Vector3(this.spawnerLocationLeft.position.x, enemy.transform.position.y, 0);
                             enemy.Setup(true, this.currentLevel);
                             this.spawningDelayTimer = 0;
                             this.currentIndex++;
@@ -190,7 +173,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
 
                         if (enemy != null)
                         {
-                            enemy.transform.position = new Vector3(this.spawnerLocationRight.position.x, this.spawnerLocationRight.position.y, 0);
+                            enemy.transform.position = new Vector3(this.spawnerLocationRight.position.x, enemy.transform.position.y, 0);
                             enemy.Setup(false, this.currentLevel);
                             this.spawningDelayTimer = 0;
                             this.currentIndex++;
@@ -208,7 +191,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         }
         else
         {
-            //this.Setup();
+            this.Setup();
         }
 
     }
@@ -248,17 +231,24 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
 
     public void Disable()
     {
-        for (int i = 0; i < spawnedEnemies.Count; i++)
-        {
-            Destroy(spawnedEnemies[i].gameObject);
+        if (spawnedEnemies.Count != 0) {
+            for (int i = 0; i < spawnedEnemies.Count; i++)
+            {
+                Destroy(spawnedEnemies[i].gameObject);
+            }
         }
-        for (int i = 0; i < spawnedBosses.Count; i++)
-        {
-            Destroy(spawnedBosses[i].gameObject);
+        
+        if (spawnedBosses.Count != 0) {
+            for (int i = 0; i < spawnedBosses.Count; i++)
+            {
+                Destroy(spawnedBosses[i].gameObject);
+            }
         }
+        
     }
 
-    public void Enable() {
+    public void Enable()
+    {
         this.Setup();
         pause = false;
         this.SpawnEnemy();

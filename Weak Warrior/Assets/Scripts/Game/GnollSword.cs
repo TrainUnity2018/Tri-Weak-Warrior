@@ -14,9 +14,11 @@ public class GnollSword : GoblinSwordman
         Die,
     }
 
-    public float standDelay;
+    public float minRandomStandDelay;
+    public float maxRandomStandDelay;
+    protected float standDelay;
     protected float standDelayTimer;
-
+    
     public float standDuration;
     protected float standDurationTimer;
 
@@ -26,8 +28,7 @@ public class GnollSword : GoblinSwordman
         currentMovementState = (int)MovementState.Walk;
         animator.SetInteger("State", currentMovementState);
         standDelayTimer = 0;
-
-        //standDelay = Random.Range(standDelay, standDelay + 0.6f);
+        standDelay = Random.Range(minRandomStandDelay, maxRandomStandDelay);
     }
 
     void Update()

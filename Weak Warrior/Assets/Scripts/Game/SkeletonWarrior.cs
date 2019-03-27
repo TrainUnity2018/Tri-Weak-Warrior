@@ -119,19 +119,25 @@ public class SkeletonWarrior : GoblinSwordman
 
     public override void TakeDamage()
     {
-        if (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Slash)
+        if (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Slash) {
             health -= 1;
-        else if (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Dash)
+            Debug.Log("slash");
+        }
+            
+        else if (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Dash) {
             health -= 2;
+            Debug.Log("ult");
+        }
+
         if (health == 1)
         {
+            EnableHitBox();
             knockBackDurationTimer = 0;
             knockBackDelayTimer = 0;
             currentMovementState = (int)MovementState.KnockedBack;
             animator.SetInteger("State", currentMovementState);
-            KnockBackTiming();
         }
-        else
+        else if (health < 1)
         {
             currentMovementState = (int)MovementState.Die;
             pause = true;

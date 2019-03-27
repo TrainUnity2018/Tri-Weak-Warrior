@@ -11,6 +11,12 @@ public class ImpSword : GoblinSwordman
     public float fallAccelerate;
     public float startFallSpeed;
     protected float fallSpeed;
+
+    public float superJumpDecelerate;
+    public float superStartJumpSpeed;
+    public float superFallAccelerate;
+    public float superStartFallSpeed;
+
     public bool isJump;
 
     void Start()
@@ -33,45 +39,87 @@ public class ImpSword : GoblinSwordman
         if (!Popup.Instance.pauseDialog.activeSelf && !Popup.Instance.deadDiaglog.activeSelf)
         {
             OnDead();
-        }       
+        }
     }
 
     public override void Setup(bool direction, ModelLevel model = null)
     {
         Flip(direction);
         spawnDirection = direction;
+
+        if (model != null)
+        {
+            isSuper = model.isSupper;
+        }
+        else
+        {
+
+        }
     }
 
     public override void Walk()
     {
         if (currentMovementState == (int)MovementState.Walk)
         {
-            if (spawnDirection == true)
+            if (isSuper)
             {
-                gameObject.transform.position += new Vector3(moveSpeed, 0) * Time.deltaTime;
-            }
-            else
-            {
-                gameObject.transform.position -= new Vector3(moveSpeed, 0) * Time.deltaTime;
-            }
-
-            if (isJump)
-            {
-                if (jumpSpeed <= 0)
+                if (spawnDirection == true)
                 {
-                    isJump = false;
-                    fallSpeed = startFallSpeed;
+                    gameObject.transform.position += new Vector3(superMoveSpeed, 0) * Time.deltaTime;
                 }
                 else
                 {
-                    jumpSpeed -= jumpDecelerate * Time.deltaTime;
-                    gameObject.transform.position += new Vector3(0, jumpSpeed) * Time.deltaTime;
+                    gameObject.transform.position -= new Vector3(superMoveSpeed, 0) * Time.deltaTime;
+                }
+
+                if (isJump)
+                {
+                    if (jumpSpeed <= 0)
+                    {
+                        isJump = false;
+                        fallSpeed = superStartFallSpeed;
+                    }
+                    else
+                    {
+                        jumpSpeed -= superJumpDecelerate * Time.deltaTime;
+                        gameObject.transform.position += new Vector3(0, jumpSpeed) * Time.deltaTime;
+                    }
+                }
+                else
+                {
+                    fallSpeed += superFallAccelerate * Time.deltaTime;
+                    gameObject.transform.position -= new Vector3(0, fallSpeed) * Time.deltaTime;
                 }
             }
             else
             {
-                fallSpeed += fallAccelerate * Time.deltaTime;
-                gameObject.transform.position -= new Vector3(0, fallSpeed) * Time.deltaTime;
+                if (spawnDirection == true)
+                {
+                    gameObject.transform.position += new Vector3(moveSpeed, 0) * Time.deltaTime;
+                }
+                else
+                {
+                    gameObject.transform.position -= new Vector3(moveSpeed, 0) * Time.deltaTime;
+                }
+
+                if (isJump)
+                {
+                    if (jumpSpeed <= 0)
+                    {
+                        isJump = false;
+                        fallSpeed = startFallSpeed;
+                    }
+                    else
+                    {
+                        jumpSpeed -= jumpDecelerate * Time.deltaTime;
+                        gameObject.transform.position += new Vector3(0, jumpSpeed) * Time.deltaTime;
+                    }
+                }
+                else
+                {
+                    fallSpeed += fallAccelerate * Time.deltaTime;
+                    gameObject.transform.position -= new Vector3(0, fallSpeed) * Time.deltaTime;
+                }
             }
         }
     }
@@ -166,7 +214,14 @@ public class ImpSword : GoblinSwordman
         if (col.gameObject.tag == "Ground")
         {
             isJump = true;
-            jumpSpeed = startJumpSpeed;
+            if (isSuper)
+            {
+                jumpSpeed = superStartJumpSpeed;
+            }
+            else
+            {
+                jumpSpeed = startJumpSpeed;
+            }            
         }
     }
 }

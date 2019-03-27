@@ -7,6 +7,7 @@ public class GoblinSwordman : MonoBehaviour
 {
 
     public float moveSpeed;
+    public float superMoveSpeed;
     public int damage;
     public bool spawnDirection;
 
@@ -33,8 +34,8 @@ public class GoblinSwordman : MonoBehaviour
     protected Vector2 headSplashVelocity;
     public Vector2 headSplashDecelerate;
 
-
     public bool pause;
+    public bool isSuper;
 
     public enum MovementState
     {
@@ -81,11 +82,11 @@ public class GoblinSwordman : MonoBehaviour
 
         if (model != null)
         {
-            SetMoveSpeed(model.moveSpeed);
+            isSuper = model.isSupper;
         }
         else
         {
-            SetMoveSpeed(0);
+
         }
     }
 
@@ -93,14 +94,28 @@ public class GoblinSwordman : MonoBehaviour
     {
         if (currentMovementState == (int)MovementState.Walk)
         {
-            if (spawnDirection == true)
+            if (isSuper)
             {
-                gameObject.transform.position += new Vector3(moveSpeed, 0) * Time.deltaTime;
+                if (spawnDirection == true)
+                {
+                    gameObject.transform.position += new Vector3(superMoveSpeed, 0) * Time.deltaTime;
+                }
+                else
+                {
+                    gameObject.transform.position -= new Vector3(superMoveSpeed, 0) * Time.deltaTime;
+                }
             }
             else
             {
-                gameObject.transform.position -= new Vector3(moveSpeed, 0) * Time.deltaTime;
-            }
+                if (spawnDirection == true)
+                {
+                    gameObject.transform.position += new Vector3(moveSpeed, 0) * Time.deltaTime;
+                }
+                else
+                {
+                    gameObject.transform.position -= new Vector3(moveSpeed, 0) * Time.deltaTime;
+                }
+            }            
         }
     }
 
@@ -140,9 +155,9 @@ public class GoblinSwordman : MonoBehaviour
     {
         Vector3 theScale = transform.localScale;
         if (direction)
-            theScale.x = 1;
+            theScale.x = transform.localScale.x;
         else
-            theScale.x = -1;
+            theScale.x = -transform.localScale.x;
         transform.localScale = theScale;
     }
 
@@ -229,11 +244,6 @@ public class GoblinSwordman : MonoBehaviour
                 gameObject.GetComponent<SpriteRenderer>().enabled = false;
             }
         }
-    }
-
-    public virtual void SetMoveSpeed(float moveSpeed)
-    {
-        this.moveSpeed = moveSpeed;
     }
 
     public virtual void Pause()

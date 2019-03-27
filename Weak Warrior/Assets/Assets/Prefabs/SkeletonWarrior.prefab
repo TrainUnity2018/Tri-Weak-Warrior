@@ -361,6 +361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
+  superMoveSpeed: 0
   damage: 1
   spawnDirection: 1
   slashDelay: 0.5
@@ -376,6 +377,7 @@ MonoBehaviour:
   headSplashStartVelocity: {x: 6, y: 5}
   headSplashDecelerate: {x: 13, y: 12}
   pause: 0
+  isSuper: 0
   currentMovementState: 0
   health: 2
   recoverMoveSpeed: 1
