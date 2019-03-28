@@ -107,13 +107,13 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         //     new ModelEnemyNormal(2, 1), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 3), new ModelEnemyNormal(2, 1), new ModelEnemyNormal(2, 0.8f),
         //     new ModelEnemyNormal(2, 3f), new ModelEnemyNormal(2, 1), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 1.2f), new ModelEnemyNormal(2, 3),
         //     new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 3), new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 0.5f), new ModelEnemyNormal(3, 0.5f),
-        //     new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 8), new ModelEnemyNormal(-1, 5),
+        //     new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 8), new ModelEnemyNormal(-1, 5), new ModelEnemyNormal(4, 1)
         //  };
         // this.levels = new List<ModelLevel>() {
         //      new ModelEnemyNormal(-1, 5),
         //  };
 
-        this.levels = new List<ModelLevel>() {new ModelEnemyNormal(0, 1), new ModelEnemyNormal(4,1)};
+        this.levels = new List<ModelLevel>() {new ModelEnemyNormal(5,2)};
         //this.levels = new List<ModelLevel>();
     }
 
