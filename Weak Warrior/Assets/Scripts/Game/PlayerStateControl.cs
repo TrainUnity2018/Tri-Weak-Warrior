@@ -82,8 +82,8 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         beingDamaged = false;
         pause = false;
         currentDirection = false;
-        // currentArmorState = (int)ArmorState.Half;
-        // currentArmorState = (int)ArmorState.Naked;
+        //currentArmorState = (int)ArmorState.Half;
+        //currentArmorState = (int)ArmorState.Naked;
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
         PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
     }
@@ -133,13 +133,12 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     public void TakeDamage(int damage)
     {
         health -= damage;
-        beingDamaged = true;
-        PlayerAnimationControl.Instance.SetBeingDamagedState(beingDamaged);
         currentMovementState = (int)MovementState.Idle;
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+        beingDamaged = true;       
+        PlayerAnimationControl.Instance.SetBeingDamagedState(beingDamaged);        
         if (health <= 0)
         {
-
             Popup.Instance.EnableDeadDialog(EnemySpawnManager.Instance.enemyLevelID, EnemySpawnManager.Instance.enemyKilled);
             EnemySpawnManager.Instance.Pause();
             slashLeftButton.SetActive(false);
@@ -167,14 +166,11 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
 
     public void Dash()
     {
-        if (currentMovementState == (int)MovementState.Idle)
-        {
-            beingDamaged = false;
-            PlayerAnimationControl.Instance.SetBeingDamagedState(beingDamaged);
-            currentMovementState = (int)MovementState.Dash;
-            PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
-            ultimateSide = false;
-        }
+        beingDamaged = false;
+        PlayerAnimationControl.Instance.SetBeingDamagedState(beingDamaged);
+        currentMovementState = (int)MovementState.Dash;        
+        PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+        ultimateSide = false;
     }
     public void DashDurationTiming()
     {
@@ -202,7 +198,11 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                     }
                     else
                     {
+                        Debug.Log("reach middle");
+                        beingDamaged = true;
+                        beingDamagedDurationTimer = 0;
                         currentMovementState = (int)MovementState.Idle;
+                        PlayerAnimationControl.Instance.SetBeingDamagedState(beingDamaged);
                         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
                         DisableUltimateDamageBox();
                         EnemySpawnManager.Instance.UnPause();
@@ -232,7 +232,11 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                     }
                     else
                     {
+                        Debug.Log("reach middle");
+                        beingDamaged = true;
+                        beingDamagedDurationTimer = 0;
                         currentMovementState = (int)MovementState.Idle;
+                        PlayerAnimationControl.Instance.SetBeingDamagedState(beingDamaged);
                         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
                         DisableUltimateDamageBox();
                         EnemySpawnManager.Instance.UnPause();

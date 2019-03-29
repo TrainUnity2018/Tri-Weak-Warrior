@@ -2467,7 +2467,7 @@ MonoBehaviour:
   cooldownImage: {fileID: 1719570009}
   ultimateCooldownReady: {fileID: 415043472}
   inCooldown: 0
-  cooldownDuration: 5
+  cooldownDuration: 0
 --- !u!1 &467070553
 GameObject:
   m_ObjectHideFlags: 0
@@ -6400,9 +6400,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   beingDamaged: 0
-  beingDamagedDuration: 0.5
+  beingDamagedDuration: 1
   currentMovementState: 0
-  currentArmorState: 1
+  currentArmorState: 0
   currentDirection: 0
   slashDuration: 1
   hitBox: {fileID: 1910017268}

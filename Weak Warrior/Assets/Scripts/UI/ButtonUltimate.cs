@@ -25,11 +25,9 @@ public class ButtonUltimate : Button
         }
         else
         {
-            if (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Idle)
-            {
-                EnemySpawnManager.Instance.Pause();
-                PlayerStateControl.Instance.Dash();
-            }
+            EnemySpawnManager.Instance.Pause();
+            PlayerStateControl.Instance.SetIdleState();
+            PlayerStateControl.Instance.Dash();
         }
     }
 }
