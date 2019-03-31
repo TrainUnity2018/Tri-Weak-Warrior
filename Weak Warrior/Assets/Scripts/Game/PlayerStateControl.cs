@@ -198,7 +198,6 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                     }
                     else
                     {
-                        Debug.Log("reach middle");
                         beingDamaged = true;
                         beingDamagedDurationTimer = 0;
                         currentMovementState = (int)MovementState.Idle;
@@ -232,7 +231,6 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                     }
                     else
                     {
-                        Debug.Log("reach middle");
                         beingDamaged = true;
                         beingDamagedDurationTimer = 0;
                         currentMovementState = (int)MovementState.Idle;
@@ -279,8 +277,10 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
 
     public void SetIdleState()
     {
-        currentMovementState = (int)MovementState.Idle;
-        PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+        if (currentMovementState != (int)(int)MovementState.Idle) {
+            currentMovementState = (int)MovementState.Idle;
+            PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+        }        
     }
 
     public void OnCollide(Collider2D col)

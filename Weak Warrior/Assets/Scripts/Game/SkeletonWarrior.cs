@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SkeletonWarrior : GoblinSwordman
-{
+{    
 
     public int health;
     public float recoverMoveSpeed;
@@ -117,30 +117,33 @@ public class SkeletonWarrior : GoblinSwordman
         }
     }
 
-    public override void TakeDamage()
+    public override void TakeDamage(int playersMovementState)
     {
-        if (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Slash) {
+        EnableHitBox();
+        
+        if (playersMovementState == (int)PlayerStateControl.MovementState.Slash) {
             health -= 1;
-            Debug.Log("slash");
+            if (health <= 0)
+                health = 0;
         }
             
-        else if (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Dash) {
-            health -= 2;
-            Debug.Log("ult");
+        if (playersMovementState == (int)PlayerStateControl.MovementState.Dash) {
+            health -= health;
+            if (health <= 0)
+                health = 0;
         }
 
-        if (health == 1)
+        if (health >= 1)
         {
-            EnableHitBox();
             knockBackDurationTimer = 0;
             knockBackDelayTimer = 0;
             currentMovementState = (int)MovementState.KnockedBack;
             animator.SetInteger("State", currentMovementState);
         }
-        else if (health < 1)
+        if (health == 0)
         {
             currentMovementState = (int)MovementState.Die;
-            pause = true;
+            this.Pause();
             body.GetComponent<SpriteRenderer>().enabled = true;
             head.GetComponent<SpriteRenderer>().enabled = true;
 

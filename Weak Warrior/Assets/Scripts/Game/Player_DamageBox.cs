@@ -21,21 +21,15 @@ public class Player_DamageBox : DamageBox
     {
         if (col.gameObject.tag == "Enemy")
         {
+            if (col.gameObject.GetComponent<GoblinSwordman>() != null)
+                col.gameObject.GetComponent<GoblinSwordman>().TakeDamage(PlayerStateControl.Instance.currentMovementState);
+            if (col.gameObject.GetComponent<DarkTree_Arm>() != null)
+                col.gameObject.GetComponent<DarkTree_Arm>().TakeDamage();
+            
             if (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Slash)
-            {
-                if (col.gameObject.GetComponent<GoblinSwordman>() != null)
-                    col.gameObject.GetComponent<GoblinSwordman>().TakeDamage();
-                if (col.gameObject.GetComponent<DarkTree_Arm>() != null)
-                    col.gameObject.GetComponent<DarkTree_Arm>().TakeDamage();
+            {                
                 PlayerStateControl.Instance.currentMovementState = (int)PlayerStateControl.MovementState.Idle;
                 PlayerAnimationControl.Instance.SetMovementState(PlayerStateControl.Instance.currentMovementState);
-            }
-            else if (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Dash)
-            {
-                if (col.gameObject.GetComponent<GoblinSwordman>() != null)
-                    col.gameObject.GetComponent<GoblinSwordman>().TakeDamage();
-                if (col.gameObject.GetComponent<DarkTree_Arm>() != null)
-                    col.gameObject.GetComponent<DarkTree_Arm>().TakeDamage();
             }
         }
     }

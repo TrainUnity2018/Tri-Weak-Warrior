@@ -29,23 +29,25 @@ public class Orge : GoblinSwordman {
         }
     }
 
-	public override void TakeDamage()
+	public override void TakeDamage(int playersMovementState)
     {
-        if (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Slash) {
+        EnableHitBox();
+        
+        if (playersMovementState == (int)PlayerStateControl.MovementState.Slash) {
             health -= 1;
+            if (health <= 0)
+                health = 0;
         }            
-        else if (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Dash) {
-            health -= 4;
+        if (playersMovementState == (int)PlayerStateControl.MovementState.Dash) {
+            health -= health;
+            if (health <= 0)
+                health = 0;
         }
         
-        if (health > 0)
-        {
-            EnableHitBox();
-        }
-        else if (health <= 0)
+        if (health == 0)
         {
             currentMovementState = (int)MovementState.Die;
-            pause = true;
+            this.Pause();
             body.GetComponent<SpriteRenderer>().enabled = true;
             head.GetComponent<SpriteRenderer>().enabled = true;
 

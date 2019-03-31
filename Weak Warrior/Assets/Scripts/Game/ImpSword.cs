@@ -124,10 +124,10 @@ public class ImpSword : GoblinSwordman
         }
     }
 
-    public override void TakeDamage()
+    public override void TakeDamage(int playersMovementState)
     {
         currentMovementState = (int)MovementState.Die;
-        pause = true;
+        this.Pause();
         body.GetComponent<SpriteRenderer>().enabled = true;
         head.GetComponent<SpriteRenderer>().enabled = true;
 

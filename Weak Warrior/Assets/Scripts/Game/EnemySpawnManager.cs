@@ -113,7 +113,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         //      new ModelEnemyNormal(-1, 5),
         //  };
 
-        this.levels = new List<ModelLevel>() {new ModelEnemyNormal(5,2)};
+        this.levels = new List<ModelLevel>() {new ModelEnemyNormal(-2,1)};
         //this.levels = new List<ModelLevel>();
     }
 
@@ -141,6 +141,15 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
                 if (currentLevel.enemyID == -1)
                 {
                     DarkTree boss = Instantiate(this.bossPrefabs[0], this.transform) as DarkTree;
+                    boss.transform.position = new Vector3(this.bossSpawnerLocation.position.x, this.bossSpawnerLocation.position.y, 0);
+                    boss.Setup(bossSpawnerLocation, bossAttackLocation);
+                    this.spawningDelayTimer = 0;
+                    this.currentIndex++;
+                    spawnedBosses.Add(boss);
+                }
+                else if (currentLevel.enemyID == -2)
+                {
+                    DarkLord boss = Instantiate(this.bossPrefabs[1], this.transform) as DarkLord;
                     boss.transform.position = new Vector3(this.bossSpawnerLocation.position.x, this.bossSpawnerLocation.position.y, 0);
                     boss.Setup(bossSpawnerLocation, bossAttackLocation);
                     this.spawningDelayTimer = 0;
@@ -191,7 +200,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         }
         else
         {
-            this.Setup();
+            //this.Setup();
         }
 
     }

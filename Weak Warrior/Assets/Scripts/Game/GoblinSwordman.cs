@@ -50,7 +50,6 @@ public class GoblinSwordman : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        EnableHitBox();
         currentMovementState = (int)MovementState.Walk;
         animator.SetInteger("State", currentMovementState);
         pause = false;
@@ -115,7 +114,7 @@ public class GoblinSwordman : MonoBehaviour
                 {
                     gameObject.transform.position -= new Vector3(moveSpeed, 0) * Time.deltaTime;
                 }
-            }            
+            }
         }
     }
 
@@ -161,10 +160,10 @@ public class GoblinSwordman : MonoBehaviour
         transform.localScale = theScale;
     }
 
-    public virtual void TakeDamage()
+    public virtual void TakeDamage(int playersMovementSate)
     {
         currentMovementState = (int)MovementState.Die;
-        pause = true;
+        this.Pause();
         body.GetComponent<SpriteRenderer>().enabled = true;
         head.GetComponent<SpriteRenderer>().enabled = true;
 
@@ -248,14 +247,18 @@ public class GoblinSwordman : MonoBehaviour
 
     public virtual void Pause()
     {
-        pause = true;
-        DisableDamageBox();
-        DisableHitBox();
+        if (currentMovementState != (int)MovementState.Die)
+        {
+            pause = true;
+            DisableDamageBox();
+            DisableHitBox();
+        }
     }
 
     public virtual void UnPause()
     {
         pause = false;
+        EnableHitBox();
         animator.SetInteger("State", currentMovementState);
     }
 
@@ -277,13 +280,15 @@ public class GoblinSwordman : MonoBehaviour
     {
         if (currentMovementState != (int)MovementState.Die)
         {
-            damageBox.EnableDamageBox();
+            if (damageBox != null)
+                damageBox.EnableDamageBox();
         }
     }
 
     public virtual void DisableDamageBox()
     {
-        damageBox.DisableDamageBox();
+        if (damageBox != null)
+            damageBox.DisableDamageBox();
     }
 
     public virtual void OnCollide(Collider2D col)

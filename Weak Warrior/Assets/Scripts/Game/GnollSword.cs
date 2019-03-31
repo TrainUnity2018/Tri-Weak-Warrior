@@ -84,10 +84,10 @@ public class GnollSword : GoblinSwordman
         }
     }
 
-    public override void TakeDamage()
+    public override void TakeDamage(int playersMovementSate)
     {
         currentMovementState = (int)MovementState.Die;
-        pause = true;
+        this.Pause();
         body.GetComponent<SpriteRenderer>().enabled = true;
         head.GetComponent<SpriteRenderer>().enabled = true;
 

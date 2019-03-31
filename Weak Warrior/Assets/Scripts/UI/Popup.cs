@@ -14,6 +14,7 @@ public class Popup : MonoSingleton<Popup>
     public GameObject pauseButton;
     public GameObject mainMenu;
     public GameObject startMenu;
+    public GameObject settingMenu;
     public GameObject player;
 
 
@@ -77,6 +78,7 @@ public class Popup : MonoSingleton<Popup>
         this.pauseButton.SetActive(false);
         this.startMenu.SetActive(false);
         this.player.SetActive(false);
+        this.settingMenu.SetActive(false);
         EnemySpawnManager.Instance.Disable();
         EnemySpawnManager.Instance.Pause();
         EnemySpawnManager.Instance.Setup();
@@ -90,6 +92,7 @@ public class Popup : MonoSingleton<Popup>
         this.pauseButton.SetActive(false);
         this.startMenu.SetActive(true);
         this.player.SetActive(true);
+        this.settingMenu.SetActive(false);
         EnemySpawnManager.Instance.Pause();
         EnemySpawnManager.Instance.Disable();
     }
@@ -102,7 +105,30 @@ public class Popup : MonoSingleton<Popup>
         this.pauseButton.SetActive(true);
         this.startMenu.SetActive(false);
         this.player.SetActive(true);
+        this.settingMenu.SetActive(false);
         PlayerStateControl.Instance.Setup();
         EnemySpawnManager.Instance.Enable();
+    }
+
+    public void EnableSettingMenu() {
+        this.mainMenu.SetActive(true);
+        this.deadDiaglog.SetActive(false);
+        this.pauseDialog.SetActive(false);
+        this.gamePlayButtons.SetActive(false);
+        this.pauseButton.SetActive(false);
+        this.startMenu.SetActive(false);
+        this.player.SetActive(false);
+        this.settingMenu.SetActive(true);
+    }
+
+    public void DisableSettingMenu() {
+        this.mainMenu.SetActive(true);
+        this.deadDiaglog.SetActive(false);
+        this.pauseDialog.SetActive(false);
+        this.gamePlayButtons.SetActive(false);
+        this.pauseButton.SetActive(false);
+        this.startMenu.SetActive(false);
+        this.player.SetActive(false);
+        this.settingMenu.SetActive(false);
     }
 }

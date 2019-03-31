@@ -41,9 +41,9 @@ public class DarkTree : MonoBehaviour
     public float dieSpeed;
 
     public List<ModelLevel_Boss> levels;
-    private ModelLevel_Boss currentLevel = null;
-    private int currentIndex = 0;
-    private float attackDelayTimer = 0;
+    protected ModelLevel_Boss currentLevel = null;
+    protected int currentIndex = 0;
+    protected float attackDelayTimer = 0;
 
     public enum MovementState
     {
@@ -103,7 +103,7 @@ public class DarkTree : MonoBehaviour
         pause = false;
     }
 
-    public void Spawning()
+    public virtual void Spawning()
     {
         if (currentMovementState == (int)MovementState.Spawning)
         {
@@ -120,7 +120,7 @@ public class DarkTree : MonoBehaviour
             }
         }
     }
-    private void Attack()
+    public virtual void Attack()
     {
         //if (this.currentIndex < this.levels.Count)
         if (this.currentIndex < 50)
