@@ -69,7 +69,7 @@ public class DarkLord : DarkTree {
             if (this.currentLevel != null)
             {
                 //int location = currentLevel.armID;
-                int location = (int)Random.Range(0,3);
+                int location = (int)Random.Range(1,4);
                 if (location == 1)
                 {
                     leftArm.PrepareAttack();

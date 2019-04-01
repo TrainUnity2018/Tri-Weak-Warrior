@@ -2059,7 +2059,7 @@ MonoBehaviour:
   cooldownImage: {fileID: 1719570009}
   ultimateCooldownReady: {fileID: 415043472}
   inCooldown: 0
-  cooldownDuration: 0
+  cooldownDuration: 5
 --- !u!1 &467070553
 GameObject:
   m_ObjectHideFlags: 0
