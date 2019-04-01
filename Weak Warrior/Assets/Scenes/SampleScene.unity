@@ -962,49 +962,49 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4977122856888900, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
+    - target: {fileID: 4735040535662062, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4977122856888900, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
+    - target: {fileID: 4735040535662062, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
       propertyPath: m_LocalPosition.y
       value: 1.8700001
       objectReference: {fileID: 0}
-    - target: {fileID: 4977122856888900, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
+    - target: {fileID: 4735040535662062, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4977122856888900, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
+    - target: {fileID: 4735040535662062, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4977122856888900, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
+    - target: {fileID: 4735040535662062, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
       propertyPath: m_LocalRotation.y
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4977122856888900, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
+    - target: {fileID: 4735040535662062, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4977122856888900, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
+    - target: {fileID: 4735040535662062, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4977122856888900, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
+    - target: {fileID: 4735040535662062, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 114438855425426366, guid: 214d6ccad19af8348b274ff0be648c43,
+    - target: {fileID: 114406290814914304, guid: 214d6ccad19af8348b274ff0be648c43,
         type: 2}
       propertyPath: spawnLocation
       value: 
       objectReference: {fileID: 8595826}
-    - target: {fileID: 114438855425426366, guid: 214d6ccad19af8348b274ff0be648c43,
+    - target: {fileID: 114406290814914304, guid: 214d6ccad19af8348b274ff0be648c43,
         type: 2}
       propertyPath: attackLocation
       value: 
       objectReference: {fileID: 1146465123}
-    - target: {fileID: 1344590213929546, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
+    - target: {fileID: 1339731855003578, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -5125,7 +5125,7 @@ MonoBehaviour:
   - {fileID: 114111979440642280, guid: f4b41d2000820fd428c8686e7f84dea4, type: 2}
   bossPrefabs:
   - {fileID: 114993150880260504, guid: 0bcf76e682ed41240b1c098014c0eabf, type: 2}
-  - {fileID: 114438855425426366, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
+  - {fileID: 114406290814914304, guid: 214d6ccad19af8348b274ff0be648c43, type: 2}
   levels:
   - enemyID: 0
     spawningDelay: 0.3

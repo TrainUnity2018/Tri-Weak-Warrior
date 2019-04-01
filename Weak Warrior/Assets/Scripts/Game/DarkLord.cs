@@ -52,6 +52,7 @@ public class DarkLord : DarkTree {
             }
             else
             {
+                transform.position = new Vector3(attackLocation.position.x, attackLocation.position.y);
                 currentMovementState = (int)MovementState.Attack;
                 leftArm.Setup();
                 rightArm.Setup();
@@ -68,7 +69,7 @@ public class DarkLord : DarkTree {
             if (this.currentLevel != null)
             {
                 //int location = currentLevel.armID;
-                int location = Random.Range(0, 3);
+                int location = (int)Random.Range(0,3);
                 if (location == 1)
                 {
                     leftArm.PrepareAttack();
