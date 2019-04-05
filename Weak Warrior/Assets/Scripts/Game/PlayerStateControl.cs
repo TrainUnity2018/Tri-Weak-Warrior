@@ -46,6 +46,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     public Transform ultimateLocationRight;
     public Transform ultimateEndLocation;
 
+
     public enum State
     {
         Active,
@@ -109,6 +110,10 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
             {
                 currentMovementState = (int)MovementState.Idle;
                 PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+            }
+
+            if (slashDurationTimer >= 0.1f) {
+                UI_Text.Instance.EnableMissedText();
             }
         }
     }
@@ -204,7 +209,12 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                         PlayerAnimationControl.Instance.SetBeingDamagedState(beingDamaged);
                         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
                         DisableUltimateDamageBox();
-                        EnemySpawnManager.Instance.UnPause();
+                        if (EnemySpawnManager.Instance.spawnedBosses.Count == 0)
+                        {
+                            Debug.Log(EnemySpawnManager.Instance.spawnedBosses.Count);
+                            EnemySpawnManager.Instance.UnPause();
+                        }
+                        EnemySpawnManager.Instance.UltimateUnPause();
                         UltimateCooldown.Instance.Setup();
                     }
                 }
@@ -237,7 +247,11 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                         PlayerAnimationControl.Instance.SetBeingDamagedState(beingDamaged);
                         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
                         DisableUltimateDamageBox();
-                        EnemySpawnManager.Instance.UnPause();
+                        if (EnemySpawnManager.Instance.spawnedBosses.Count == 0) {
+                            Debug.Log(EnemySpawnManager.Instance.spawnedBosses.Count);
+                            EnemySpawnManager.Instance.UnPause();
+                        }
+                        EnemySpawnManager.Instance.UltimateUnPause();    
                         UltimateCooldown.Instance.Setup();
                     }
                 }
@@ -273,6 +287,14 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     public void DisableUltimateDamageBox()
     {
         ultimateDamageBox.DisableDamageBox();
+    }
+
+    public void EnableMissedText() {
+        UI_Text.Instance.EnableMissedText();
+    }
+
+    public void DisableMissedText() {
+        UI_Text.Instance.DisableMissedText();
     }
 
     public void SetIdleState()
