@@ -117,12 +117,14 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         //      new ModelEnemyNormal(-1, 5),
         //  };
 
-        //this.levels = new List<ModelLevel>() {new ModelEnemyNormal(-2,1)};
-        this.levels = new List<ModelLevel>();
+        //this.levels = new List<ModelLevel>() { new ModelEnemyNormal(5, 3), new ModelEnemyNormal(5, 3), new ModelEnemyNormal(6, 3), new ModelEnemyNormal(6, 3), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(-2, 1) };
+        //this.levels = new List<ModelLevel>();
         // this.levels = new List<ModelLevel>()
         // {
         //     new ModelEnemyNormal(0, 8), new ModelEnemyNormal(-1, 5), new ModelEnemyNormal(0, 1),
         // };
+
+        this.levels = new List<ModelLevel>() { new ModelEnemyNormal(-2, 1), new ModelEnemyNormal(5, 3), new ModelEnemyNormal(6, 3), new ModelEnemyNormal(6, 3), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(-2, 1) };
     }
 
     // Update is called once per frame
@@ -231,7 +233,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
     }
 
     public void UnPause()
-    {       
+    {
         pause = false;
         if (spawnedEnemies.Count > 0)
             for (int i = 0; i < spawnedEnemies.Count; i++)
@@ -241,7 +243,8 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
                 spawnedBosses[i].UnPause();
     }
 
-    public void UltimateUnPause() {
+    public void UltimateUnPause()
+    {
         if (spawnedBosses.Count > 0)
             for (int i = 0; i < spawnedBosses.Count; i++)
                 spawnedBosses[i].UnPause();
@@ -254,20 +257,22 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
 
     public void Disable()
     {
-        if (spawnedEnemies.Count != 0) {
+        if (spawnedEnemies.Count != 0)
+        {
             for (int i = 0; i < spawnedEnemies.Count; i++)
             {
                 Destroy(spawnedEnemies[i].gameObject);
             }
         }
-        
-        if (spawnedBosses.Count != 0) {
+
+        if (spawnedBosses.Count != 0)
+        {
             for (int i = 0; i < spawnedBosses.Count; i++)
             {
                 Destroy(spawnedBosses[i].gameObject);
             }
         }
-        
+
     }
 
     public void Enable()

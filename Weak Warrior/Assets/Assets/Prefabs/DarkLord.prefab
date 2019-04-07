@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 4695066072640388}
   - component: {fileID: 61026208721763688}
   - component: {fileID: 114050893245237042}
+  - component: {fileID: 50119180659161628}
   m_Layer: 0
   m_Name: DamageBox
   m_TagString: Untagged
@@ -92,6 +93,7 @@ GameObject:
   - component: {fileID: 4035561640825442}
   - component: {fileID: 61999998147914748}
   - component: {fileID: 114494246706647810}
+  - component: {fileID: 50576848346171844}
   m_Layer: 0
   m_Name: DamageBox
   m_TagString: Untagged
@@ -144,6 +146,7 @@ GameObject:
   - component: {fileID: 4607016620190416}
   - component: {fileID: 61064993496871260}
   - component: {fileID: 114701811076334098}
+  - component: {fileID: 50804421137587564}
   m_Layer: 0
   m_Name: DamageBox
   m_TagString: Untagged
@@ -262,6 +265,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50119180659161628
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1634723055080450}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!50 &50230840001159276
 Rigidbody2D:
   serializedVersion: 4
@@ -282,6 +305,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!50 &50576848346171844
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1639176097331094}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!50 &50742265108179688
 Rigidbody2D:
   serializedVersion: 4
@@ -289,6 +332,26 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1659768391798718}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!50 &50804421137587564
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1867521493361368}
   m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -579,7 +642,7 @@ MonoBehaviour:
   attackEndPosition: {x: 0, y: 0.4, z: 0}
   nextFloatingPosition: {x: 0, y: 0, z: 0}
   attackSpeed: 2
-  retreatSpeed: 1
+  retreatSpeed: 3
   knockBackSpeed: 2
   floatingSpeed: 0.5
   floatingRange: 0.5
@@ -597,14 +660,14 @@ MonoBehaviour:
   firstMiddleHorizontalFloatingPosition: {x: -0.8, y: 5, z: 0}
   attackStartPosition2: {x: 1.6, y: 1.6, z: 0}
   currentAttackPosition: 0
+  prepareAttackSpeed: 2
   leftHorizontalFloatingPosition: {x: -1.6, y: 4, z: 0}
   rightHorizontalFloatingPosition: {x: 1.6, y: 4, z: 0}
   middleHorizontalFloatingPosition: {x: 0, y: 5, z: 0}
   fallBackFromFloating: 0
   count: 0
   floatingLeftToRight: 0
-  floatingHorizontalDelay: 5
-  floatingHorizontalDelayTimer: 0
+  floatingHorizontalDelay: 10
 --- !u!114 &114955149079570424
 MonoBehaviour:
   m_ObjectHideFlags: 1

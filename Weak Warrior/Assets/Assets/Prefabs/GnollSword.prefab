@@ -76,6 +76,7 @@ GameObject:
   - component: {fileID: 224796377705788706}
   - component: {fileID: 61599829474589536}
   - component: {fileID: 114191148677565512}
+  - component: {fileID: 50505518569267800}
   m_Layer: 0
   m_Name: DamageBox
   m_TagString: Untagged
@@ -153,6 +154,26 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1157045392711936}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!50 &50505518569267800
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1444339635151120}
   m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -387,6 +408,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1.3
+  superMoveSpeed: 0
   damage: 1
   spawnDirection: 1
   slashDelay: 0.5
@@ -402,10 +424,11 @@ MonoBehaviour:
   headSplashStartVelocity: {x: 6, y: 5}
   headSplashDecelerate: {x: 13, y: 12}
   pause: 0
+  isSuper: 0
   currentMovementState: 0
   minRandomStandDelay: 1.6
   maxRandomStandDelay: 1
-  standDuration: 0.25
+  standDuration: 0.5
 --- !u!114 &114711540185703574
 MonoBehaviour:
   m_ObjectHideFlags: 1

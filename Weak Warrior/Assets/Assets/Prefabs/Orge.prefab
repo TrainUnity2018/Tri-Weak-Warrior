@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 224199107065907168}
   - component: {fileID: 61400528625175024}
   - component: {fileID: 114096165631983772}
+  - component: {fileID: 50096855487130224}
   m_Layer: 0
   m_Name: DamageBox
   m_TagString: Untagged
@@ -153,6 +154,26 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1937157027683058}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!50 &50096855487130224
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1020774921678400}
   m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0

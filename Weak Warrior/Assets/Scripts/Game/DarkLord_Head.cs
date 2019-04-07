@@ -12,6 +12,8 @@ public class DarkLord_Head : DarkTree_Arm
     public Vector3 attackStartPosition2;
     public bool currentAttackPosition;
 
+    public float prepareAttackSpeed;
+
     public Vector3 leftHorizontalFloatingPosition;
     public Vector3 rightHorizontalFloatingPosition;
     public Vector3 middleHorizontalFloatingPosition;
@@ -24,7 +26,7 @@ public class DarkLord_Head : DarkTree_Arm
 
     public bool floatingLeftToRight;
     public float floatingHorizontalDelay;
-    public float floatingHorizontalDelayTimer;
+    protected float floatingHorizontalDelayTimer;
 
     // Use this for initialization
     void Start()
@@ -79,7 +81,7 @@ public class DarkLord_Head : DarkTree_Arm
             {
                 if (count < 1.0f)
                 {
-                    count += 1.0f * Time.deltaTime;
+                    count += Time.deltaTime;
                     Vector3 m1 = Vector3.Lerp(firstRightHorizontalFloatingPosition, firstMiddleHorizontalFloatingPosition, count);
                     Vector3 m2 = Vector3.Lerp(firstMiddleHorizontalFloatingPosition, leftHorizontalFloatingPosition, count);
                     this.gameObject.transform.position = Vector3.Lerp(m1, m2, count);
@@ -89,6 +91,7 @@ public class DarkLord_Head : DarkTree_Arm
                 {
                     count = 0;
                     firstHorizontalFloating = false;
+                    floatingLeftToRight = true;
                     currentAttackPosition = true;
                     nextFloatingPosition = attackStartPosition;
                     floatingHorizontalDelayTimer = 0;
@@ -112,6 +115,7 @@ public class DarkLord_Head : DarkTree_Arm
                             }
                             else
                             {
+                                transform.localPosition = new Vector3(attackStartPosition.x, attackStartPosition.y);
                                 fallBackFromFloating = false;
                             }
                         }
@@ -119,7 +123,7 @@ public class DarkLord_Head : DarkTree_Arm
                         {
                             if (count < 1.0f)
                             {
-                                count += 1.0f * Time.deltaTime;
+                                count += Time.deltaTime;
                                 Vector3 m1 = Vector3.Lerp(leftHorizontalFloatingPosition, middleHorizontalFloatingPosition, count);
                                 Vector3 m2 = Vector3.Lerp(middleHorizontalFloatingPosition, rightHorizontalFloatingPosition, count);
                                 this.gameObject.transform.position = Vector3.Lerp(m1, m2, count);
@@ -147,6 +151,7 @@ public class DarkLord_Head : DarkTree_Arm
                             }
                             else
                             {
+                                transform.localPosition = new Vector3(attackStartPosition2.x, attackStartPosition2.y);
                                 fallBackFromFloating = false;
                             }
                         }
@@ -154,7 +159,7 @@ public class DarkLord_Head : DarkTree_Arm
                         {
                             if (count < 1.0f)
                             {
-                                count += 1.0f * Time.deltaTime;
+                                count += Time.deltaTime;
                                 Vector3 m1 = Vector3.Lerp(rightHorizontalFloatingPosition, middleHorizontalFloatingPosition, count);
                                 Vector3 m2 = Vector3.Lerp(middleHorizontalFloatingPosition, leftHorizontalFloatingPosition, count);
                                 this.gameObject.transform.position = Vector3.Lerp(m1, m2, count);
@@ -228,11 +233,12 @@ public class DarkLord_Head : DarkTree_Arm
                 if ((Mathf.Abs(transform.localPosition.x - attackStartPosition.x) > 0.01f) || (Mathf.Abs(transform.localPosition.y - attackStartPosition.y) > 0.01f))
                 {
                     Vector3 moveVector = (attackStartPosition - transform.localPosition).normalized;
-                    transform.localPosition += moveVector * floatingSpeed * Time.deltaTime;
+                    transform.localPosition += moveVector * prepareAttackSpeed * Time.deltaTime;
                     this.gameObject.transform.rotation = rotateAngle;
                 }
                 else
                 {
+                    transform.localPosition = new Vector3(attackStartPosition.x, attackStartPosition.y);
                     currentMovementState = (int)MovementState.Attack;
                     attackVibrateTimer = 0;
                 }
@@ -242,11 +248,12 @@ public class DarkLord_Head : DarkTree_Arm
                 if ((Mathf.Abs(transform.localPosition.x - attackStartPosition2.x) > 0.01f) || (Mathf.Abs(transform.localPosition.y - attackStartPosition2.y) > 0.01f))
                 {
                     Vector3 moveVector = (attackStartPosition2 - transform.localPosition).normalized;
-                    transform.localPosition += moveVector * floatingSpeed * Time.deltaTime;
+                    transform.localPosition += moveVector * prepareAttackSpeed * Time.deltaTime;
                     this.gameObject.transform.rotation = rotateAngle;
                 }
                 else
                 {
+                    transform.localPosition = new Vector3(attackStartPosition2.x, attackStartPosition2.y);
                     currentMovementState = (int)MovementState.Attack;
                     attackVibrateTimer = 0;
                 }
@@ -269,6 +276,7 @@ public class DarkLord_Head : DarkTree_Arm
                     }
                     else
                     {
+                        transform.localPosition = new Vector3(attackEndPosition.x, attackEndPosition.y);
                         currentMovementState = (int)MovementState.Retreat;
                         attackDelayTimer = 0;
                     }
@@ -284,6 +292,7 @@ public class DarkLord_Head : DarkTree_Arm
                     }
                     else
                     {
+                        transform.localPosition = new Vector3(attackStartPosition.x, attackStartPosition.y);
                         nextFloatingPosition = new Vector3(Random.Range(attackStartPosition.x - 0.1f, attackStartPosition.x + 0.1f), Random.Range(attackStartPosition.y - 0.1f, attackStartPosition.y + 0.1f));
                     }
                 }
@@ -302,6 +311,7 @@ public class DarkLord_Head : DarkTree_Arm
                     }
                     else
                     {
+                        transform.localPosition = new Vector3(attackEndPosition.x, attackEndPosition.y);
                         currentMovementState = (int)MovementState.Retreat;
                         attackDelayTimer = 0;
                     }
@@ -317,6 +327,7 @@ public class DarkLord_Head : DarkTree_Arm
                     }
                     else
                     {
+                        transform.localPosition = new Vector3(attackStartPosition2.x, attackStartPosition2.y);
                         nextFloatingPosition = new Vector3(Random.Range(attackStartPosition2.x - 0.1f, attackStartPosition2.x + 0.1f), Random.Range(attackStartPosition2.y - 0.1f, attackStartPosition2.y + 0.1f));
                     }
                 }
@@ -389,7 +400,7 @@ public class DarkLord_Head : DarkTree_Arm
             {
                 if ((Mathf.Abs(transform.localPosition.x - attackStartPosition2.x) > 0.01f) || (Mathf.Abs(transform.localPosition.y - attackStartPosition2.y) > 0.01f))
                 {
-                    Vector3 moveVector = (attackStartPosition - transform.localPosition).normalized;
+                    Vector3 moveVector = (attackStartPosition2 - transform.localPosition).normalized;
                     transform.localPosition += moveVector * knockBackSpeed * Time.deltaTime;
                     this.gameObject.transform.rotation = rotateAngle;
                 }
