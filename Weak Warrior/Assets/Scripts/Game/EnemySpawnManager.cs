@@ -98,31 +98,27 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         this.spawningDelayTimer = 0;
         enemyLevelID = 0;
         enemyKilled = 0;
-        // this.levels = new List<ModelLevel>() {
-        //     new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 4),
-        //     new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 4, 70),
-        //     new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1, 70), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3),
-        //     new ModelEnemyNormal(1, 1), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 3), new ModelEnemyNormal(1, 1), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 4),
-        //     new ModelEnemyNormal(1, 1), new ModelEnemyNormal(1, 0.2f), new ModelEnemyNormal(1, 3), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 3),
-        //     new ModelEnemyNormal(2, 1), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 3), new ModelEnemyNormal(2, 1), new ModelEnemyNormal(2, 0.8f),
-        //     new ModelEnemyNormal(2, 3f), new ModelEnemyNormal(2, 1), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 1.2f), new ModelEnemyNormal(2, 3),
-        //     new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 3), new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 0.5f), new ModelEnemyNormal(3, 0.5f),
-        //     new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 8), new ModelEnemyNormal(-1, 5), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f, 70), new ModelEnemyNormal(0, 3),
-        //     new ModelEnemyNormal(0, 1, 70), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 4), new ModelEnemyNormal(1, 1), new ModelEnemyNormal(1, 0.8f), new ModelEnemyNormal(1, 3),
-        //     new ModelEnemyNormal(2, 1), new ModelEnemyNormal(1, 0.8f), new ModelEnemyNormal(2, 3), new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 0.8f), new ModelEnemyNormal(3, 3),
-        //     new ModelEnemyNormal(4, 3), new ModelEnemyNormal(4, 0.8f), new ModelEnemyNormal(5, 3), new ModelEnemyNormal(5, 1), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(3, 3),
-        //     new ModelEnemyNormal(6, 2), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(7, 4), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(7, 0.8f), new ModelEnemyNormal(6, 3), new ModelEnemyNormal(-2, 1),
-        //  };
+        this.levels = new List<ModelLevel>() {
+            new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 4),
+            new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 4, 70),
+            new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 3), new ModelEnemyNormal(0, 1, 70), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 3),
+            new ModelEnemyNormal(1, 1), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 3), new ModelEnemyNormal(1, 1), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 4),
+            new ModelEnemyNormal(1, 1), new ModelEnemyNormal(1, 0.2f), new ModelEnemyNormal(1, 3), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 0.5f), new ModelEnemyNormal(1, 3),
+            new ModelEnemyNormal(2, 1), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 3), new ModelEnemyNormal(2, 1), new ModelEnemyNormal(2, 0.8f),
+            new ModelEnemyNormal(2, 3f), new ModelEnemyNormal(2, 1), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(2, 1.2f), new ModelEnemyNormal(2, 3),
+            new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 3), new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 0.5f), new ModelEnemyNormal(3, 0.5f),
+            new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 8), new ModelEnemyNormal(-1, 5), new ModelEnemyNormal(0, 1), new ModelEnemyNormal(0, 0.8f, 70), new ModelEnemyNormal(0, 3),
+            new ModelEnemyNormal(0, 1, 70), new ModelEnemyNormal(0, 0.8f), new ModelEnemyNormal(0, 4), new ModelEnemyNormal(1, 1), new ModelEnemyNormal(1, 0.8f), new ModelEnemyNormal(1, 3),
+            new ModelEnemyNormal(2, 1), new ModelEnemyNormal(1, 0.8f), new ModelEnemyNormal(2, 3), new ModelEnemyNormal(3, 1), new ModelEnemyNormal(3, 0.8f), new ModelEnemyNormal(3, 3),
+            new ModelEnemyNormal(4, 3), new ModelEnemyNormal(4, 0.8f), new ModelEnemyNormal(5, 3), new ModelEnemyNormal(5, 1), new ModelEnemyNormal(2, 0.8f), new ModelEnemyNormal(3, 3),
+            new ModelEnemyNormal(6, 2), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(7, 4), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(7, 0.8f), new ModelEnemyNormal(6, 3), new ModelEnemyNormal(-2, 1),
+         };
         // this.levels = new List<ModelLevel>() {
         //      new ModelEnemyNormal(-1, 5),
         //  };
 
         //this.levels = new List<ModelLevel>() {new ModelEnemyNormal(-2,1)};
         //this.levels = new List<ModelLevel>();
-        this.levels = new List<ModelLevel>()
-        {
-            new ModelEnemyNormal(0, 8), new ModelEnemyNormal(-1, 5), new ModelEnemyNormal(0, 1),
-        };
     }
 
     // Update is called once per frame
@@ -231,17 +227,11 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
     }
 
     public void UnPause()
-    {       
+    {
         pause = false;
         if (spawnedEnemies.Count > 0)
             for (int i = 0; i < spawnedEnemies.Count; i++)
                 spawnedEnemies[i].UnPause();
-        if (spawnedBosses.Count > 0)
-            for (int i = 0; i < spawnedBosses.Count; i++)
-                spawnedBosses[i].UnPause();
-    }
-
-    public void UltimateUnPause() {
         if (spawnedBosses.Count > 0)
             for (int i = 0; i < spawnedBosses.Count; i++)
                 spawnedBosses[i].UnPause();
