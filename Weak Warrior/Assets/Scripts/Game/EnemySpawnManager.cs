@@ -118,11 +118,11 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         //  };
 
         //this.levels = new List<ModelLevel>() {new ModelEnemyNormal(-2,1)};
-        //this.levels = new List<ModelLevel>();
-        this.levels = new List<ModelLevel>()
-        {
-            new ModelEnemyNormal(0, 8), new ModelEnemyNormal(-1, 5), new ModelEnemyNormal(0, 1),
-        };
+        this.levels = new List<ModelLevel>();
+        // this.levels = new List<ModelLevel>()
+        // {
+        //     new ModelEnemyNormal(0, 8), new ModelEnemyNormal(-1, 5), new ModelEnemyNormal(0, 1),
+        // };
     }
 
     // Update is called once per frame

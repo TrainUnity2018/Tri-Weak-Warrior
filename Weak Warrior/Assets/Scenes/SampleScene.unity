@@ -598,6 +598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 100257980}
+  - component: {fileID: 100257983}
   - component: {fileID: 100257982}
   - component: {fileID: 100257981}
   m_Layer: 5
@@ -664,6 +665,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 54.264633, y: 579.7063}
   m_EdgeRadius: 0
+--- !u!50 &100257983
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 100257979}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &123367913
 GameObject:
   m_ObjectHideFlags: 0
@@ -2059,7 +2080,7 @@ MonoBehaviour:
   cooldownImage: {fileID: 1719570009}
   ultimateCooldownReady: {fileID: 415043472}
   inCooldown: 0
-  cooldownDuration: 5
+  cooldownDuration: 0
 --- !u!1 &467070553
 GameObject:
   m_ObjectHideFlags: 0
@@ -4082,6 +4103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1077776730}
+  - component: {fileID: 1077776733}
   - component: {fileID: 1077776732}
   - component: {fileID: 1077776731}
   m_Layer: 5
@@ -4148,6 +4170,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 117.59967, y: 180.94965}
   m_EdgeRadius: 0
+--- !u!50 &1077776733
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1077776729}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1135068326
 GameObject:
   m_ObjectHideFlags: 0
@@ -6130,6 +6172,8 @@ MonoBehaviour:
   hitBox: {fileID: 1910017268}
   damageBox: {fileID: 1077776731}
   ultimateDamageBox: {fileID: 100257981}
+  damageBoxOn: 0
+  ultimateDamageBoxOn: 0
   ultimateSpeed: 5
   ultimateSide: 0
   pause: 0

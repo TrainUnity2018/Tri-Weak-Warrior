@@ -25,9 +25,26 @@ public class Player_DamageBox : DamageBox
                 col.gameObject.GetComponent<GoblinSwordman>().TakeDamage(PlayerStateControl.Instance.currentMovementState);
             if (col.gameObject.GetComponent<DarkTree_Arm>() != null)
                 col.gameObject.GetComponent<DarkTree_Arm>().TakeDamage();
-            
+
             if (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Slash)
-            {                
+            {
+                PlayerStateControl.Instance.currentMovementState = (int)PlayerStateControl.MovementState.Idle;
+                PlayerAnimationControl.Instance.SetMovementState(PlayerStateControl.Instance.currentMovementState);
+            }
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Enemy")
+        {
+            if (col.gameObject.GetComponent<GoblinSwordman>() != null)
+                col.gameObject.GetComponent<GoblinSwordman>().TakeDamage(PlayerStateControl.Instance.currentMovementState);
+            if (col.gameObject.GetComponent<DarkTree_Arm>() != null)
+                col.gameObject.GetComponent<DarkTree_Arm>().TakeDamage();
+
+            if (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Slash)
+            {
                 PlayerStateControl.Instance.currentMovementState = (int)PlayerStateControl.MovementState.Idle;
                 PlayerAnimationControl.Instance.SetMovementState(PlayerStateControl.Instance.currentMovementState);
             }

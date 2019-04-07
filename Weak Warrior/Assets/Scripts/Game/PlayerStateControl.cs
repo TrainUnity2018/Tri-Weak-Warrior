@@ -158,10 +158,11 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
             EnemySpawnManager.Instance.Pause();
             slashLeftButton.SetActive(false);
             slashRightButton.SetActive(false);
-            health = 0;
             currentMovementState = (int)MovementState.Die;
             PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
-            this.gameObject.GetComponent<Image>().enabled = false;
+            health = 0;
+            StopAllCoroutines();
+            this.gameObject.GetComponent<Image>().enabled = false;                      
         }
         if (health == 3)
         {
@@ -213,11 +214,11 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                     }
                     else
                     {
-                        beingDamaged = true;
-                        DisableHitBox();
-                        beingDamagedDurationTimer = 0;
                         currentMovementState = (int)MovementState.Idle;
                         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+                        beingDamaged = true;
+                        DisableHitBox();
+                        beingDamagedDurationTimer = 0;                        
                         DisableUltimateDamageBox();
                         if (EnemySpawnManager.Instance.spawnedBosses.Count == 0)
                         {
@@ -250,11 +251,11 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                     }
                     else
                     {
-                        beingDamaged = true;
-                        DisableHitBox();
-                        beingDamagedDurationTimer = 0;
                         currentMovementState = (int)MovementState.Idle;
                         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+                        beingDamaged = true;
+                        DisableHitBox();
+                        beingDamagedDurationTimer = 0;                        
                         DisableUltimateDamageBox();
                         if (EnemySpawnManager.Instance.spawnedBosses.Count == 0)
                         {
@@ -286,26 +287,26 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
 
     public void EnableDamageBox()
     {
-        //damageBox.EnableDamageBox();
-        damageBoxOn = true;
+        damageBox.EnableDamageBox();
+        //damageBoxOn = true;
     }
 
     public void EnableUltimateDamageBox()
     {
-        //ultimateDamageBox.EnableDamageBox();
-        ultimateDamageBoxOn = true;
+        ultimateDamageBox.EnableDamageBox();
+        //ultimateDamageBoxOn = true;
     }
 
     public void DisableDamageBox()
     {
-        //damageBox.DisableDamageBox();
-        damageBoxOn = false;
+        damageBox.DisableDamageBox();
+        //damageBoxOn = false;
     }
 
     public void DisableUltimateDamageBox()
     {
-        //ultimateDamageBox.DisableDamageBox();
-        ultimateDamageBoxOn = false;
+        ultimateDamageBox.DisableDamageBox();
+        //ultimateDamageBoxOn = false;
     }
 
     public void EnableMissedText()
