@@ -156,13 +156,8 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         {
             Popup.Instance.EnableDeadDialog(EnemySpawnManager.Instance.enemyLevelID, EnemySpawnManager.Instance.enemyKilled);
             EnemySpawnManager.Instance.Pause();
-            slashLeftButton.SetActive(false);
-            slashRightButton.SetActive(false);
-            currentMovementState = (int)MovementState.Die;
-            PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
             health = 0;
-            StopAllCoroutines();
-            this.gameObject.GetComponent<Image>().enabled = false;                      
+            this.gameObject.SetActive(false);
         }
         if (health == 3)
         {
@@ -218,7 +213,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
                         beingDamaged = true;
                         DisableHitBox();
-                        beingDamagedDurationTimer = 0;                        
+                        beingDamagedDurationTimer = 0;
                         DisableUltimateDamageBox();
                         if (EnemySpawnManager.Instance.spawnedBosses.Count == 0)
                         {
@@ -255,7 +250,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
                         beingDamaged = true;
                         DisableHitBox();
-                        beingDamagedDurationTimer = 0;                        
+                        beingDamagedDurationTimer = 0;
                         DisableUltimateDamageBox();
                         if (EnemySpawnManager.Instance.spawnedBosses.Count == 0)
                         {
@@ -274,8 +269,10 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         hitBox.enabled = true;
     }
 
-    public void EnableHitBoxNotDamaged() {
-        if (!beingDamaged) {
+    public void EnableHitBoxNotDamaged()
+    {
+        if (!beingDamaged)
+        {
             hitBox.enabled = true;
         }
     }
@@ -344,6 +341,15 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     {
         this.pause = false;
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+    }
+
+    public void Revive()
+    {
+        currentArmorState = (int)ArmorState.Naked;
+        currentMovementState  = (int)MovementState.Idle;
+        PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
+        PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
+        health = 1;
     }
 
     IEnumerator FlashSprite()

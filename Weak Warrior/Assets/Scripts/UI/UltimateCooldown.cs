@@ -11,6 +11,7 @@ public class UltimateCooldown : MonoSingleton<UltimateCooldown>
     public bool inCooldown;
     public float cooldownDuration;
     protected float cooldownDurationTimer;
+    public Animator animator;
     // Use this for initialization
     void Start()
     {
@@ -23,7 +24,8 @@ public class UltimateCooldown : MonoSingleton<UltimateCooldown>
         cooldownDurationTimer = 0;
         cooldownImage.fillAmount = 1;
         cooldownImage.gameObject.SetActive(true);
-        ultimateCooldownReady.color = new Color(ultimateCooldownReady.color.r, ultimateCooldownReady.color.g, ultimateCooldownReady.color.b, 0f);
+        //ultimateCooldownReady.color = new Color(ultimateCooldownReady.color.r, ultimateCooldownReady.color.g, ultimateCooldownReady.color.b, 0f);
+        animator.SetBool("Ready", false);
     }
 
     // Update is called once per frame
@@ -40,8 +42,9 @@ public class UltimateCooldown : MonoSingleton<UltimateCooldown>
         if (cooldownDurationTimer >= cooldownDuration)
         {
             inCooldown = false;
-            ultimateCooldownReady.color = new Color(ultimateCooldownReady.color.r, ultimateCooldownReady.color.g, ultimateCooldownReady.color.b, 1f);
-			cooldownImage.gameObject.SetActive(false);
+            //ultimateCooldownReady.color = new Color(ultimateCooldownReady.color.r, ultimateCooldownReady.color.g, ultimateCooldownReady.color.b, 1f);
+            animator.SetBool("Ready", true);
+            cooldownImage.gameObject.SetActive(false);
         }
     }
 }

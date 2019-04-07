@@ -63,11 +63,25 @@ public class Popup : MonoSingleton<Popup>
         this.deadDiaglog.SetActive(true);
         lastEnemyAnimator.SetInteger("ID", id);
         this.killCount.text = killCount.ToString();
+        this.mainMenu.SetActive(false);
+        this.pauseDialog.SetActive(false);
+        this.gamePlayButtons.SetActive(false);
+        this.pauseButton.SetActive(false);
+        this.startMenu.SetActive(false);
+        this.settingMenu.SetActive(false);
     }
 
     public void DisableDeadDialog()
     {
         this.deadDiaglog.SetActive(false);
+        this.player.SetActive(true);
+        PlayerStateControl.Instance.Revive();
+        this.mainMenu.SetActive(false);
+        this.pauseDialog.SetActive(false);
+        this.gamePlayButtons.SetActive(true);
+        this.pauseButton.SetActive(false);
+        this.startMenu.SetActive(false);
+        this.settingMenu.SetActive(false);
     }
 
     public void EnableMainMenu() {

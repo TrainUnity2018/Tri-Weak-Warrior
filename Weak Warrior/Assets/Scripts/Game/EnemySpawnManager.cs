@@ -117,14 +117,12 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         //      new ModelEnemyNormal(-1, 5),
         //  };
 
-        //this.levels = new List<ModelLevel>() { new ModelEnemyNormal(5, 3), new ModelEnemyNormal(5, 3), new ModelEnemyNormal(6, 3), new ModelEnemyNormal(6, 3), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(-2, 1) };
+        this.levels = new List<ModelLevel>() { new ModelEnemyNormal(5, 3), new ModelEnemyNormal(5, 3), new ModelEnemyNormal(6, 3), new ModelEnemyNormal(6, 3), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(-2, 1) };
         //this.levels = new List<ModelLevel>();
         // this.levels = new List<ModelLevel>()
         // {
         //     new ModelEnemyNormal(0, 8), new ModelEnemyNormal(-1, 5), new ModelEnemyNormal(0, 1),
         // };
-
-        this.levels = new List<ModelLevel>() { new ModelEnemyNormal(-2, 1), new ModelEnemyNormal(5, 3), new ModelEnemyNormal(6, 3), new ModelEnemyNormal(6, 3), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(-2, 1) };
     }
 
     // Update is called once per frame
@@ -280,5 +278,22 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         this.Setup();
         pause = false;
         this.SpawnEnemy();
+    }
+
+    public void KillFirstEnemy() {
+        if (spawnedEnemies.Count != 0)
+        {
+            for (int i = 0; i < spawnedEnemies.Count; i++)
+            {
+                spawnedEnemies[i].TakeDamage((int)PlayerStateControl.MovementState.Dash);
+            }       
+        }
+        else if (spawnedBosses.Count != 0)
+        {
+            for (int i = 0; i < spawnedBosses.Count; i++)
+            {
+                spawnedBosses[i].TakeDamage(spawnedBosses[0].health);
+            }            
+        }
     }
 }

@@ -45,7 +45,6 @@ public class DarkLord_Head : DarkTree_Arm
         if (!body.pause && (PlayerStateControl.Instance.currentMovementState != (int)PlayerStateControl.MovementState.Dash))
         {
             Floating();
-            FindRotateAngle();
             Attack();
             Retreat();
             KnockBack();
@@ -58,6 +57,8 @@ public class DarkLord_Head : DarkTree_Arm
         {
             KnockBack();
         }
+
+        FindRotateAngle();
     }
 
     public override void Setup()
