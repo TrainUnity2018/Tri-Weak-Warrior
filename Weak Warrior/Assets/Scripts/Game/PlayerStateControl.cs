@@ -221,7 +221,6 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                         DisableUltimateDamageBox();
                         if (EnemySpawnManager.Instance.spawnedBosses.Count == 0)
                         {
-                            Debug.Log(EnemySpawnManager.Instance.spawnedBosses.Count);
                             EnemySpawnManager.Instance.UnPause();
                         }
                         EnemySpawnManager.Instance.UltimateUnPause();
@@ -259,7 +258,6 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                         DisableUltimateDamageBox();
                         if (EnemySpawnManager.Instance.spawnedBosses.Count == 0)
                         {
-                            Debug.Log(EnemySpawnManager.Instance.spawnedBosses.Count);
                             EnemySpawnManager.Instance.UnPause();
                         }
                         EnemySpawnManager.Instance.UltimateUnPause();
