@@ -195,8 +195,7 @@ public class DarkLord_Head : DarkTree_Arm
                             {
                                 floatingDelayTimer = 0;
                                 floatingDelay = floatingDelayAverage + Random.Range(-floatingDelayAverage, floatingDelayRange);
-                                float floatingRangeTemp = Random.Range(-floatingRange, floatingRange);
-                                nextFloatingPosition = new Vector3(attackStartPosition.x + floatingRangeTemp, attackStartPosition.y + floatingRangeTemp);
+                                nextFloatingPosition = new Vector3(Random.Range(attackStartPosition.x - floatingRange, attackStartPosition.x + floatingRange), Random.Range(attackStartPosition.y - floatingRange, attackStartPosition.y + floatingRange));
                             }
                         }
                     }
@@ -215,8 +214,7 @@ public class DarkLord_Head : DarkTree_Arm
                             {
                                 floatingDelayTimer = 0;
                                 floatingDelay = floatingDelayAverage + Random.Range(-floatingDelayAverage, floatingDelayRange);
-                                float floatingRangeTemp = Random.Range(-floatingRange, floatingRange);
-                                nextFloatingPosition = new Vector3(attackStartPosition2.x + floatingRangeTemp, attackStartPosition2.y + floatingRangeTemp);
+                                nextFloatingPosition = new Vector3(Random.Range(attackStartPosition2.x - floatingRange, attackStartPosition2.x + floatingRange), Random.Range(attackStartPosition2.y - floatingRange, attackStartPosition2.y + floatingRange));
                             }
                         }
                     }

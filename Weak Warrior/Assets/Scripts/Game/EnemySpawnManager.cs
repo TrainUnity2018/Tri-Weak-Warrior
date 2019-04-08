@@ -117,8 +117,8 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         //      new ModelEnemyNormal(-1, 5),
         //  };
 
-        this.levels = new List<ModelLevel>() { new ModelEnemyNormal(5, 3), new ModelEnemyNormal(5, 3), new ModelEnemyNormal(6, 3), new ModelEnemyNormal(6, 3), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(-2, 1) };
-        //this.levels = new List<ModelLevel>();
+        //this.levels = new List<ModelLevel>() { new ModelEnemyNormal(5, 3), new ModelEnemyNormal(5, 3), new ModelEnemyNormal(6, 3), new ModelEnemyNormal(6, 3), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(-2, 1) };
+        this.levels = new List<ModelLevel>();
         // this.levels = new List<ModelLevel>()
         // {
         //     new ModelEnemyNormal(0, 8), new ModelEnemyNormal(-1, 5), new ModelEnemyNormal(0, 1),
