@@ -118,11 +118,20 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         //  };
 
         //this.levels = new List<ModelLevel>() { new ModelEnemyNormal(5, 3), new ModelEnemyNormal(5, 3), new ModelEnemyNormal(6, 3), new ModelEnemyNormal(6, 3), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(7, 3), new ModelEnemyNormal(-2, 1) };
-        this.levels = new List<ModelLevel>();
+        //this.levels = new List<ModelLevel>();
         // this.levels = new List<ModelLevel>()
         // {
         //     new ModelEnemyNormal(0, 8), new ModelEnemyNormal(-1, 5), new ModelEnemyNormal(0, 1),
         // };
+
+        // this.levels = new List<ModelLevel>() {
+        //     new ModelEnemyNormal(0, 3), new ModelEnemyNormal(1, 3), new ModelEnemyNormal(2, 3), new ModelEnemyNormal(3, 3), new ModelEnemyNormal(4, 3), new ModelEnemyNormal(5, 3),
+        //     new ModelEnemyNormal(6, 3), new ModelEnemyNormal(7, 3),
+        // };
+
+        this.levels = new List<ModelLevel>(){
+            new ModelEnemyNormal(-2, 3),
+        };
     }
 
     // Update is called once per frame
@@ -208,7 +217,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         }
         else
         {
-            //this.Setup();
+            this.Setup();
         }
 
     }

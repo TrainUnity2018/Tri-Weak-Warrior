@@ -34,6 +34,10 @@ public class DarkTree : MonoBehaviour
     public DarkTree_Arm rightArm;
 
     public int health;
+    protected int currentHealth;
+    protected int initHealth;
+    public GameObject healthBar;
+    public GameObject healthBarFrame;
 
     public Transform spawnLocation;
     public Transform attackLocation;
@@ -101,6 +105,9 @@ public class DarkTree : MonoBehaviour
         currentMovementState = (int)MovementState.Spawning;
         this.transform.position = new Vector3(spawnLocation.position.x, spawnLocation.position.y, 0);
         pause = false;
+        initHealth = health;
+        currentHealth = initHealth;
+        healthBarFrame.SetActive(false);
     }
 
     public virtual void Spawning()
@@ -117,6 +124,8 @@ public class DarkTree : MonoBehaviour
                 currentMovementState = (int)MovementState.Attack;
                 leftArm.Setup();
                 rightArm.Setup();
+                healthBarFrame.SetActive(true);
+                HealthBarScale();
             }
         }
     }
@@ -157,6 +166,8 @@ public class DarkTree : MonoBehaviour
         if (health - damage <= 0)
         {
             health = 0;
+            currentHealth = health;
+            HealthBarScale();
             currentMovementState = (int)DarkTree.MovementState.Die;
             Destroy(leftArm.gameObject);
             Destroy(rightArm.gameObject);
@@ -164,6 +175,8 @@ public class DarkTree : MonoBehaviour
         else
         {
             health -= damage;
+            currentHealth = health;
+            HealthBarScale();
         }
     }
 
@@ -171,6 +184,7 @@ public class DarkTree : MonoBehaviour
     {
         if (currentMovementState == (int)MovementState.Die)
         {
+            healthBarFrame.SetActive(false);
             if ((Mathf.Abs(transform.position.x - spawnLocation.position.x) > 0.01f) || (Mathf.Abs(transform.position.y - spawnLocation.position.y) > 0.01f))
             {
                 Vector3 moveVector = (spawnLocation.position - transform.position).normalized;
@@ -182,6 +196,14 @@ public class DarkTree : MonoBehaviour
                 EnemySpawnManager.Instance.UnPause();
             }
         }
+    }
+
+    public virtual void HealthBarScale()
+    {
+        float scaleRatio = (float)((float)currentHealth / (float)initHealth);
+        Vector3 healthBarScale = healthBar.transform.localScale;
+        healthBarScale.x = 0.1f * scaleRatio;
+        healthBar.transform.localScale = healthBarScale;
     }
 
     public virtual void Pause()

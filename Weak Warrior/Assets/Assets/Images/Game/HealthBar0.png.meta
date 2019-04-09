@@ -1,7 +1,8 @@
 fileFormatVersion: 2
-guid: a152d4c4fe60d1746b2ea8aa7366c2e8
+guid: 3c0acd95148b7ae419a5f89c004e14db
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: HealthBar0_0
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -40,7 +41,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -93,11 +94,31 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: HealthBar0_0
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 10
+        width: 410
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd51b3873f82c7d4d9ce242c3525b45b
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 3c76999071ef7fc4e9578ef3423ce2d3
+    spriteID: 255ad447254295346b34e56e1dbdbafb
     vertices: []
     indices: 
     edges: []

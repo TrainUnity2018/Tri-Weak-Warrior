@@ -57,6 +57,8 @@ public class DarkLord : DarkTree {
                 leftArm.Setup();
                 rightArm.Setup();
 				head.Setup();
+                healthBarFrame.SetActive(true);
+                HealthBarScale();
             }
         }
 	}
@@ -101,6 +103,8 @@ public class DarkLord : DarkTree {
         if (health - damage <= 0)
         {
             health = 0;
+            currentHealth = health;
+            HealthBarScale();
             currentMovementState = (int)DarkTree.MovementState.Die;
             Destroy(leftArm.gameObject);
             Destroy(rightArm.gameObject);
@@ -109,6 +113,8 @@ public class DarkLord : DarkTree {
         else
         {
             health -= damage;
+            currentHealth = health;
+            HealthBarScale();
         }
 	}
 }

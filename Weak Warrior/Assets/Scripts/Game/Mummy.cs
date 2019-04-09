@@ -6,6 +6,10 @@ public class Mummy : GoblinSwordman
 {
 
     public int health;
+    protected int currentHealth;
+    protected int initHealth;
+    public GameObject healthBar;
+    public GameObject healthBarFrame;
     public float knockBackDistance;
     public float knockBackDuration;
     protected float knockBackDurationTimer;
@@ -27,6 +31,8 @@ public class Mummy : GoblinSwordman
         currentMovementState = (int)MovementState.Walk;
         animator.SetInteger("State", currentMovementState);
         pause = false;
+        initHealth = health;
+        currentHealth = initHealth;
     }
 
     // Update is called once per frame
@@ -93,18 +99,25 @@ public class Mummy : GoblinSwordman
     public override void TakeDamage(int playersMovementState)
     {
         EnableHitBox();
-        
-        if (playersMovementState == (int)PlayerStateControl.MovementState.Slash) {
+        StartCoroutine(HitEffect());
+
+        if (playersMovementState == (int)PlayerStateControl.MovementState.Slash)
+        {
             health -= 1;
             if (health <= 0)
                 health = 0;
-        }            
-        if (playersMovementState == (int)PlayerStateControl.MovementState.Dash) {
+            currentHealth = health;
+        }
+        if (playersMovementState == (int)PlayerStateControl.MovementState.Dash)
+        {
             health -= health;
             if (health <= 0)
                 health = 0;
+            currentHealth = health;
         }
-        
+
+        HealthBarScale();
+
         if (health > 0)
         {
             knockBackDurationTimer = 0;
@@ -118,6 +131,8 @@ public class Mummy : GoblinSwordman
             this.Pause();
             body.GetComponent<SpriteRenderer>().enabled = true;
             head.GetComponent<SpriteRenderer>().enabled = true;
+            dieEffect.GetComponent<SpriteRenderer>().enabled = true;
+            StartCoroutine(DieEffect());
 
             headSplashSpinningSpeed = headSplashStartSpinningSpeed;
             headSplashVelocity = headSplashStartVelocity;
@@ -135,6 +150,7 @@ public class Mummy : GoblinSwordman
 
         if (currentMovementState == (int)MovementState.Die)
         {
+            healthBarFrame.SetActive(false);
             DisableDamageBox();
             DisableHitBox();
             if (spawnDirection)
@@ -196,5 +212,37 @@ public class Mummy : GoblinSwordman
                 gameObject.GetComponent<SpriteRenderer>().enabled = false;
             }
         }
+    }
+
+    private void HealthBarScale()
+    {
+        float scaleRatio = (float)((float)currentHealth / (float)initHealth);
+        Vector3 healthBarScale = healthBar.transform.localScale;
+        healthBarScale.x = 0.1f * scaleRatio;
+        healthBar.transform.localScale = healthBarScale;
+    }
+
+    IEnumerator DieEffect()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(.2f);
+            dieEffect.GetComponent<SpriteRenderer>().enabled = false;
+            StopCoroutine(DieEffect());
+        }
+    }
+
+    IEnumerator HitEffect()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Color color = new Color((float)(255 / 255), (float)(61 / 255), (float)(61 / 255), (float)(255 / 255));
+            this.gameObject.GetComponent<SpriteRenderer>().color = color;
+            yield return new WaitForSeconds(.05f);
+            color = new Color((float)(255 / 255), (float)(255 / 255), (float)(255 / 255), (float)(255 / 255));
+            this.gameObject.GetComponent<SpriteRenderer>().color = color;
+            yield return new WaitForSeconds(.05f);
+        }
+        StopCoroutine(HitEffect());
     }
 }

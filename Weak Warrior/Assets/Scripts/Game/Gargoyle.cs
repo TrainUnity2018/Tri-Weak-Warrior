@@ -168,6 +168,8 @@ public class Gargoyle : GoblinSwordman
             this.Pause();
             body.GetComponent<SpriteRenderer>().enabled = true;
             head.GetComponent<SpriteRenderer>().enabled = true;
+            dieEffect.GetComponent<SpriteRenderer>().enabled = true;
+            StartCoroutine(DieEffect());
 
             headSplashSpinningSpeed = headSplashStartSpinningSpeed;
             headSplashVelocity = headSplashStartVelocity;
@@ -255,4 +257,14 @@ public class Gargoyle : GoblinSwordman
 	public override void EnableDamageBox() {
 		damageBoxGargoyle.EnableDamageBox();
 	}
+
+    IEnumerator DieEffect()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(.2f);
+            dieEffect.GetComponent<SpriteRenderer>().enabled = false;
+            StopCoroutine(DieEffect());
+        }
+    }
 }

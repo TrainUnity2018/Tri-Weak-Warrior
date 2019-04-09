@@ -21,6 +21,7 @@ public class GoblinSwordman : MonoBehaviour
 
     public GameObject head;
     public GameObject body;
+    public GameObject dieEffect;
 
     public Vector2 bodySplashStartVelocity;
     protected Vector2 bodySplashVelocity;
@@ -166,6 +167,8 @@ public class GoblinSwordman : MonoBehaviour
         this.Pause();
         body.GetComponent<SpriteRenderer>().enabled = true;
         head.GetComponent<SpriteRenderer>().enabled = true;
+        dieEffect.GetComponent<SpriteRenderer>().enabled = true;
+        StartCoroutine(DieEffect());
 
         headSplashSpinningSpeed = headSplashStartSpinningSpeed;
         headSplashVelocity = headSplashStartVelocity;
@@ -294,5 +297,15 @@ public class GoblinSwordman : MonoBehaviour
     public virtual void OnCollide(Collider2D col)
     {
 
+    }
+
+    IEnumerator DieEffect()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(.2f);
+            dieEffect.GetComponent<SpriteRenderer>().enabled = false;
+            StopCoroutine(DieEffect());
+        }
     }
 }

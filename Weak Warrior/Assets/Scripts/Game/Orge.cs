@@ -2,17 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Orge : GoblinSwordman {
+public class Orge : GoblinSwordman
+{
 
-	public int health;
+    public int health;
+    protected int currentHealth;
+    protected int initHealth;
+    public GameObject healthBar;
+    public GameObject healthBarFrame;
 
-	// Use this for initialization
-	void Start()
+    public float animationDelayDuration;
+    protected float animationDelayTimer;
+    public float animationDelayRate;
+
+    // Use this for initialization
+    void Start()
     {
         EnableHitBox();
         currentMovementState = (int)MovementState.Walk;
         animator.SetInteger("State", currentMovementState);
         pause = false;
+        initHealth = health;
+        currentHealth = initHealth;
+        animationDelayTimer = animationDelayDuration;
     }
 
     // Update is called once per frame
@@ -22,6 +34,7 @@ public class Orge : GoblinSwordman {
         {
             Walk();
             SlashDelayTiming();
+            DelayAnimationOnTakeDamage();
         }
         if (!Popup.Instance.pauseDialog.activeSelf && !Popup.Instance.deadDiaglog.activeSelf)
         {
@@ -29,31 +42,58 @@ public class Orge : GoblinSwordman {
         }
     }
 
-	public override void TakeDamage(int playersMovementState)
+    public override void TakeDamage(int playersMovementState)
     {
+        StopAllCoroutines();
         EnableHitBox();
+        StartCoroutine(HitEffect());
+        animationDelayTimer = 0;
         
-        if (playersMovementState == (int)PlayerStateControl.MovementState.Slash) {
+        if (playersMovementState == (int)PlayerStateControl.MovementState.Slash)
+        {
             health -= 1;
             if (health <= 0)
                 health = 0;
-        }            
-        if (playersMovementState == (int)PlayerStateControl.MovementState.Dash) {
+            currentHealth = health;
+        }
+        if (playersMovementState == (int)PlayerStateControl.MovementState.Dash)
+        {
             health -= health;
             if (health <= 0)
                 health = 0;
+            currentHealth = health;
         }
-        
+
+        HealthBarScale();
+
         if (health == 0)
         {
             currentMovementState = (int)MovementState.Die;
             this.Pause();
             body.GetComponent<SpriteRenderer>().enabled = true;
             head.GetComponent<SpriteRenderer>().enabled = true;
+            dieEffect.GetComponent<SpriteRenderer>().enabled = true;
+            StartCoroutine(DieEffect());
 
             headSplashSpinningSpeed = headSplashStartSpinningSpeed;
             headSplashVelocity = headSplashStartVelocity;
             bodySplashVelocity = bodySplashStartVelocity;
+        }
+    }
+
+    public virtual void DelayAnimationOnTakeDamage()
+    {
+        if (currentMovementState == (int)MovementState.Slash)
+        {
+            animationDelayTimer += Time.deltaTime;
+            if (animationDelayTimer >= animationDelayDuration)
+            {
+                animator.speed = 1f;
+            }
+            else
+            {
+                animator.speed = animationDelayRate;
+            }
         }
     }
 
@@ -67,6 +107,7 @@ public class Orge : GoblinSwordman {
 
         if (currentMovementState == (int)MovementState.Die)
         {
+            healthBarFrame.SetActive(false);
             DisableDamageBox();
             DisableHitBox();
             if (spawnDirection)
@@ -128,5 +169,37 @@ public class Orge : GoblinSwordman {
                 gameObject.GetComponent<SpriteRenderer>().enabled = false;
             }
         }
+    }
+
+    public void HealthBarScale()
+    {
+        float scaleRatio = (float)((float)currentHealth / (float)initHealth);
+        Vector3 healthBarScale = healthBar.transform.localScale;
+        healthBarScale.x = 0.1f * scaleRatio;
+        healthBar.transform.localScale = healthBarScale;
+    }
+
+    IEnumerator DieEffect()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(.2f);
+            dieEffect.GetComponent<SpriteRenderer>().enabled = false;
+            StopCoroutine(DieEffect());
+        }
+    }
+
+    IEnumerator HitEffect()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            Color color = new Color((float)(255 / 255), (float)(61 / 255), (float)(61 / 255), (float)(255 / 255));
+            this.gameObject.GetComponent<SpriteRenderer>().color = color;
+            yield return new WaitForSeconds(.05f);
+            color = new Color((float)(255 / 255), (float)(255 / 255), (float)(255 / 255), (float)(255 / 255));
+            this.gameObject.GetComponent<SpriteRenderer>().color = color;
+            yield return new WaitForSeconds(.05f);
+        }
+        StopCoroutine(HitEffect());
     }
 }

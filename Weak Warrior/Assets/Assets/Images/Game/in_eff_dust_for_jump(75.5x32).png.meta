@@ -1,7 +1,23 @@
 fileFormatVersion: 2
 guid: ad70a5f1d40392c42823aeaa47d0fa77
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: in_eff_dust_for_jump(75.5x32)_0
+    21300002: in_eff_dust_for_jump(75.5x32)_1
+    21300004: in_eff_dust_for_jump(75.5x32)_2
+    21300006: in_eff_dust_for_jump(75.5x32)_3
+    21300008: in_eff_dust_for_jump(75.5x32)_4
+    21300010: in_eff_dust_for_jump(75.5x32)_5
+    21300012: in_eff_dust_for_jump(75.5x32)_6
+    21300014: in_eff_dust_for_jump(75.5x32)_7
+    21300016: in_eff_dust_for_jump(75.5x32)_8
+    21300018: in_eff_dust_for_jump(75.5x32)_9
+    21300020: in_eff_dust_for_jump(75.5x32)_10
+    21300022: in_eff_dust_for_jump(75.5x32)_11
+    21300024: in_eff_dust_for_jump(75.5x32)_12
+    21300026: in_eff_dust_for_jump(75.5x32)_13
+    21300028: in_eff_dust_for_jump(75.5x32)_14
+    21300030: in_eff_dust_for_jump(75.5x32)_15
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -40,7 +56,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -60,10 +76,32 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 2
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -71,7 +109,327 @@ TextureImporter:
     androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: in_eff_dust_for_jump(75.5x32)_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 37.75
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4c1c6aab1e051043a18f2c633a32123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: in_eff_dust_for_jump(75.5x32)_1
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 96
+        width: 38
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7f05480d99140ce4186afa7a6457de58
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: in_eff_dust_for_jump(75.5x32)_2
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 96
+        width: 37.75
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46391283663874642841cde4cce5aa42
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: in_eff_dust_for_jump(75.5x32)_3
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 96
+        width: 37.75
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7616f1963d2ca04e8886fcadd241181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: in_eff_dust_for_jump(75.5x32)_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 37.75
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbbd8979cd82470459a2acd67ffed6d4
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: in_eff_dust_for_jump(75.5x32)_5
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 64
+        width: 37.75
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b35c85025c8e72e42a32c2b25ba0dc62
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: in_eff_dust_for_jump(75.5x32)_6
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 64
+        width: 37.75
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85d64d9f9d3e79940b7183d9082fcdae
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: in_eff_dust_for_jump(75.5x32)_7
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 64
+        width: 37.75
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11456ab0b0f6297438cda7666cd68a38
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: in_eff_dust_for_jump(75.5x32)_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 37.75
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcbf2289c9dcffc4db5fd5bf8c312087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: in_eff_dust_for_jump(75.5x32)_9
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 32
+        width: 37.75
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b480994ed77385a4b87f3ec93ee14d32
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: in_eff_dust_for_jump(75.5x32)_10
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 32
+        width: 37.75
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 835c188805157244eb0b5172a0d5f120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: in_eff_dust_for_jump(75.5x32)_11
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 32
+        width: 37.75
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f48f54b9d34c02468d6d1070359f7dc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: in_eff_dust_for_jump(75.5x32)_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 37.75
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bc8cf3bff7c4ca4fae83ca9635b1600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: in_eff_dust_for_jump(75.5x32)_13
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 0
+        width: 37.75
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d9f48dde5f0f294e89486a9f075ac5d
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: in_eff_dust_for_jump(75.5x32)_14
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 0
+        width: 37.75
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ffdc9e6f701f934c8fcd86f33f0dceb
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: in_eff_dust_for_jump(75.5x32)_15
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 0
+        width: 37.75
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e7b336a2f2368f4992e744e5144af59
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
