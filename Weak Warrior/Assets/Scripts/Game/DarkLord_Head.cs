@@ -23,6 +23,7 @@ public class DarkLord_Head : DarkTree_Arm
     public float count;
     protected Quaternion rotateAngle;
     protected Vector3 enemyTarget = new Vector3(0, -1.3f, 0);
+    protected Vector3 firstPosition = new Vector3(0, 1.6f, 0);
 
     public bool floatingLeftToRight;
     public float floatingHorizontalDelay;
@@ -382,34 +383,49 @@ public class DarkLord_Head : DarkTree_Arm
         {
             DisableDamageBox();
             DisableHitBox();
-            if (currentAttackPosition)
+            if (firstHorizontalFloating)
             {
-                if ((Mathf.Abs(transform.localPosition.x - attackStartPosition.x) > 0.01f) || (Mathf.Abs(transform.localPosition.y - attackStartPosition.y) > 0.01f))
+                if ((Mathf.Abs(transform.localPosition.x - firstPosition.x) > 0.01f) || (Mathf.Abs(transform.localPosition.y - firstPosition.y) > 0.01f))
                 {
-                    Vector3 moveVector = (attackStartPosition - transform.localPosition).normalized;
+                    Vector3 moveVector = (firstPosition - transform.localPosition).normalized;
                     transform.localPosition += moveVector * knockBackSpeed * Time.deltaTime;
                     this.gameObject.transform.rotation = rotateAngle;
                 }
                 else
                 {
                     currentMovementState = (int)MovementState.Floating;
+                    firstHorizontalFloating = true;
                 }
             }
             else
             {
-                if ((Mathf.Abs(transform.localPosition.x - attackStartPosition2.x) > 0.01f) || (Mathf.Abs(transform.localPosition.y - attackStartPosition2.y) > 0.01f))
+                if (currentAttackPosition)
                 {
-                    Vector3 moveVector = (attackStartPosition2 - transform.localPosition).normalized;
-                    transform.localPosition += moveVector * knockBackSpeed * Time.deltaTime;
-                    this.gameObject.transform.rotation = rotateAngle;
+                    if ((Mathf.Abs(transform.localPosition.x - attackStartPosition.x) > 0.01f) || (Mathf.Abs(transform.localPosition.y - attackStartPosition.y) > 0.01f))
+                    {
+                        Vector3 moveVector = (attackStartPosition - transform.localPosition).normalized;
+                        transform.localPosition += moveVector * knockBackSpeed * Time.deltaTime;
+                        this.gameObject.transform.rotation = rotateAngle;
+                    }
+                    else
+                    {
+                        currentMovementState = (int)MovementState.Floating;
+                    }
                 }
                 else
                 {
-                    currentMovementState = (int)MovementState.Floating;
+                    if ((Mathf.Abs(transform.localPosition.x - attackStartPosition2.x) > 0.01f) || (Mathf.Abs(transform.localPosition.y - attackStartPosition2.y) > 0.01f))
+                    {
+                        Vector3 moveVector = (attackStartPosition2 - transform.localPosition).normalized;
+                        transform.localPosition += moveVector * knockBackSpeed * Time.deltaTime;
+                        this.gameObject.transform.rotation = rotateAngle;
+                    }
+                    else
+                    {
+                        currentMovementState = (int)MovementState.Floating;
+                    }
                 }
             }
-
-
         }
     }
 
