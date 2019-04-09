@@ -73,6 +73,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
     public List<ModelLevel> levels;
     public List<GoblinSwordman> spawnedEnemies;
     public List<DarkTree> spawnedBosses;
+    public List<ArmorGiver> spawnedArmorGiver;
     public int enemyLevelID;
     public int enemyKilled;
     private ModelLevel currentLevel = null;
@@ -226,6 +227,7 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
     {
         spawnedEnemies.RemoveAll(GoblinSwordman => GoblinSwordman == null);
         spawnedBosses.RemoveAll(DarkTree => DarkTree == null);
+        spawnedArmorGiver.RemoveAll(ArmorGiver => ArmorGiver == null);
     }
 
     public void Pause()
@@ -237,6 +239,11 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         if (spawnedBosses.Count > 0)
             for (int i = 0; i < spawnedBosses.Count; i++)
                 spawnedBosses[i].Pause();
+        if (spawnedArmorGiver.Count < 0)
+        {
+            for (int i = 0; i < spawnedArmorGiver.Count; i++)
+                spawnedArmorGiver[i].Pause();
+        }
     }
 
     public void UnPause()
@@ -248,6 +255,11 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         if (spawnedBosses.Count > 0)
             for (int i = 0; i < spawnedBosses.Count; i++)
                 spawnedBosses[i].UnPause();
+        if (spawnedArmorGiver.Count < 0)
+        {
+            for (int i = 0; i < spawnedArmorGiver.Count; i++)
+                spawnedArmorGiver[i].UnPause();
+        }
     }
 
     public void UltimateUnPause()
@@ -289,20 +301,21 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         this.SpawnEnemy();
     }
 
-    public void KillFirstEnemy() {
+    public void KillFirstEnemy()
+    {
         if (spawnedEnemies.Count != 0)
         {
             for (int i = 0; i < spawnedEnemies.Count; i++)
             {
                 spawnedEnemies[i].TakeDamage((int)PlayerStateControl.MovementState.Dash);
-            }       
+            }
         }
         else if (spawnedBosses.Count != 0)
         {
             for (int i = 0; i < spawnedBosses.Count; i++)
             {
                 spawnedBosses[i].TakeDamage(spawnedBosses[0].health);
-            }            
+            }
         }
     }
 }

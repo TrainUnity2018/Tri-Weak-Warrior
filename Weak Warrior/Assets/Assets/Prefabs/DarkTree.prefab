@@ -604,6 +604,8 @@ MonoBehaviour:
   spawnSpeed: 50
   dieSpeed: 5
   levels: []
+  armorGiver: {fileID: 114772894610371464, guid: 6e0708b5c0c524742905eaa4a45f82c0,
+    type: 2}
   currentMovementState: 0
   pause: 0
 --- !u!212 &212037234012342378

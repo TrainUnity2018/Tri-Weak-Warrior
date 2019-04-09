@@ -687,8 +687,10 @@ MonoBehaviour:
   spawnLocation: {fileID: 0}
   attackLocation: {fileID: 0}
   spawnSpeed: 50
-  dieSpeed: 5
+  dieSpeed: 8
   levels: []
+  armorGiver: {fileID: 114772894610371464, guid: 6e0708b5c0c524742905eaa4a45f82c0,
+    type: 2}
   currentMovementState: 0
   pause: 0
   head: {fileID: 114930338804099936}

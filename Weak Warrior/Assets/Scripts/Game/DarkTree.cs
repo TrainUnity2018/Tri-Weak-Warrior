@@ -49,6 +49,8 @@ public class DarkTree : MonoBehaviour
     protected int currentIndex = 0;
     protected float attackDelayTimer = 0;
 
+    public ArmorGiver armorGiver;
+
     public enum MovementState
     {
         Spawning,
@@ -192,8 +194,9 @@ public class DarkTree : MonoBehaviour
             }
             else
             {
-                Destroy(gameObject);
-                EnemySpawnManager.Instance.UnPause();
+                ArmorGiver armorgiver = Instantiate(armorGiver, armorGiver.spawnLocation, Quaternion.identity) as ArmorGiver;
+                EnemySpawnManager.Instance.spawnedArmorGiver.Add(armorgiver);
+                Destroy(gameObject);              
             }
         }
     }
