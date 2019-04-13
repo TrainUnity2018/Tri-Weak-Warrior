@@ -49,6 +49,8 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     public Transform ultimateLocationRight;
     public Transform ultimateEndLocation;
 
+    public List<GoblinSwordman> ultedEnemies;
+
 
     public enum State
     {
@@ -350,6 +352,12 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
         PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
         health = 1;
+    }
+
+    public void KillUltedEnemies() {
+        for (int i = 0; i < ultedEnemies.Count; i++) {
+            ultedEnemies[i].TakeDamage((int)MovementState.Dash);
+        }
     }
 
     IEnumerator FlashSprite()

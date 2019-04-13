@@ -395,6 +395,7 @@ public class DarkLord_Head : DarkTree_Arm
                 {
                     currentMovementState = (int)MovementState.Floating;
                     firstHorizontalFloating = true;
+                    ultDamaged = true;
                 }
             }
             else
@@ -410,6 +411,7 @@ public class DarkLord_Head : DarkTree_Arm
                     else
                     {
                         currentMovementState = (int)MovementState.Floating;
+                        ultDamaged = true;
                     }
                 }
                 else
@@ -423,6 +425,7 @@ public class DarkLord_Head : DarkTree_Arm
                     else
                     {
                         currentMovementState = (int)MovementState.Floating;
+                        ultDamaged = true;
                     }
                 }
             }

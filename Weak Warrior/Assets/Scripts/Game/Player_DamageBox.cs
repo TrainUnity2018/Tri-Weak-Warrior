@@ -36,30 +36,35 @@ public class Player_DamageBox : DamageBox
 
     void OnTriggerStay2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Enemy" && PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Slash)
+        if (col.gameObject.tag == "Enemy")
         {
             if (col.gameObject.GetComponent<GoblinSwordman>() != null)
                 col.gameObject.GetComponent<GoblinSwordman>().TakeDamage(PlayerStateControl.Instance.currentMovementState);
             if (col.gameObject.GetComponent<DarkTree_Arm>() != null)
                 col.gameObject.GetComponent<DarkTree_Arm>().TakeDamage();
 
-            PlayerStateControl.Instance.currentMovementState = (int)PlayerStateControl.MovementState.Idle;
-            PlayerAnimationControl.Instance.SetMovementState(PlayerStateControl.Instance.currentMovementState);
-
+            if (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Slash)
+            {
+                PlayerStateControl.Instance.currentMovementState = (int)PlayerStateControl.MovementState.Idle;
+                PlayerAnimationControl.Instance.SetMovementState(PlayerStateControl.Instance.currentMovementState);
+            }
         }
     }
 
     void OnTriggerExit2D(Collider2D col)
     {
-        if (col.gameObject.tag == "Enemy" && PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Slash)
+        if (col.gameObject.tag == "Enemy")
         {
             if (col.gameObject.GetComponent<GoblinSwordman>() != null)
                 col.gameObject.GetComponent<GoblinSwordman>().TakeDamage(PlayerStateControl.Instance.currentMovementState);
             if (col.gameObject.GetComponent<DarkTree_Arm>() != null)
                 col.gameObject.GetComponent<DarkTree_Arm>().TakeDamage();
 
-            PlayerStateControl.Instance.currentMovementState = (int)PlayerStateControl.MovementState.Idle;
-            PlayerAnimationControl.Instance.SetMovementState(PlayerStateControl.Instance.currentMovementState);
+            if (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Slash)
+            {
+                PlayerStateControl.Instance.currentMovementState = (int)PlayerStateControl.MovementState.Idle;
+                PlayerAnimationControl.Instance.SetMovementState(PlayerStateControl.Instance.currentMovementState);
+            }
         }
     }
 }

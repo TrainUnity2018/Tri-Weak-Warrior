@@ -28,6 +28,7 @@ public class DarkTree_Arm : MonoBehaviour
     public DarkTree body;
     public BoxCollider2D hitBox;
     public BoxCollider2D damageBox;
+    public bool ultDamaged;
     public enum MovementState
     {
         Floating,
@@ -72,6 +73,7 @@ public class DarkTree_Arm : MonoBehaviour
         currentMovementState = (int)MovementState.Floating;
         floatingDelayTimer = 0;
         floatingDelay = floatingDelayAverage + Random.Range(-floatingDelayAverage, floatingDelayRange);
+        ultDamaged = false;
     }
 
     public virtual void Floating()
@@ -191,6 +193,7 @@ public class DarkTree_Arm : MonoBehaviour
             else
             {
                 currentMovementState = (int)MovementState.Floating;
+                ultDamaged = true;
             }
         }
     }
@@ -198,7 +201,9 @@ public class DarkTree_Arm : MonoBehaviour
     public virtual void TakeDamage()
     {
         currentMovementState = (int)MovementState.KnockBack;
-        body.TakeDamage(damage);
+        if (!ultDamaged) {
+            body.TakeDamage(damage);
+        }      
     }
 
     public virtual void OnCollide(Collider2D col)

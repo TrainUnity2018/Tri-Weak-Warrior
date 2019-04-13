@@ -18,7 +18,7 @@ public class ButtonRetry : Button {
 	public override void onClick() {
 		Popup.Instance.DisableDeadDialog();
 		PlayerStateControl.Instance.Revive();
-		EnemySpawnManager.Instance.KillFirstEnemy();
 		EnemySpawnManager.Instance.UnPause();
+		EnemySpawnManager.Instance.KillFirstEnemy();
 	}
 }

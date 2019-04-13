@@ -107,11 +107,12 @@ public class ArmorGiver : MonoBehaviour
             else
             {
                 present.GetComponent<SpriteRenderer>().enabled = false;
+                PlayerStateControl.Instance.health = 3;
                 PlayerStateControl.Instance.currentMovementState = (int)PlayerStateControl.MovementState.Idle;
                 PlayerStateControl.Instance.currentArmorState = (int)PlayerStateControl.ArmorState.Full;
                 PlayerAnimationControl.Instance.SetMovementState(PlayerStateControl.Instance.currentMovementState);
                 PlayerAnimationControl.Instance.SetArmorState(PlayerStateControl.Instance.currentArmorState);
-                EnemySpawnManager.Instance.UnPause();
+                EnemySpawnManager.Instance.ArmorGiverUnPause();
 				Destroy(this.gameObject);
             }
         }

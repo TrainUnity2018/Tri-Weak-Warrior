@@ -248,10 +248,11 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
 
     public void UnPause()
     {
-        pause = false;
         if (spawnedEnemies.Count > 0)
-            for (int i = 0; i < spawnedEnemies.Count; i++)
+            for (int i = 0; i < spawnedEnemies.Count; i++) {
                 spawnedEnemies[i].UnPause();
+                pause = false;
+            }               
         if (spawnedBosses.Count > 0)
             for (int i = 0; i < spawnedBosses.Count; i++)
                 spawnedBosses[i].UnPause();
@@ -267,6 +268,13 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         if (spawnedBosses.Count > 0)
             for (int i = 0; i < spawnedBosses.Count; i++)
                 spawnedBosses[i].UnPause();
+        else {
+            pause = false;
+        }
+    }
+
+    public void ArmorGiverUnPause() {
+        pause = false;
     }
 
     public void EnemyKilled()

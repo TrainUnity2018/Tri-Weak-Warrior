@@ -69,6 +69,7 @@ public class Popup : MonoSingleton<Popup>
         this.pauseButton.SetActive(false);
         this.startMenu.SetActive(false);
         this.settingMenu.SetActive(false);
+        AdManager.Instance.ShowInterstitial();
     }
 
     public void DisableDeadDialog()
@@ -82,6 +83,17 @@ public class Popup : MonoSingleton<Popup>
         this.pauseButton.SetActive(false);
         this.startMenu.SetActive(false);
         this.settingMenu.SetActive(false);
+    }
+
+    public void ShowVideo() {
+        AdManager.Instance.ShowRewardVideo(this.ShowVideoCoplete);
+    }
+    private void ShowVideoCoplete(bool success)
+    {
+        if(success)
+        {
+            Debug.Log("ASDSADSADsa");
+        }
     }
 
     public void EnableMainMenu() {
