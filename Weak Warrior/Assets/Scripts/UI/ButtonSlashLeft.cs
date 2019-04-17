@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class SettingMenu_ExitButton : Touch {
+public class ButtonSlashLeft : Touch {
 
 	public override void OnPointerClick(PointerEventData eventData)
     {
-		Popup.Instance.DisableSettingMenu();
-	}
+        PlayerInput.Instance.SlashLeft();
+    }
 }

@@ -1,23 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class ButtonExit : Button
+public class ButtonExit : Touch
 {
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
-    public override void onClick()
+    public override void OnPointerClick(PointerEventData eventData)
     {
         Popup.Instance.EnableMainMenu();
     }

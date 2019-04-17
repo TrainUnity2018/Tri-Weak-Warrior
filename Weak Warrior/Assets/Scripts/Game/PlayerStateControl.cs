@@ -90,6 +90,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
         isSlashing = false;
         isDashing = false;
+        StopAllCoroutines();
     }
 
     public void Slash(bool direction)
@@ -352,6 +353,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
         PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
         health = 1;
+        StopAllCoroutines();
     }
 
     public void KillUltedEnemies() {

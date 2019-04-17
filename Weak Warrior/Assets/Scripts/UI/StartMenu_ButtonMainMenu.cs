@@ -1,20 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class StartMenu_ButtonMainMenu : Button {
+public class StartMenu_ButtonMainMenu : Touch
+{
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-	public override void onClick() {
-		Popup.Instance.EnableMainMenu();
-	}
+    public override void OnPointerClick(PointerEventData eventData)
+    {
+        Popup.Instance.EnableMainMenu();
+    }
 }

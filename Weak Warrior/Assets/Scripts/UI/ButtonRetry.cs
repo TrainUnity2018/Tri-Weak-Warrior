@@ -2,20 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
-public class ButtonRetry : Button {
+public class ButtonRetry : Touch {
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-	public override void onClick() {
+	public override void OnPointerClick(PointerEventData eventData)
+    {
 		Popup.Instance.DisableDeadDialog();
 		PlayerStateControl.Instance.Revive();
 		EnemySpawnManager.Instance.UnPause();

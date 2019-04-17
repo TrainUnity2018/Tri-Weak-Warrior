@@ -1,20 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class StartMenu_ButtonContinue : Button {
+public class StartMenu_ButtonContinue : Touch {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-	public override void onClick() {
+	public override void OnPointerClick(PointerEventData eventData)
+    {
 		Popup.Instance.DisableStartMenu();
 	}
 }
