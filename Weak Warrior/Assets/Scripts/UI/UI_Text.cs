@@ -29,4 +29,5 @@ public class UI_Text : MonoSingleton<UI_Text>
     {
         missedText.SetActive(false);
     }
+
 }

@@ -119,7 +119,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
 
             if (slashDurationTimer >= 0.25f)
             {
-                UI_Text.Instance.EnableMissedText();
+                EnableMissedText();
             }
         }
     }

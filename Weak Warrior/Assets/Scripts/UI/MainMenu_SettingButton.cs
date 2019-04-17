@@ -9,6 +9,7 @@ public class MainMenu_SettingButton : Touch
     public override void OnPointerClick(PointerEventData eventData)
     {
         Popup.Instance.EnableSettingMenu();
+        Popup.Instance.ButtonPressedSound();
     }
 
 }

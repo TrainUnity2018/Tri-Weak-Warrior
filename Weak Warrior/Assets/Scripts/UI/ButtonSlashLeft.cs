@@ -5,8 +5,13 @@ using UnityEngine.EventSystems;
 
 public class ButtonSlashLeft : Touch {
 
-	public override void OnPointerClick(PointerEventData eventData)
+	public AudioSource audioSource;
+    public AudioClip buttonSlashPressed;
+    
+    public override void OnPointerClick(PointerEventData eventData)
     {
         PlayerInput.Instance.SlashLeft();
+        audioSource.clip = buttonSlashPressed;
+        audioSource.Play(0);
     }
 }

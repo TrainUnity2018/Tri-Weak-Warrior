@@ -8,6 +8,7 @@ public class ButtonResume : Touch
     public override void OnPointerClick(PointerEventData eventData)
     {
         Popup.Instance.DisablePauseDialog();
+        Popup.Instance.ButtonPressedSound();
     }
 }
 

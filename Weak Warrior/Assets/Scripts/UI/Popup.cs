@@ -8,6 +8,9 @@ public class Popup : MonoSingleton<Popup>
     public Animator lastEnemyAnimator;
     public Text killCount;
 
+    public AudioSource audioSource;
+    public AudioClip buttonPressedSound;
+
     public GameObject deadDiaglog;
     public GameObject pauseDialog;
     public GameObject gamePlayButtons;
@@ -86,18 +89,20 @@ public class Popup : MonoSingleton<Popup>
         StopAllCoroutines();
     }
 
-    public void ShowVideo() {
+    public void ShowVideo()
+    {
         AdManager.Instance.ShowRewardVideo(this.ShowVideoCoplete);
     }
     private void ShowVideoCoplete(bool success)
     {
-        if(success)
+        if (success)
         {
             Debug.Log("ASDSADSADsa");
         }
     }
 
-    public void EnableMainMenu() {
+    public void EnableMainMenu()
+    {
         this.mainMenu.SetActive(true);
         this.deadDiaglog.SetActive(false);
         this.pauseDialog.SetActive(false);
@@ -111,7 +116,8 @@ public class Popup : MonoSingleton<Popup>
         EnemySpawnManager.Instance.Setup();
     }
 
-    public void DisableMainMenu() {
+    public void DisableMainMenu()
+    {
         this.mainMenu.SetActive(false);
         this.deadDiaglog.SetActive(false);
         this.pauseDialog.SetActive(false);
@@ -125,7 +131,8 @@ public class Popup : MonoSingleton<Popup>
         StopAllCoroutines();
     }
 
-    public void DisableStartMenu() {
+    public void DisableStartMenu()
+    {
         this.mainMenu.SetActive(false);
         this.deadDiaglog.SetActive(false);
         this.pauseDialog.SetActive(false);
@@ -139,7 +146,8 @@ public class Popup : MonoSingleton<Popup>
         StopAllCoroutines();
     }
 
-    public void EnableSettingMenu() {
+    public void EnableSettingMenu()
+    {
         this.mainMenu.SetActive(true);
         this.deadDiaglog.SetActive(false);
         this.pauseDialog.SetActive(false);
@@ -150,7 +158,8 @@ public class Popup : MonoSingleton<Popup>
         this.settingMenu.SetActive(true);
     }
 
-    public void DisableSettingMenu() {
+    public void DisableSettingMenu()
+    {
         this.mainMenu.SetActive(true);
         this.deadDiaglog.SetActive(false);
         this.pauseDialog.SetActive(false);
@@ -159,5 +168,11 @@ public class Popup : MonoSingleton<Popup>
         this.startMenu.SetActive(false);
         this.player.SetActive(false);
         this.settingMenu.SetActive(false);
+    }
+
+    public void ButtonPressedSound()
+    {
+        audioSource.clip = buttonPressedSound;
+        audioSource.Play(0);
     }
 }
