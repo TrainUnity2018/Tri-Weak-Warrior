@@ -18,6 +18,7 @@ public class GoblinSwordman : MonoBehaviour
 
     public GoblinSwordman_DamageBox damageBox;
     public BoxCollider2D hitBox;
+    public bool isUlted;
 
     public GameObject head;
     public GameObject body;
@@ -54,6 +55,7 @@ public class GoblinSwordman : MonoBehaviour
         currentMovementState = (int)MovementState.Walk;
         animator.SetInteger("State", currentMovementState);
         pause = false;
+        isUlted = false;
     }
 
     // Update is called once per frame
@@ -292,6 +294,11 @@ public class GoblinSwordman : MonoBehaviour
     {
         if (damageBox != null)
             damageBox.DisableDamageBox();
+    }
+
+    public virtual void AfterDash()
+    {
+        isUlted = false;
     }
 
     public virtual void OnCollide(Collider2D col)

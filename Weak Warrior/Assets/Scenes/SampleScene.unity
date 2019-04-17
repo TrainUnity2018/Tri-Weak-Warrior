@@ -769,7 +769,7 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 100257979}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -4332,7 +4332,7 @@ BoxCollider2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1077776729}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -6440,6 +6440,8 @@ MonoBehaviour:
   ultimateLocationRight: {fileID: 662669154}
   ultimateEndLocation: {fileID: 358662299}
   ultedEnemies: []
+  isSlashing: 0
+  isDashing: 0
 --- !u!114 &1910017270
 MonoBehaviour:
   m_ObjectHideFlags: 0

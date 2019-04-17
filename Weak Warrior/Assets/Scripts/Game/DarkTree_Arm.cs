@@ -28,7 +28,7 @@ public class DarkTree_Arm : MonoBehaviour
     public DarkTree body;
     public BoxCollider2D hitBox;
     public BoxCollider2D damageBox;
-    public bool ultDamaged;
+    public bool isUlted;
     public enum MovementState
     {
         Floating,
@@ -73,7 +73,7 @@ public class DarkTree_Arm : MonoBehaviour
         currentMovementState = (int)MovementState.Floating;
         floatingDelayTimer = 0;
         floatingDelay = floatingDelayAverage + Random.Range(-floatingDelayAverage, floatingDelayRange);
-        ultDamaged = false;
+        isUlted = false;
     }
 
     public virtual void Floating()
@@ -193,7 +193,7 @@ public class DarkTree_Arm : MonoBehaviour
             else
             {
                 currentMovementState = (int)MovementState.Floating;
-                ultDamaged = true;
+
             }
         }
     }
@@ -201,9 +201,15 @@ public class DarkTree_Arm : MonoBehaviour
     public virtual void TakeDamage()
     {
         currentMovementState = (int)MovementState.KnockBack;
-        if (!ultDamaged) {
-            body.TakeDamage(damage);
-        }      
+        if (PlayerStateControl.Instance.isSlashing)
+        {
+            body.TakeDamage(1);
+        }
+        else if (PlayerStateControl.Instance.isDashing && !isUlted)
+        {
+            isUlted = true;
+            body.TakeDamage(1);
+        }
     }
 
     public virtual void OnCollide(Collider2D col)
@@ -229,5 +235,9 @@ public class DarkTree_Arm : MonoBehaviour
     public virtual void DisableDamageBox()
     {
         damageBox.enabled = false;
+    }
+
+    public virtual void AfterDash() {
+        isUlted = false;
     }
 }

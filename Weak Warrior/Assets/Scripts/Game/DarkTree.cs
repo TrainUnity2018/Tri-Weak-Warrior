@@ -218,4 +218,9 @@ public class DarkTree : MonoBehaviour
     {
         pause = false;
     }
+
+    public virtual void AfterDash() {
+        rightArm.AfterDash();
+        leftArm.AfterDash();
+    }
 }

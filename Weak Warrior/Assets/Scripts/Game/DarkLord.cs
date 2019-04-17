@@ -117,4 +117,10 @@ public class DarkLord : DarkTree {
             HealthBarScale();
         }
 	}
+
+    public override void AfterDash() {
+        rightArm.AfterDash();
+        leftArm.AfterDash();
+        head.AfterDash();
+    }
 }

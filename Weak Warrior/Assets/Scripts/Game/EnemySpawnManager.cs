@@ -249,10 +249,11 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
     public void UnPause()
     {
         if (spawnedEnemies.Count > 0)
-            for (int i = 0; i < spawnedEnemies.Count; i++) {
+            for (int i = 0; i < spawnedEnemies.Count; i++)
+            {
                 spawnedEnemies[i].UnPause();
                 pause = false;
-            }               
+            }
         if (spawnedBosses.Count > 0)
             for (int i = 0; i < spawnedBosses.Count; i++)
                 spawnedBosses[i].UnPause();
@@ -268,12 +269,14 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
         if (spawnedBosses.Count > 0)
             for (int i = 0; i < spawnedBosses.Count; i++)
                 spawnedBosses[i].UnPause();
-        else {
+        else
+        {
             pause = false;
         }
     }
 
-    public void ArmorGiverUnPause() {
+    public void ArmorGiverUnPause()
+    {
         pause = false;
     }
 
@@ -323,6 +326,17 @@ public class EnemySpawnManager : MonoSingleton<EnemySpawnManager>
             for (int i = 0; i < spawnedBosses.Count; i++)
             {
                 spawnedBosses[i].TakeDamage(spawnedBosses[0].health);
+            }
+        }
+    }
+
+    public void AfterDash()
+    {
+        if (spawnedBosses.Count != 0)
+        {
+            for (int i = 0; i < spawnedBosses.Count; i++)
+            {
+                spawnedBosses[i].AfterDash();
             }
         }
     }

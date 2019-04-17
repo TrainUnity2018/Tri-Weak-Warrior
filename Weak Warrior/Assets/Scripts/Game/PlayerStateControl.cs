@@ -51,12 +51,8 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
 
     public List<GoblinSwordman> ultedEnemies;
 
-
-    public enum State
-    {
-        Active,
-        Inactive
-    }
+    public bool isSlashing;
+    public bool isDashing;
 
     // Use this for initialization
     void Start()
@@ -92,6 +88,8 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         //currentArmorState = (int)ArmorState.Naked;
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
         PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
+        isSlashing = false;
+        isDashing = false;
     }
 
     public void Slash(bool direction)
@@ -126,7 +124,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
 
     public void BeingDamagedDurationTiming()
     {
-        if (beingDamaged)
+        if (beingDamaged & currentMovementState != (int)MovementState.Dash)
         {
             beingDamagedDurationTimer += Time.deltaTime;
             if (beingDamagedDurationTimer >= beingDamagedDuration)
@@ -287,25 +285,25 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     public void EnableDamageBox()
     {
         damageBox.EnableDamageBox();
-        //damageBoxOn = true;
+        isSlashing = true;
     }
 
     public void EnableUltimateDamageBox()
     {
         ultimateDamageBox.EnableDamageBox();
-        //ultimateDamageBoxOn = true;
+        isDashing = true;
     }
 
     public void DisableDamageBox()
     {
-        damageBox.DisableDamageBox();
-        //damageBoxOn = false;
+        //damageBox.DisableDamageBox();
+        isSlashing = false;
     }
 
     public void DisableUltimateDamageBox()
     {
-        ultimateDamageBox.DisableDamageBox();
-        //ultimateDamageBoxOn = false;
+        //ultimateDamageBox.DisableDamageBox();
+        isDashing = false;
     }
 
     public void EnableMissedText()

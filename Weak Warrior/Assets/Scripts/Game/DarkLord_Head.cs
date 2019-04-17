@@ -73,6 +73,7 @@ public class DarkLord_Head : DarkTree_Arm
         count = 0;
         floatingDelayTimer = 0;
         floatingDelay = floatingDelayAverage + Random.Range(-floatingDelayAverage, floatingDelayRange);
+        isUlted = false;
     }
 
     public override void Floating()
@@ -395,7 +396,6 @@ public class DarkLord_Head : DarkTree_Arm
                 {
                     currentMovementState = (int)MovementState.Floating;
                     firstHorizontalFloating = true;
-                    ultDamaged = true;
                 }
             }
             else
@@ -411,7 +411,6 @@ public class DarkLord_Head : DarkTree_Arm
                     else
                     {
                         currentMovementState = (int)MovementState.Floating;
-                        ultDamaged = true;
                     }
                 }
                 else
@@ -425,7 +424,6 @@ public class DarkLord_Head : DarkTree_Arm
                     else
                     {
                         currentMovementState = (int)MovementState.Floating;
-                        ultDamaged = true;
                     }
                 }
             }
