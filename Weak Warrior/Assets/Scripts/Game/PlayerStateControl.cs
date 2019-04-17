@@ -84,6 +84,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         beingDamaged = false;
         pause = false;
         currentDirection = false;
+        PlayerAnimationControl.Instance.Flip(currentDirection);
         //currentArmorState = (int)ArmorState.Half;
         //currentArmorState = (int)ArmorState.Naked;
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);

@@ -83,6 +83,7 @@ public class Popup : MonoSingleton<Popup>
         this.pauseButton.SetActive(false);
         this.startMenu.SetActive(false);
         this.settingMenu.SetActive(false);
+        StopAllCoroutines();
     }
 
     public void ShowVideo() {
@@ -121,6 +122,7 @@ public class Popup : MonoSingleton<Popup>
         this.settingMenu.SetActive(false);
         EnemySpawnManager.Instance.Pause();
         EnemySpawnManager.Instance.Disable();
+        StopAllCoroutines();
     }
 
     public void DisableStartMenu() {
@@ -134,6 +136,7 @@ public class Popup : MonoSingleton<Popup>
         this.settingMenu.SetActive(false);
         PlayerStateControl.Instance.Setup();
         EnemySpawnManager.Instance.Enable();
+        StopAllCoroutines();
     }
 
     public void EnableSettingMenu() {
