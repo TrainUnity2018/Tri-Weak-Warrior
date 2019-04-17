@@ -220,6 +220,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                             EnemySpawnManager.Instance.UnPause();
                         }
                         EnemySpawnManager.Instance.UltimateUnPause();
+                        EnemySpawnManager.Instance.AfterDash();
                         UltimateCooldown.Instance.Setup();
                     }
                 }
@@ -257,6 +258,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
                             EnemySpawnManager.Instance.UnPause();
                         }
                         EnemySpawnManager.Instance.UltimateUnPause();
+                        EnemySpawnManager.Instance.AfterDash();
                         UltimateCooldown.Instance.Setup();
                     }
                 }
