@@ -49,8 +49,6 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     public Transform ultimateLocationRight;
     public Transform ultimateEndLocation;
 
-    public List<GoblinSwordman> ultedEnemies;
-
     public bool isSlashing;
     public bool isDashing;
 
@@ -381,14 +379,6 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
         health = 1;
         StopAllCoroutines();
-    }
-
-    public void KillUltedEnemies()
-    {
-        for (int i = 0; i < ultedEnemies.Count; i++)
-        {
-            ultedEnemies[i].TakeDamage((int)MovementState.Dash);
-        }
     }
 
     IEnumerator FlashSprite()
