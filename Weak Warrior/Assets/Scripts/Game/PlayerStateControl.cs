@@ -54,6 +54,11 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     public bool isSlashing;
     public bool isDashing;
 
+    public AudioSource audioSource;
+    public AudioClip hitSound;
+    public AudioClip nakedHitSound;
+    public AudioClip dieSound;
+
     // Use this for initialization
     void Start()
     {
@@ -103,6 +108,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
             PlayerAnimationControl.Instance.Slash(direction);
             currentDirection = direction;
             slashDurationTimer = 0;
+            LoadMissSound();
         }
     }
 
@@ -110,6 +116,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     {
         if (currentMovementState == (int)MovementState.Slash)
         {
+
             slashDurationTimer += Time.deltaTime;
             if (slashDurationTimer >= slashDuration)
             {
@@ -120,6 +127,7 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
             if (slashDurationTimer >= 0.25f)
             {
                 EnableMissedText();
+                MissSound();
             }
         }
     }
@@ -156,23 +164,31 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         DisableHitBox();
         if (health <= 0)
         {
-            Popup.Instance.EnableDeadDialog(EnemySpawnManager.Instance.enemyLevelID, EnemySpawnManager.Instance.enemyKilled);
-            EnemySpawnManager.Instance.Pause();
+            audioSource.clip = dieSound;
+            audioSource.Play(0);
             health = 0;
-            this.gameObject.SetActive(false);
+            Popup.Instance.EnableDeadDialog(EnemySpawnManager.Instance.enemyLevelID, EnemySpawnManager.Instance.enemyKilled);            
+            EnemySpawnManager.Instance.Pause();
+            this.gameObject.SetActive(false);           
         }
         if (health == 3)
         {
+            audioSource.clip = hitSound;
+            audioSource.Play(0);
             currentArmorState = 0;
             PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
         }
         else if (health == 2)
         {
+            audioSource.clip = hitSound;
+            audioSource.Play(0);
             currentArmorState = 1;
             PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
         }
         else if (health == 1)
         {
+            audioSource.clip = hitSound;
+            audioSource.Play(0);
             currentArmorState = 2;
             PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
         }
@@ -320,6 +336,16 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
         UI_Text.Instance.DisableMissedText();
     }
 
+    public void LoadMissSound()
+    {
+        UI_Text.Instance.LoadMissSound();
+    }
+
+    public void MissSound()
+    {
+        UI_Text.Instance.MissSound();
+    }
+
     public void SetIdleState()
     {
         if (currentMovementState != (int)MovementState.Idle)
@@ -350,15 +376,17 @@ public class PlayerStateControl : MonoSingleton<PlayerStateControl>
     public void Revive()
     {
         currentArmorState = (int)ArmorState.Naked;
-        currentMovementState  = (int)MovementState.Idle;
+        currentMovementState = (int)MovementState.Idle;
         PlayerAnimationControl.Instance.SetMovementState(currentMovementState);
         PlayerAnimationControl.Instance.SetArmorState(currentArmorState);
         health = 1;
         StopAllCoroutines();
     }
 
-    public void KillUltedEnemies() {
-        for (int i = 0; i < ultedEnemies.Count; i++) {
+    public void KillUltedEnemies()
+    {
+        for (int i = 0; i < ultedEnemies.Count; i++)
+        {
             ultedEnemies[i].TakeDamage((int)MovementState.Dash);
         }
     }

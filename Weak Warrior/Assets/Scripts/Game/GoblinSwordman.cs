@@ -49,6 +49,9 @@ public class GoblinSwordman : MonoBehaviour
 
     public int currentMovementState;
 
+    public AudioSource audioSource;
+    public AudioClip hitSound;
+
     // Use this for initialization
     void Start()
     {
@@ -171,6 +174,8 @@ public class GoblinSwordman : MonoBehaviour
         head.GetComponent<SpriteRenderer>().enabled = true;
         dieEffect.GetComponent<SpriteRenderer>().enabled = true;
         StartCoroutine(DieEffect());
+        audioSource.clip = hitSound;
+        audioSource.Play(0);
 
         headSplashSpinningSpeed = headSplashStartSpinningSpeed;
         headSplashVelocity = headSplashStartVelocity;

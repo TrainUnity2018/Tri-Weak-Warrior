@@ -92,6 +92,8 @@ public class GnollSword : GoblinSwordman
         head.GetComponent<SpriteRenderer>().enabled = true;
         dieEffect.GetComponent<SpriteRenderer>().enabled = true;
         StartCoroutine(DieEffect());
+        audioSource.clip = hitSound;
+        audioSource.Play(0);
 
         headSplashSpinningSpeed = headSplashStartSpinningSpeed;
         headSplashVelocity = headSplashStartVelocity;

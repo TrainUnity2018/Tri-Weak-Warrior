@@ -10,8 +10,11 @@ public class ButtonSlashRight : Touch {
     
     public override void OnPointerClick(PointerEventData eventData)
     {
-        PlayerInput.Instance.SlashRight();
-        audioSource.clip = buttonSlashPressed;
-        audioSource.Play(0);
+        if (PlayerStateControl.Instance.currentMovementState == (int)PlayerStateControl.MovementState.Idle)
+        {
+            PlayerInput.Instance.SlashRight();
+            audioSource.clip = buttonSlashPressed;
+            audioSource.Play(0);
+        }
     }
 }

@@ -176,6 +176,7 @@ GameObject:
   - component: {fileID: 61135311333107600}
   - component: {fileID: 95578050992044908}
   - component: {fileID: 114036739102095924}
+  - component: {fileID: 82018308630556578}
   m_Layer: 0
   m_Name: Mummy
   m_TagString: Enemy
@@ -501,6 +502,101 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.30971462, y: 0.4762155}
   m_EdgeRadius: 0
+--- !u!82 &82018308630556578
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1957858817962556}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!95 &95578050992044908
 Animator:
   serializedVersion: 3
@@ -538,6 +634,7 @@ MonoBehaviour:
   animator: {fileID: 95578050992044908}
   damageBox: {fileID: 114802714124538064}
   hitBox: {fileID: 61135311333107600}
+  isUlted: 0
   head: {fileID: 1001399361110812}
   body: {fileID: 1206916262271472}
   dieEffect: {fileID: 1370517866807150}
@@ -550,6 +647,8 @@ MonoBehaviour:
   pause: 0
   isSuper: 0
   currentMovementState: 0
+  audioSource: {fileID: 82018308630556578}
+  hitSound: {fileID: 8300000, guid: 8b8476a0fdb09b340b19744672d4bfa6, type: 3}
   health: 4
   healthBar: {fileID: 1939981321127762}
   healthBarFrame: {fileID: 1125787227224264}

@@ -104,6 +104,8 @@ public class Mummy : GoblinSwordman
         if (playersMovementState == (int)PlayerStateControl.MovementState.Slash)
         {
             health -= 1;
+            audioSource.clip = hitSound;
+            audioSource.Play(0);
             if (health <= 0)
                 health = 0;
             currentHealth = health;
@@ -111,6 +113,8 @@ public class Mummy : GoblinSwordman
         if (playersMovementState == (int)PlayerStateControl.MovementState.Dash)
         {
             health -= health;
+            audioSource.clip = hitSound;
+            audioSource.Play(0);
             if (health <= 0)
                 health = 0;
             currentHealth = health;

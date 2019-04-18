@@ -40,6 +40,9 @@ public class DarkTree_Arm : MonoBehaviour
 
     public int currentMovementState;
 
+    public AudioSource audioSource;
+    public AudioClip hitSound;
+
     // Use this for initialization
     void Start()
     {
@@ -204,11 +207,15 @@ public class DarkTree_Arm : MonoBehaviour
         if (PlayerStateControl.Instance.isSlashing)
         {
             body.TakeDamage(1);
+            audioSource.clip = hitSound;
+            audioSource.Play(0);
         }
         else if (PlayerStateControl.Instance.isDashing && !isUlted)
         {
             isUlted = true;
             body.TakeDamage(1);
+            audioSource.clip = hitSound;
+            audioSource.Play(0);
         }
     }
 
@@ -237,7 +244,8 @@ public class DarkTree_Arm : MonoBehaviour
         damageBox.enabled = false;
     }
 
-    public virtual void AfterDash() {
+    public virtual void AfterDash()
+    {
         isUlted = false;
     }
 }

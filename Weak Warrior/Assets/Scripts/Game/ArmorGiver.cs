@@ -29,6 +29,11 @@ public class ArmorGiver : MonoBehaviour
         Third,
     }
 
+    public AudioSource audioSource;
+    public AudioClip flyingSound;
+    public AudioClip equipSound;
+    public bool equipSoundPlayed;
+
     // Use this for initialization
     void Start()
     {
@@ -49,6 +54,9 @@ public class ArmorGiver : MonoBehaviour
     public virtual void Setup()
     {
         currentMovementState = (int)MovementState.First;
+        audioSource.clip = flyingSound;
+        audioSource.Play(0);
+        equipSoundPlayed = false;
         count = 0;
 		pause = false;
     }
@@ -112,8 +120,15 @@ public class ArmorGiver : MonoBehaviour
                 PlayerStateControl.Instance.currentArmorState = (int)PlayerStateControl.ArmorState.Full;
                 PlayerAnimationControl.Instance.SetMovementState(PlayerStateControl.Instance.currentMovementState);
                 PlayerAnimationControl.Instance.SetArmorState(PlayerStateControl.Instance.currentArmorState);
+                if (equipSoundPlayed == false)
+                {
+                    audioSource.clip = equipSound;
+                    audioSource.Play(0);
+                    equipSoundPlayed = true;
+                }
                 EnemySpawnManager.Instance.ArmorGiverUnPause();
-				Destroy(this.gameObject);
+				if (!audioSource.isPlaying)
+                    Destroy(this.gameObject);
             }
         }
     }

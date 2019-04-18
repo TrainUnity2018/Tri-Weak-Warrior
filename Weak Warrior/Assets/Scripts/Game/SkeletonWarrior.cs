@@ -5,6 +5,9 @@ using UnityEngine;
 public class SkeletonWarrior : GoblinSwordman
 {    
 
+    public AudioClip recoverSound;
+    protected bool recoverSoundPlayed;
+
     public int health;
     public float recoverMoveSpeed;
     public float knockBackDistance;
@@ -99,6 +102,12 @@ public class SkeletonWarrior : GoblinSwordman
                 recoverDurationTimer = 0;
                 currentMovementState = (int)MovementState.Recover;
                 animator.SetInteger("State", currentMovementState);
+                if (recoverSoundPlayed == false)
+                {
+                    audioSource.clip = recoverSound;
+                    audioSource.Play(0);
+                    recoverSoundPlayed = true;
+                }
             }
         }
     }
@@ -123,12 +132,16 @@ public class SkeletonWarrior : GoblinSwordman
         
         if (playersMovementState == (int)PlayerStateControl.MovementState.Slash) {
             health -= 1;
+            audioSource.clip = hitSound;
+            audioSource.Play(0);
             if (health <= 0)
                 health = 0;
         }
             
         if (playersMovementState == (int)PlayerStateControl.MovementState.Dash) {
             health -= health;
+            audioSource.clip = hitSound;
+            audioSource.Play(0);
             if (health <= 0)
                 health = 0;
         }
@@ -139,6 +152,7 @@ public class SkeletonWarrior : GoblinSwordman
             knockBackDelayTimer = 0;
             currentMovementState = (int)MovementState.KnockedBack;
             animator.SetInteger("State", currentMovementState);
+            recoverSoundPlayed = false;
         }
         if (health == 0)
         {
@@ -227,6 +241,7 @@ public class SkeletonWarrior : GoblinSwordman
             }
         }
     }
+
 
     IEnumerator DieEffect()
     {
