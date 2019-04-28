@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerDamageBox : MonoBehaviour
-{
+public class PlayerSkillDamageBox : MonoBehaviour {
+
     public List<Goblin> monsterList;
     //public List<DarkTree_Arm> bossList;   
-    
+
     // Use this for initialization
     void Start()
     {
@@ -16,7 +16,7 @@ public class PlayerDamageBox : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+		Skill();
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -37,21 +37,14 @@ public class PlayerDamageBox : MonoBehaviour
         }
     }
 
-    public void Attack()
+    public void Skill()
     {
-        if (monsterList.Count > 0)
+        for (int i = 0; i < monsterList.Count; i++)
         {
-            Debug.Log("damage");
-            for (int i = 0; i < monsterList.Count; i++)
-            {
-                monsterList[i].TakeDamage(PlayerStateController.Instance.currentMovementState);
-            }
+            monsterList[i].TakeDamage(PlayerStateController.Instance.currentMovementState);
+        }
 
-            PlayerStateController.Instance.currentMovementState = (int)PlayerStateController.MovementState.Idle;
-            PlayerAnimationController.Instance.SetMovementState(PlayerStateController.Instance.currentMovementState);
-
-            monsterList.RemoveAll(Goblin => Goblin != null);
-            monsterList.RemoveAll(Goblin => Goblin == null);
-        }       
+        monsterList.RemoveAll(Goblin => Goblin != null);
+        monsterList.RemoveAll(Goblin => Goblin == null);
     }
 }
