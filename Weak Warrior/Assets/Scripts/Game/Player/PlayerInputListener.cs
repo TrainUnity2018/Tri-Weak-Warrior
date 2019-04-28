@@ -14,21 +14,21 @@ public class PlayerInputListener : MonoSingleton<PlayerInputListener>
     // Update is called once per frame
     void Update()
     {
-        InputHandle();
+		InputHandle();
     }
 
     public void Attack(bool direction) //true for left, false for right
     {
-        PlayerStateController.Instance.Attack(direction);
+		PlayerStateController.Instance.Attack(direction);
     }
 
-    public void Skill()
-    {
+	public void Skill()
+	{
         PlayerStateController.Instance.Skill();
-    }
+	}
 
-    public void InputHandle()
-    {
+	public void InputHandle() 
+	{
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             Attack(true);
@@ -41,7 +41,7 @@ public class PlayerInputListener : MonoSingleton<PlayerInputListener>
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Skill();
+			Skill();
         }
-    }
+	}
 }

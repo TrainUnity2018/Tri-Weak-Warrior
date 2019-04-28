@@ -32,12 +32,10 @@ public class PlayerStateController : MonoSingleton<PlayerStateController>
     public float attackDuration;
     protected float attackDurationTimer;
     public GameObject missText;
-    public bool isAttack;
-    public bool isSkill;
 
     public BoxCollider2D hitBox;
     public PlayerDamageBox damageBox;
-    public PlayerSkillDamageBox skillDamageBox;
+    public PlayerDamageBox skillDamageBox;
     public float skillSpeed;
     public bool skillSide;
 
@@ -85,7 +83,7 @@ public class PlayerStateController : MonoSingleton<PlayerStateController>
         beingDamagedDurationTimer = 0;
 
         attackDurationTimer = 0;
-        DisableMissText();
+        missText.GetComponent<Image>().enabled = false;
 
         pause = false;
     }
@@ -95,11 +93,11 @@ public class PlayerStateController : MonoSingleton<PlayerStateController>
         if (currentMovementState == (int)MovementState.Idle)
         {
             currentMovementState = (int)MovementState.Attack;
-
-            currentDirection = direction;
             PlayerAnimationController.Instance.SetMovementState(currentMovementState);
-            PlayerAnimationController.Instance.Attack(currentDirection);
-
+            
+            currentDirection = direction;
+            PlayerAnimationController.Instance.Flip(currentDirection);
+            
             attackDurationTimer = 0;
         }
     }
@@ -109,28 +107,28 @@ public class PlayerStateController : MonoSingleton<PlayerStateController>
         if (currentMovementState == (int)MovementState.Attack)
         {
             attackDurationTimer += Time.deltaTime;
-            if (attackDurationTimer >= 0.25f && !missText.GetComponent<Image>().enabled)
+            if (attackDurationTimer >= 0.25f)
             {
                 EnebleMissText();
-            }
+            }            
             if (attackDurationTimer >= attackDuration)
             {
                 currentMovementState = (int)MovementState.Idle;
                 PlayerAnimationController.Instance.SetMovementState(currentMovementState);
 
                 DisableMissText();
-            }
+            }            
         }
     }
 
     public void Skill()
     {
         beingDamaged = false;
-
+        
         currentMovementState = (int)MovementState.Skill;
         PlayerAnimationController.Instance.SetMovementState(currentMovementState);
-
-        skillSide = false;
+        
+        skillSide = false;   
     }
 
     public void SkillDurationTiming()
@@ -148,7 +146,7 @@ public class PlayerStateController : MonoSingleton<PlayerStateController>
                     else
                     {
                         transform.position = new Vector3(skillLocationLeft.position.x, transform.position.y, 0);
-
+                        
                         skillSide = true;
                     }
                 }
@@ -160,16 +158,15 @@ public class PlayerStateController : MonoSingleton<PlayerStateController>
                     }
                     else
                     {
-                        transform.position = new Vector3(skillEndLocation.position.x, transform.position.y, 0);
-
                         currentMovementState = (int)MovementState.Idle;
                         PlayerAnimationController.Instance.SetMovementState(currentMovementState);
 
                         beingDamaged = true;
                         beingDamagedDurationTimer = 0;
-                        DisableHitBox();
                         StartCoroutine(FlashSprite());
+                        //DisableHitBox();
 
+                        //DisableUltimateDamageBox();
                         // if (EnemySpawnManager.Instance.spawnedBosses.Count == 0)
                         // {
                         //     EnemySpawnManager.Instance.UnPause();
@@ -191,7 +188,7 @@ public class PlayerStateController : MonoSingleton<PlayerStateController>
                     else
                     {
                         transform.position = new Vector3(skillLocationRight.position.x, transform.position.y, 0);
-
+                        
                         skillSide = true;
                     }
                 }
@@ -203,16 +200,15 @@ public class PlayerStateController : MonoSingleton<PlayerStateController>
                     }
                     else
                     {
-                        transform.position = new Vector3(skillEndLocation.position.x, transform.position.y, 0);
-
                         currentMovementState = (int)MovementState.Idle;
                         PlayerAnimationController.Instance.SetMovementState(currentMovementState);
-
+                        
                         beingDamaged = true;
                         beingDamagedDurationTimer = 0;
-                        DisableHitBox();
                         StartCoroutine(FlashSprite());
+                        //DisableHitBox();
 
+                        //DisableUltimateDamageBox();
                         // if (EnemySpawnManager.Instance.spawnedBosses.Count == 0)
                         // {
                         //     EnemySpawnManager.Instance.UnPause();
@@ -235,8 +231,8 @@ public class PlayerStateController : MonoSingleton<PlayerStateController>
             if (beingDamagedDurationTimer >= beingDamagedDuration)
             {
                 beingDamaged = false;
-                EnableHitBox();
-
+                
+                //EnableHitBox();
                 StopAllCoroutines();
                 this.gameObject.GetComponent<Image>().enabled = true;
             }
@@ -246,34 +242,32 @@ public class PlayerStateController : MonoSingleton<PlayerStateController>
     public void TakeDamage(int damage)
     {
         health -= damage;
-
+        
         currentMovementState = (int)MovementState.Idle;
         PlayerAnimationController.Instance.SetMovementState(currentMovementState);
-
+        
         beingDamaged = true;
         beingDamagedDurationTimer = 0;
-        this.gameObject.GetComponent<Image>().enabled = true;
         StartCoroutine(FlashSprite());
-        DisableHitBox();
-        DisableMissText();
-
+        //DisableHitBox();
+        
         if (health <= 0)
         {
             // audioSource.clip = dieSound;
             // audioSource.Play(0);
-
+            
             health = 0;
 
             // Popup.Instance.EnableDeadDialog(EnemySpawnManager.Instance.enemyLevelID, EnemySpawnManager.Instance.enemyKilled);
             // EnemySpawnManager.Instance.Pause();
-
+            
             //this.gameObject.SetActive(false);
         }
         if (health == 3)
         {
             // audioSource.clip = hitSound;
             // audioSource.Play(0);
-
+            
             currentArmorState = 0;
             PlayerAnimationController.Instance.SetArmorState(currentArmorState);
         }
@@ -293,7 +287,6 @@ public class PlayerStateController : MonoSingleton<PlayerStateController>
             currentArmorState = 2;
             PlayerAnimationController.Instance.SetArmorState(currentArmorState);
         }
-
     }
 
     public void EnebleMissText()
@@ -304,29 +297,6 @@ public class PlayerStateController : MonoSingleton<PlayerStateController>
     public void DisableMissText()
     {
         this.missText.GetComponent<Image>().enabled = false;
-    }
-
-    public void EnableHitBox()
-    {
-        hitBox.enabled = true;
-    }
-
-    public void EnableHitBoxNotDamaged()
-    {
-        if (!beingDamaged)
-        {
-            hitBox.enabled = true;
-        }
-    }
-
-    public void DisableHitBox()
-    {
-        hitBox.enabled = false;
-    }
-
-    public void KillAttack()
-    {
-        damageBox.Attack();
     }
 
     IEnumerator FlashSprite()

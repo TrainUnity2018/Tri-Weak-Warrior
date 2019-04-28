@@ -7,7 +7,6 @@ public class DamageBox : MonoBehaviour
 
     public GameObject actor;
     public BoxCollider2D damageBox;
-    public int damage;
 
     // Use this for initialization
     void Start()

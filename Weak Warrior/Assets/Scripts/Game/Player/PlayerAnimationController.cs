@@ -27,12 +27,6 @@ public class PlayerAnimationController : MonoSingleton<PlayerAnimationController
         transform.localScale = theScale;
     }
 
-    public void Attack(bool direction) //true for left, false for right
-    {
-        Flip(direction);
-        SetMovementState(PlayerStateController.Instance.currentMovementState);
-    }
-
     public void SetMovementState(int state)
     {
         animator.SetInteger("MovementState", state);
